@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = E22CD0E32A25CE2900C78018 /* hamburger.png */; };
+		E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CD0E72A25CF8700C78018 /* HamburgerView.swift */; };
 		E27C8E442A23949200841268 /* CalendarAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E432A23949200841268 /* CalendarAppApp.swift */; };
 		E27C8E462A23949200841268 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E452A23949200841268 /* MainView.swift */; };
 		E27C8E482A23949300841268 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E27C8E472A23949300841268 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E22CD0E32A25CE2900C78018 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
+		E22CD0E72A25CF8700C78018 /* HamburgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
 		E27C8E402A23949200841268 /* CalendarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27C8E432A23949200841268 /* CalendarAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAppApp.swift; sourceTree = "<group>"; };
 		E27C8E452A23949200841268 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -46,6 +50,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E22CD0E02A25CD6700C78018 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E22CD0E22A25CDAC00C78018 /* Image */,
+				E22CD0E12A25CD7900C78018 /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E22CD0E12A25CD7900C78018 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		E22CD0E22A25CDAC00C78018 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				E22CD0E32A25CE2900C78018 /* hamburger.png */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		E22CD0E52A25CF2900C78018 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				E22CD0E72A25CF8700C78018 /* HamburgerView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		E27C8E372A23949200841268 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +107,7 @@
 				E27C8E5E2A23993500841268 /* Model */,
 				E27C8E5F2A23995900841268 /* Repository */,
 				E27C8E602A2399B800841268 /* Commons */,
+				E22CD0E02A25CD6700C78018 /* Resources */,
 				E27C8E472A23949300841268 /* Assets.xcassets */,
 				E27C8E492A23949300841268 /* Preview Content */,
 			);
@@ -115,6 +152,7 @@
 		E27C8E582A2398D500841268 /* CalendarView */ = {
 			isa = PBXGroup;
 			children = (
+				E22CD0E52A25CF2900C78018 /* Component */,
 				E27C8E592A2398E400841268 /* CalendarView.swift */,
 			);
 			path = CalendarView;
@@ -243,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27C8E4B2A23949300841268 /* Preview Assets.xcassets in Resources */,
+				E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */,
 				E27C8E482A23949300841268 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +295,7 @@
 			files = (
 				E27C8E5D2A23991A00841268 /* CalendarViewModel.swift in Sources */,
 				E27C8E6A2A239A6300841268 /* Color+.swift in Sources */,
+				E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */,
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
 				E27C8E462A23949200841268 /* MainView.swift in Sources */,
 				E27C8E562A2398BA00841268 /* SplashView.swift in Sources */,

@@ -24,7 +24,14 @@ struct CalendarView: View {
         GeometryReader { geometry in
             VStack {
                 HStack() {
-                    
+                    Spacer()
+                    Text("スケジュールアプリ")
+                        .font(.system(size: 24))
+                        .offset(x: 0, y: 0)
+                    HamburgerView()
+                }
+                
+                HStack() {
                     Button(action: {
                         // ToDo 月が1未満になったら12月になるようにして、年数を一つ下げる
                         currentMonth -= 1
@@ -33,10 +40,11 @@ struct CalendarView: View {
                         Text("◀︎")
                             .font(.system(size: 20))
                     }
-                    .offset(x: 0, y: 60)
+                    .offset(x: 0, y: -10)
+                    
                     Text("\(String(calendarViewModel.year))年\(calendarViewModel.month + currentMonth)月")
                         .font(.system(size: 20))
-                        .offset(x: 0, y: 60)
+                        .offset(x: 0, y: -10)
                     
                     Button(action: {
                         // ToDo 月が12以上になったら1月になるようにして、年数を一つ上げる
@@ -46,23 +54,26 @@ struct CalendarView: View {
                         Text("▶︎")
                             .font(.system(size: 20))
                     }
-                    .offset(x: 0, y: 60)
+                    .offset(x: 0, y: -10)
                 }
+                
                 HStack() {
                     ForEach(self.dayofweek, id: \.self) { day in
                         ZStack {
                             RoundedRectangle(cornerRadius: cornerRadius)
                                 .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
                                 .foregroundColor(Color.clear) // 今のところは表示の必要がないため透明にする
-                                .offset(x: 0, y: 30)
+                                .offset(x: -3, y: -30)
+                            
                             HStack {
                                 Spacer().frame(width: 20)
                                 Text(day)
                                     .font(.system(size: 16))
                                     .foregroundColor(day == "土" ? Color.blue : (day == "日" ? Color.red : Color.black))
-                                    .offset(x: 0, y: 30)
-                                Spacer().frame(width: 20)
+                                    .offset(x: -3, y: -30)
+                                Spacer().frame(width: 13)
                             }
+                            
                         }
                     }
                 }
@@ -75,6 +86,7 @@ struct CalendarView: View {
                                 Rectangle()
                                     .stroke(Color.black)
                                     .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
+                                    .offset(x: 0, y: -30)
                             }
                         }
                         
@@ -90,7 +102,7 @@ struct CalendarView: View {
                                     Text("\(i + (week*7) - firstDayWeek.rawValue)")
                                         .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
                                         .foregroundColor((i+week*7) == 1 || (i+week*7) == 8 || (i+week*7) == 15 || (i+week*7) == 22 || (i+week*7) == 29 || (i+week*7) == 36 ? Color.red : ((i+week*7) == 7 || (i+week*7) == 14 || (i+week*7) == 21 || (i+week*7) == 28 || (i+week*7) == 35 ? Color.blue : Color.black))
-                                        .offset(x: 0, y: -30)
+                                        .offset(x: 0, y: -60)
                                 }
                             }
                         }
@@ -114,6 +126,7 @@ struct CalendarView: View {
                         
                     }
                     .padding(.bottom, -8) // 行間のスペースを削除するために負の余白を設定
+                    .offset(x: 0, y: -30)
                 }
                 
             }
@@ -129,5 +142,11 @@ extension CalendarView {
         firstDayWeek = calendarViewModel.dayOfWeekCalc(year: calendarViewModel.year, month: calendarViewModel.month + currentMonth,  day: 1)
         
         numDaysMonth = calendarViewModel.dayNumber(year: calendarViewModel.year, month: calendarViewModel.month + currentMonth)
+    }
+}
+
+struct CalendarView_Previews: PreviewProvider {
+    static var previews: some View {
+        CalendarView()
     }
 }
