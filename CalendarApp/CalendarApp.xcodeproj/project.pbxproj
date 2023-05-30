@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2120D842A264F5C00F08940 /* ScheduleConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D832A264F5C00F08940 /* ScheduleConfirmView.swift */; };
+		E2120D862A2652F500F08940 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = E2120D852A2652F500F08940 /* back.png */; };
+		E2120D882A26533A00F08940 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D872A26533A00F08940 /* BackButtonView.swift */; };
+		E2120D8A2A26540D00F08940 /* ButtonStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D892A26540D00F08940 /* ButtonStyle+.swift */; };
 		E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = E22CD0E32A25CE2900C78018 /* hamburger.png */; };
 		E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CD0E72A25CF8700C78018 /* HamburgerView.swift */; };
 		E27C8E442A23949200841268 /* CalendarAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E432A23949200841268 /* CalendarAppApp.swift */; };
@@ -23,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E2120D832A264F5C00F08940 /* ScheduleConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleConfirmView.swift; sourceTree = "<group>"; };
+		E2120D852A2652F500F08940 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		E2120D872A26533A00F08940 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		E2120D892A26540D00F08940 /* ButtonStyle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+.swift"; sourceTree = "<group>"; };
 		E22CD0E32A25CE2900C78018 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		E22CD0E72A25CF8700C78018 /* HamburgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
 		E27C8E402A23949200841268 /* CalendarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +58,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E2120D812A264F1200F08940 /* ScheduleConfirmView */ = {
+			isa = PBXGroup;
+			children = (
+				E2120D822A264F4200F08940 /* Component */,
+				E2120D832A264F5C00F08940 /* ScheduleConfirmView.swift */,
+			);
+			path = ScheduleConfirmView;
+			sourceTree = "<group>";
+		};
+		E2120D822A264F4200F08940 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				E2120D872A26533A00F08940 /* BackButtonView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		E22CD0E02A25CD6700C78018 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +94,7 @@
 		E22CD0E22A25CDAC00C78018 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E2120D852A2652F500F08940 /* back.png */,
 				E22CD0E32A25CE2900C78018 /* hamburger.png */,
 			);
 			path = Image;
@@ -137,6 +163,7 @@
 				E27C8E452A23949200841268 /* MainView.swift */,
 				E27C8E572A2398C200841268 /* SplashView */,
 				E27C8E582A2398D500841268 /* CalendarView */,
+				E2120D812A264F1200F08940 /* ScheduleConfirmView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +245,7 @@
 			children = (
 				E27C8E672A239A5800841268 /* View+.swift */,
 				E27C8E692A239A6300841268 /* Color+.swift */,
+				E2120D892A26540D00F08940 /* ButtonStyle+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -280,6 +308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2120D862A2652F500F08940 /* back.png in Resources */,
 				E27C8E4B2A23949300841268 /* Preview Assets.xcassets in Resources */,
 				E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */,
 				E27C8E482A23949300841268 /* Assets.xcassets in Resources */,
@@ -299,10 +328,13 @@
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
 				E27C8E462A23949200841268 /* MainView.swift in Sources */,
 				E27C8E562A2398BA00841268 /* SplashView.swift in Sources */,
+				E2120D8A2A26540D00F08940 /* ButtonStyle+.swift in Sources */,
 				E27C8E682A239A5800841268 /* View+.swift in Sources */,
 				E27C8E442A23949200841268 /* CalendarAppApp.swift in Sources */,
+				E2120D842A264F5C00F08940 /* ScheduleConfirmView.swift in Sources */,
 				E27C8E662A239A4F00841268 /* Route.swift in Sources */,
 				E27C8E542A23987400841268 /* AppSetting.swift in Sources */,
+				E2120D882A26533A00F08940 /* BackButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

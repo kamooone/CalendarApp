@@ -18,4 +18,5 @@ class RouteObserver: ObservableObject{
 public enum Route{
     case Loading
     case Calendar
+    case ScheduleConfirm
 }

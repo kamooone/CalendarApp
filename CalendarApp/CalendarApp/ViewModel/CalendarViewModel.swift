@@ -21,12 +21,14 @@ final class CalendarViewModel: ObservableObject {
     //Action trigger for request API
     static let shared = CalendarViewModel()
     
+    //var selectMonth: Int = 0
+    //var selectDay: Int = 0
     // 年のみを取得
-    let year : Int = Calendar.current.component(.year, from: Date())
+    let selectYear : Int = Calendar.current.component(.year, from: Date())
     // 月のみを取得
-    let month : Int = Calendar.current.component(.month, from: Date())
+    var selectMonth : Int = Calendar.current.component(.month, from: Date())
     // 日のみを取得
-    let day : Int = Calendar.current.component(.day, from: Date())
+    var selectDay : Int = Calendar.current.component(.day, from: Date())
     
     // 閏年の判定
     func leapYear(year:Int) -> Bool {

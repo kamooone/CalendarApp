@@ -27,7 +27,6 @@ struct SplashView: View {
             // 一定時間後にスプラッシュ画面からホーム画面に遷移するための処理
             DispatchQueue.main.asyncAfter(deadline: .now() + splashTime) {
                 setting.isLoading = false
-                //route.path = .Loading
                 route.path = .Calendar
             }
         }

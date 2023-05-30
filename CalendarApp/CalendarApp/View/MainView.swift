@@ -22,6 +22,8 @@ struct MainView: View {
                     LoadingView()
                 case .Calendar:
                     CalendarView()
+                case .ScheduleConfirm:
+                    ScheduleConfirmView()
                 }
             }
         }

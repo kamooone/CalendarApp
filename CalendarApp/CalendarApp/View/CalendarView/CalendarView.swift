@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    
+    @EnvironmentObject var route: RouteObserver
     let calendarViewModel = CalendarViewModel.shared
     
     let dayofweek = ["日", "月", "火", "水", "木", "金", "土"]
@@ -42,7 +42,7 @@ struct CalendarView: View {
                     }
                     .offset(x: 0, y: -10)
                     
-                    Text("\(String(calendarViewModel.year))年\(calendarViewModel.month + currentMonth)月")
+                    Text("\(String(calendarViewModel.selectYear))年\(calendarViewModel.selectMonth + currentMonth)月")
                         .font(.system(size: 20))
                         .offset(x: 0, y: -10)
                     
@@ -92,17 +92,25 @@ struct CalendarView: View {
                         
                         HStack(spacing: 0) {
                             ForEach(1..<8, id: \.self) { i in
-                                if ((i+week*7) - firstDayWeek.rawValue <= 0) {
-                                    Text("")
-                                        .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
-                                } else if ((i+week*7) - firstDayWeek.rawValue > numDaysMonth) {
+                                if !(1..<numDaysMonth + 1).contains(i + week*7 - firstDayWeek.rawValue) {
                                     Text("")
                                         .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
                                 } else {
-                                    Text("\(i + (week*7) - firstDayWeek.rawValue)")
-                                        .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
-                                        .foregroundColor((i+week*7) == 1 || (i+week*7) == 8 || (i+week*7) == 15 || (i+week*7) == 22 || (i+week*7) == 29 || (i+week*7) == 36 ? Color.red : ((i+week*7) == 7 || (i+week*7) == 14 || (i+week*7) == 21 || (i+week*7) == 28 || (i+week*7) == 35 ? Color.blue : Color.black))
-                                        .offset(x: 0, y: -60)
+                                    Button(action: {
+                                        print("\(i+week*7 - firstDayWeek.rawValue)日をタップ")
+                                        
+                                        // ルートをスケジュール登録に変更して、選択したセルの月日を取得
+                                        route.path = .ScheduleConfirm
+                                        calendarViewModel.selectMonth = calendarViewModel.selectMonth + currentMonth
+                                        calendarViewModel.selectDay = i+week*7 - firstDayWeek.rawValue
+                                    }) {
+                                        Text("\(i + (week*7) - firstDayWeek.rawValue)")
+                                            .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
+                                            .foregroundColor((i+week*7) == 1 || (i+week*7) == 8 || (i+week*7) == 15 || (i+week*7) == 22 || (i+week*7) == 29 || (i+week*7) == 36 ? Color.red : ((i+week*7) == 7 || (i+week*7) == 14 || (i+week*7) == 21 || (i+week*7) == 28 || (i+week*7) == 35 ? Color.blue : Color.black))
+                                            .offset(x: 0, y: -30)
+                                    }
+                                    .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
+                                    .offset(x: 0, y: -30)
                                 }
                             }
                         }
@@ -124,8 +132,9 @@ struct CalendarView: View {
 //                            }
 //                        }
                         
+                        
                     }
-                    .padding(.bottom, -8) // 行間のスペースを削除するために負の余白を設定
+                    .padding(.bottom, -8)
                     .offset(x: 0, y: -30)
                 }
                 
@@ -139,9 +148,9 @@ struct CalendarView: View {
 
 extension CalendarView {
     func bindViewModel() {
-        firstDayWeek = calendarViewModel.dayOfWeekCalc(year: calendarViewModel.year, month: calendarViewModel.month + currentMonth,  day: 1)
+        firstDayWeek = calendarViewModel.dayOfWeekCalc(year: calendarViewModel.selectYear, month: calendarViewModel.selectMonth + currentMonth,  day: 1)
         
-        numDaysMonth = calendarViewModel.dayNumber(year: calendarViewModel.year, month: calendarViewModel.month + currentMonth)
+        numDaysMonth = calendarViewModel.dayNumber(year: calendarViewModel.selectYear, month: calendarViewModel.selectMonth + currentMonth)
     }
 }
 

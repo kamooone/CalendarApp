@@ -1,18 +1,21 @@
 //
-//  HamburgerMenu.swift
+//  BackButtonView.swift
 //  CalendarApp
 //
-//  Created by Kazusa Kondo on 2023/05/30.
+//  Created by Kazusa Kondo on 2023/05/31.
 //
 
 import SwiftUI
 
-struct HamburgerView: View {
+struct BackButtonView: View {
+    @EnvironmentObject var route: RouteObserver
     
     var body: some View  {
         Button(action: {
+            // ルートをカレンダーに変更
+            route.path = .Calendar
         }) {
-            if let image = UIImage(named: "hamburger") {
+            if let image = UIImage(named: "back") {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -28,8 +31,8 @@ struct HamburgerView: View {
     }
 }
 
-struct HamburgerView_Previews: PreviewProvider {
+struct BackButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        HamburgerView()
+        BackButtonView()
     }
 }
