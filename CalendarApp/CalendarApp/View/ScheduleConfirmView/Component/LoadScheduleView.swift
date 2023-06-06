@@ -13,10 +13,13 @@ struct LoadScheduleView: View {
     
     var body: some View {
         GeometryReader { geometry in
+            Spacer()
             HStack {
+                Spacer()
                 Text("作成した理想のスケジュールを使用する")
                     .font(.system(size: 16))
-                    .offset(x:0,y:-20)
+                    .offset(x:0,y:10)
+                Spacer()
             }
             
             HStack {
@@ -28,7 +31,7 @@ struct LoadScheduleView: View {
                 }
                 .frame(width: geometry.size.width * 0.6, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:10)
+                .offset(x:0,y:20)
                 
                 Button(action: {
                     
@@ -37,9 +40,10 @@ struct LoadScheduleView: View {
                 }
                 .buttonStyle(SmallButtonStyle.smallButtonStyle())
                 .padding() // ボタンの余白を調整
-                .offset(x:0,y:10)
+                .offset(x:0,y:20)
                 Spacer()
             }
+            Spacer()
         }
     }
 }

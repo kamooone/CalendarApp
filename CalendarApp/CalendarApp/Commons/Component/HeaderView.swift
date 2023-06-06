@@ -11,8 +11,10 @@ struct HeaderView: View {
     var _headerTitle: String
 
     var body: some View {
+        Spacer()
         Text(_headerTitle)
             .font(.system(size: 24))
             .offset(x: 0, y: -60)
+        Spacer()
     }
 }

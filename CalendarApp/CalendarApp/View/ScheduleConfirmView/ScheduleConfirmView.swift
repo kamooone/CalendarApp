@@ -16,22 +16,16 @@ struct ScheduleConfirmView: View {
             VStack {
                 HStack {
                     BackButtonView()
-                    Spacer()
                 }
                 HStack {
-                    Spacer()
                     HeaderView(_headerTitle: headerTitle)
-                    Spacer()
                 }
                 VStack {
                     HStack {
-                        Spacer()
                         SelectedMonthDayView()
-                        Spacer()
                     }
                     
                     HStack {
-                        Spacer()
                         RegisterButtonView()
                     }
                     

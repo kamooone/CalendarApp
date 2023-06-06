@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterButtonView: View {
     var body: some View {
+        Spacer()
         Button(action: {
             
         }) {
