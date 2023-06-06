@@ -18,9 +18,9 @@ struct SmallButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .foregroundColor(.primary)
-            .padding(8)
+            .padding(3)
             .background(Color.secondary.opacity(0.5))
-            .cornerRadius(8)
+            .cornerRadius(3)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }
 }

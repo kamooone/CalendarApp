@@ -30,6 +30,12 @@ struct MainView: View {
     }
 }
 
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView().environmentObject(RouteObserver()).environmentObject(Setting())
+    }
+}
+
 struct LoadingView: View{
     ///引数でmessageを指定した場合はそちらが優先される
     var message = "loading画面です。"//.localized()
@@ -45,11 +51,5 @@ struct LoadingView: View{
             .zIndex(1)
             .matchParentSize()
             .background(Color.black.opacity(0.5))
-    }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView().environmentObject(RouteObserver()).environmentObject(Setting())
     }
 }

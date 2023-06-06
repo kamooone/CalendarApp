@@ -35,5 +35,13 @@ extension Color{
     static var anthracite: Color {
         Color.fromHex("#27272e")
     }
+    
+    static var lightGray: Color {
+        Color.fromHex("#DEDEDE")
+    }
+    
+    static var lightWhite: Color {
+        Color.fromHex("#FEFEFF")
+    }
 }
 
