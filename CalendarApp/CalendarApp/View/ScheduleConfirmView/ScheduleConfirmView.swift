@@ -8,14 +8,10 @@
 import SwiftUI
 
 struct ScheduleConfirmView: View {
-    let calendarViewModel = CalendarViewModel.shared
-    
-    @State private var selectedOption = 0
-    let options = ["-------------------", "作成した理想のスケ1", "作成した理想のスケ2", "作成した理想のスケ3"]
-    @State private var text = ""
-
+    let headerTitle: String = "スケジュール登録"
     
     var body: some View {
+        Color.lightGray.edgesIgnoringSafeArea(.all)
         GeometryReader { geometry in
             VStack {
                 HStack {
@@ -24,87 +20,55 @@ struct ScheduleConfirmView: View {
                 }
                 HStack {
                     Spacer()
-                    Text("スケジュール登録")
-                        .font(.system(size: 24))
-                        .offset(x: 0, y: -60)
+                    HeaderView(_headerTitle: headerTitle)
                     Spacer()
                 }
                 VStack {
                     HStack {
                         Spacer()
-                        Text("\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日")
-                            .font(.system(size: 24))
-                            .offset(x: 0, y: -40)
+                        SelectedMonthDayView()
                         Spacer()
                     }
                     
                     HStack {
                         Spacer()
-                        Button(action: {
-                            
-                        }) {
-                            Text("登録")
-                        }
-                        .offset(x:0,y:-110)
-                        .buttonStyle(SmallButtonStyle.smallButtonStyle())
-                        .padding() // ボタンの余白を調整
+                        RegisterButtonView()
                     }
                     
-                    HStack {
-                        Text("作成した理想のスケジュールを使用する")
-                            .font(.system(size: 16))
-                            .offset(x: 0, y: -100)
+                    ZStack {
+                        LoadScheduleView()
                     }
+                    .frame(maxWidth: .infinity, maxHeight: 130)
+                    .background(Color.lightWhite)
+                    .offset(x: 0, y: -100)
                     
-                    HStack {
-                        Spacer()
-                        Picker("Select an option", selection: $selectedOption) {
-                            ForEach(0..<options.count, id: \.self) { index in
-                                Text(options[index])
-                            }
-                        }
-                        .frame(width: geometry.size.width * 0.6, height: geometry.size.height / 10)
-                        .pickerStyle(MenuPickerStyle())
-                        .offset(x:0,y:-110)
+                    
+                    ZStack {
+                        RegisterScheduleTitleView()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 160)
+                    .background(Color.lightWhite)
+                    .offset(x: 0, y: -90)
+                    
+                    
+                    ZStack {
+                        RegisterScheduleDetailView()
                         
-                        Button(action: {
-                            
-                        }) {
-                            Text("追加")
-                        }
-                        .offset(x:0,y:-110)
-                        .buttonStyle(SmallButtonStyle.smallButtonStyle())
-                        .padding() // ボタンの余白を調整
-                        Spacer()
-                    }
-                    
-                    VStack {
-                        Text("登録するスケジュールのタイトルを入力しよう！")
-                            .font(.system(size: 16))
-                            .offset(x: 0, y: -100)
+                        RegisterScheduleTimeView()
                         
-                        HStack {
-                            Text("※")
-                                .foregroundColor(Color.red)
-                                .font(.system(size: 16))
-                                .offset(x: 20, y: -90)
-                            Text("タイトル")
-                                .font(.system(size: 16))
-                                .offset(x: 20, y: -90)
-                            TextField("例 : 休日の理想のスケジュール", text: $text)
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .padding()
-                                        .offset(x: 5, y: -90)
-                            Spacer()
-                        }
+                        RegisterNoticeView()
                     }
+                    .frame(width:geometry.size.width, height:250)
+                    .background(Color.lightWhite)
+                    .offset(x: 0, y: -80)
                     
                     
                     Spacer()
                 }
                 
-                // ToDo タイトル入力などの各コンポーネントの実装
+                // ToDo 詳細を追加して行った時の表示の更新をどのようにするか
                 
+                BannerAdsView()
                 Spacer()
             }
         }
