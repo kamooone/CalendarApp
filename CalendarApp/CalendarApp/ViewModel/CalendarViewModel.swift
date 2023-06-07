@@ -21,14 +21,19 @@ final class CalendarViewModel: ObservableObject {
     //Action trigger for request API
     static let shared = CalendarViewModel()
     
-    //var selectMonth: Int = 0
-    //var selectDay: Int = 0
+    var firstDayWeek: Weekday = Weekday.monday
+    var numDaysMonth: Int = 0
+    let columns: CGFloat = 8
+    let rows: CGFloat = 9
+    
     // 年のみを取得
     let selectYear : Int = Calendar.current.component(.year, from: Date())
     // 月のみを取得
     var selectMonth : Int = Calendar.current.component(.month, from: Date())
     // 日のみを取得
     var selectDay : Int = Calendar.current.component(.day, from: Date())
+    
+    var currentMonth: Int = 0
     
     // 閏年の判定
     func leapYear(year:Int) -> Bool {
@@ -72,6 +77,12 @@ final class CalendarViewModel: ObservableObject {
         }
     }
     
+    func bindViewModel() {
+        firstDayWeek = dayOfWeekCalc(year: selectYear, month: selectMonth + currentMonth,  day: 1)
+        numDaysMonth = dayNumber(year: selectYear, month: selectMonth + currentMonth)
+        print(firstDayWeek)
+        print(numDaysMonth)
+    }
     
     //=========================================
     // 使用しないためコメントアウト

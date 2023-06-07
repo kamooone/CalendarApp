@@ -27,9 +27,3 @@ struct HamburgerView: View {
         .padding() // ボタンの余白を調整
     }
 }
-
-struct HamburgerView_Previews: PreviewProvider {
-    static var previews: some View {
-        HamburgerView()
-    }
-}
