@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @State private var shouldReloadView = false
     let calendarViewModel = CalendarViewModel.shared
     let headerTitle: String = "スケジュール登録"
     
-    // ToDo カレンダーの表示の修正をする
+    init() {
+        calendarViewModel.bindViewModel()
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -23,17 +27,17 @@ struct CalendarView: View {
             }
             
             HStack() {
-                YearMonthView()
+                YearMonthView(reloadView: $shouldReloadView)
             }
             
             HStack() {
                 DaysWeekView()
             }
             CalendarCellView()
+            
+            Spacer()
         }
-        .onAppear {
-            calendarViewModel.bindViewModel()
-        }
+        .id(shouldReloadView) // reloadViewの変更によってViewの再描画をトリガーする
     }
 }
 
