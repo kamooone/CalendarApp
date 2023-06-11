@@ -13,7 +13,5 @@ struct BannerAdsView: View {
             Text("バナー広告表示")
                 .font(.system(size: 16))
         }
-        .frame(maxWidth: .infinity, maxHeight: 80)
-        .background(Color.yellow)
     }
 }

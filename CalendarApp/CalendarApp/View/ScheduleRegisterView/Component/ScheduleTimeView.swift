@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegisterScheduleTimeView: View {
+struct ScheduleTimeView: View {
     @State private var selectedStartTime = 0
     @State private var selectedEndTime = 0
     let time = ["0:00", "0:15", "0:30", "0:45"]
@@ -18,7 +18,7 @@ struct RegisterScheduleTimeView: View {
                 Spacer()
                 Text("開始")
                     .font(.system(size: 16))
-                    .offset(x:0,y:150)
+                    .offset(x:0,y:140)
                 Picker("Select an StartTIme", selection: $selectedStartTime) {
                     ForEach(0..<time.count, id: \.self) { index in
                         Text(time[index])
@@ -26,15 +26,15 @@ struct RegisterScheduleTimeView: View {
                 }
                 .frame(width: 80, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:150)
+                .offset(x:0,y:140)
                 
                 Text("〜　")
                     .font(.system(size: 16))
-                    .offset(x:0,y:150)
+                    .offset(x:0,y:140)
                 
                 Text("終了")
                     .font(.system(size: 16))
-                    .offset(x:0,y:150)
+                    .offset(x:0,y:140)
                 Picker("Select an EndTime", selection: $selectedEndTime) {
                     ForEach(0..<time.count, id: \.self) { index in
                         Text(time[index])
@@ -42,7 +42,7 @@ struct RegisterScheduleTimeView: View {
                 }
                 .frame(width: 80, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:150)
+                .offset(x:0,y:140)
                 
                 Spacer()
             }

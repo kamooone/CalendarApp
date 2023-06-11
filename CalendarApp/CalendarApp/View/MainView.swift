@@ -23,7 +23,7 @@ struct MainView: View {
                 case .Calendar:
                     CalendarView()
                 case .ScheduleConfirm:
-                    ScheduleConfirmView()
+                    ScheduleRegisterView()
                 }
             }
         }

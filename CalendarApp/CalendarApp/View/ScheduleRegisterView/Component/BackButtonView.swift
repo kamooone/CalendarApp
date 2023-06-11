@@ -26,7 +26,7 @@ struct BackButtonView: View {
             }
         }
         .offset(x:0,y:-20)
-        .buttonStyle(SmallButtonStyle.smallButtonStyle())
+        .buttonStyle(NormalButtonStyle.normalButtonStyle())
         .padding() // ボタンの余白を調整
         
         Spacer()

@@ -31,14 +31,15 @@ struct LoadScheduleView: View {
                 }
                 .frame(width: geometry.size.width * 0.6, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:20)
+                .offset(x:0,y:25)
                 
                 Button(action: {
                     
                 }) {
                     Text("追加")
+                        .frame(width: 50, height: 30)
                 }
-                .buttonStyle(SmallButtonStyle.smallButtonStyle())
+                .buttonStyle(NormalButtonStyle.normalButtonStyle())
                 .padding() // ボタンの余白を調整
                 .offset(x:0,y:20)
                 Spacer()

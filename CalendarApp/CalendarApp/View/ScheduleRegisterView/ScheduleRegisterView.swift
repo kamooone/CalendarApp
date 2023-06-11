@@ -1,5 +1,5 @@
 //
-//  ScheduleConfirmView.swift
+//  ScheduleRegisterView.swift
 //  CalendarApp
 //
 //  Created by Kazusa Kondo on 2023/05/31.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScheduleConfirmView: View {
+struct ScheduleRegisterView: View {
     let headerTitle: String = "スケジュール登録"
     
     var body: some View {
@@ -26,51 +26,62 @@ struct ScheduleConfirmView: View {
                     }
                     
                     HStack {
-                        RegisterButtonView()
+                        RegisterScheduleButtonView()
                     }
                     
                     ZStack {
                         LoadScheduleView()
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 130)
+                    .frame(width: geometry.size.width, height: 80)
                     .background(Color.lightWhite)
                     .offset(x: 0, y: -100)
                     
                     
                     ZStack {
-                        RegisterScheduleTitleView()
+                        ScheduleTitleView()
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 160)
+                    .frame(width: geometry.size.width, height: 150)
                     .background(Color.lightWhite)
                     .offset(x: 0, y: -90)
-                    
+    
                     
                     ZStack {
-                        RegisterScheduleDetailView()
+                        ScheduleDetailView()
                         
-                        RegisterScheduleTimeView()
+                        ScheduleTimeView()
                         
-                        RegisterNoticeView()
+                        NoticeSettingView()
+                        
+                        HStack {
+                            Spacer()
+                            ConfirmScheduleDetailButtonView()
+                                .offset(x:-30, y:0)
+                            RegisterScheduleDetailButtonView()
+                                .offset(x:30, y:0)
+                            Spacer()
+                        }
+
                     }
-                    .frame(width:geometry.size.width, height:250)
+                    .frame(width:geometry.size.width, height:270)
                     .background(Color.lightWhite)
                     .offset(x: 0, y: -80)
-                    
-                    
+
                     Spacer()
                 }
                 
-                // ToDo 詳細を追加して行った時の表示の更新をどのようにするか
-                
                 BannerAdsView()
+                    .frame(width: geometry.size.width, height: 80)
+                    .background(Color.yellow)
+                    .offset(x: 0, y: -70)
+                
                 Spacer()
             }
         }
     }
 }
 
-struct ScheduleConfirmView_Previews: PreviewProvider {
+struct ScheduleRegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        ScheduleConfirmView()
+        ScheduleRegisterView()
     }
 }

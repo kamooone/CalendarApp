@@ -9,18 +9,18 @@ import Foundation
 import SwiftUI
 
 extension ButtonStyle {
-    static func smallButtonStyle() -> some ButtonStyle {
-        return SmallButtonStyle()
+    static func normalButtonStyle() -> some ButtonStyle {
+        return NormalButtonStyle()
     }
 }
 
-struct SmallButtonStyle: ButtonStyle {
+struct NormalButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .foregroundColor(.primary)
-            .padding(3)
+            .padding(6)
             .background(Color.secondary.opacity(0.5))
-            .cornerRadius(3)
+            .cornerRadius(12)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }
 }

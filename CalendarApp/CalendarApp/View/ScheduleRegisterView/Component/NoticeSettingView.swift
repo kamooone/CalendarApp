@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct RegisterNoticeView: View {
+struct NoticeSettingView: View {
     @State private var isSwitchOn = false
     
     var body: some View {
         VStack {
             Toggle("通知", isOn: $isSwitchOn)
-                .offset(x:0,y:80)
+                .offset(x:0,y:60)
                 .padding(.horizontal, 100)
         }
     }
