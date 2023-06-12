@@ -8,7 +8,29 @@
 import SwiftUI
 
 struct ConfirmScheduleDetailView: View {
+    let headerTitle: String = "スケジュール詳細確認"
+    
     var body: some View {
-        Text("aaa")
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    BackButtonView()
+                }
+                HStack {
+                    HeaderView(_headerTitle: headerTitle)
+                }
+                
+                ScrollView {
+                    ForEach(0..<6, id: \.self) { week in
+                        VStack {
+                            Text("aaa")
+                        }
+                        .frame(width: geometry.size.width, height: 80)
+                        .background(Color.pink)
+                        .offset(x: 0, y: 0)
+                    }
+                }
+            }
+        }
     }
 }

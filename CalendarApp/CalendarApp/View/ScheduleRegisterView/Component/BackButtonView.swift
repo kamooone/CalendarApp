@@ -13,7 +13,11 @@ struct BackButtonView: View {
     var body: some View  {
         Button(action: {
             // ルートをカレンダーに変更
-            route.path = .Calendar
+            if route.path == .ConfirmScheduleDetail {
+                route.path = .ScheduleConfirm
+            } else if route.path == .ScheduleConfirm {
+                route.path = .Calendar
+            }
         }) {
             if let image = UIImage(named: "back") {
                 Image(uiImage: image)
@@ -30,11 +34,5 @@ struct BackButtonView: View {
         .padding() // ボタンの余白を調整
         
         Spacer()
-    }
-}
-
-struct BackButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        BackButtonView()
     }
 }
