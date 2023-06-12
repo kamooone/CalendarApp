@@ -19,4 +19,5 @@ public enum Route{
     case Loading
     case Calendar
     case ScheduleConfirm
+    case ConfirmScheduleDetail
 }

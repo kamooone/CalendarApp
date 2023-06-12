@@ -10,6 +10,7 @@
 		E20018802A30D3D1009640F0 /* YearMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200187F2A30D3D1009640F0 /* YearMonthView.swift */; };
 		E20018822A30DC4B009640F0 /* DaysWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20018812A30DC4B009640F0 /* DaysWeekView.swift */; };
 		E20018842A30DCA5009640F0 /* CalendarCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20018832A30DCA5009640F0 /* CalendarCellView.swift */; };
+		E20CE4212A375F410095C102 /* ConfirmScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20CE4202A375F410095C102 /* ConfirmScheduleDetailView.swift */; };
 		E2120D842A264F5C00F08940 /* ScheduleRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D832A264F5C00F08940 /* ScheduleRegisterView.swift */; };
 		E2120D862A2652F500F08940 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = E2120D852A2652F500F08940 /* back.png */; };
 		E2120D882A26533A00F08940 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D872A26533A00F08940 /* BackButtonView.swift */; };
@@ -44,6 +45,7 @@
 		E200187F2A30D3D1009640F0 /* YearMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearMonthView.swift; sourceTree = "<group>"; };
 		E20018812A30DC4B009640F0 /* DaysWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysWeekView.swift; sourceTree = "<group>"; };
 		E20018832A30DCA5009640F0 /* CalendarCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCellView.swift; sourceTree = "<group>"; };
+		E20CE4202A375F410095C102 /* ConfirmScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleDetailView.swift; sourceTree = "<group>"; };
 		E2120D832A264F5C00F08940 /* ScheduleRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleRegisterView.swift; sourceTree = "<group>"; };
 		E2120D852A2652F500F08940 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		E2120D872A26533A00F08940 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E20CE41F2A375F1E0095C102 /* ConfirmScheduleDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				E20CE4202A375F410095C102 /* ConfirmScheduleDetailView.swift */,
+			);
+			path = ConfirmScheduleDetailView;
+			sourceTree = "<group>";
+		};
 		E2120D812A264F1200F08940 /* ScheduleRegisterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +223,7 @@
 				E27C8E572A2398C200841268 /* SplashView */,
 				E27C8E582A2398D500841268 /* CalendarView */,
 				E2120D812A264F1200F08940 /* ScheduleRegisterView */,
+				E20CE41F2A375F1E0095C102 /* ConfirmScheduleDetailView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -389,6 +400,7 @@
 				E20018822A30DC4B009640F0 /* DaysWeekView.swift in Sources */,
 				E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */,
 				E225D2C52A2F79CD0052362D /* RegisterScheduleButtonView.swift in Sources */,
+				E20CE4212A375F410095C102 /* ConfirmScheduleDetailView.swift in Sources */,
 				E225D2CB2A2F7BF00052362D /* ScheduleTitleView.swift in Sources */,
 				E27C8E442A23949200841268 /* CalendarAppApp.swift in Sources */,
 				E2120D842A264F5C00F08940 /* ScheduleRegisterView.swift in Sources */,

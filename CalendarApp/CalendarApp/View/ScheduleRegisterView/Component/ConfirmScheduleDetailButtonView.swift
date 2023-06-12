@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ConfirmScheduleDetailButtonView: View {
+    @EnvironmentObject var route: RouteObserver
     
     var body: some View {
         
         Button(action: {
-            // ToDo 追加したスケジュール詳細を表示する画面に遷移する。
-            
+            route.path = .ConfirmScheduleDetail
         }) {
             Text("確認")
                 .frame(width: 50, height: 30)
