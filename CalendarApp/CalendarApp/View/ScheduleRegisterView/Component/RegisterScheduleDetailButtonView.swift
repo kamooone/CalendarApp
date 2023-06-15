@@ -47,22 +47,15 @@ struct RegisterScheduleDetailButtonView: View {
             //=======================================
             // レコードの取得
             //=======================================
-            let realm = try! Realm()
-            
-            let shopTable = realm.objects(Shop.self)
-            print("shopテーブルのデータ全て取得")
-            print(shopTable)
-            
-            let menuTable = realm.objects(Menu.self)
-            print("menuテーブルのデータ全て取得")
-            print(menuTable)
-            
-
-            // Realmファイルが保存先のパス
-            let fileURL = realm.configuration.fileURL
-            print("Realm file path: \(fileURL?.path ?? "")")
-            
-            
+//            let realm = try! Realm()
+//
+//            let shopTable = realm.objects(Shop.self)
+//            print("shopテーブルのデータ全て取得")
+//            print(shopTable)
+//
+//            let menuTable = realm.objects(Menu.self)
+//            print("menuテーブルのデータ全て取得")
+//            print(menuTable)
         }) {
             Text("登録")
                 .frame(width: 50, height: 30)
