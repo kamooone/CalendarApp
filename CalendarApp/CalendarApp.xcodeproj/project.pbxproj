@@ -40,6 +40,7 @@
 		E27C8E6A2A239A6300841268 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E692A239A6300841268 /* Color+.swift */; };
 		E2AA373F2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */; };
 		E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */; };
+		E2FB60ED2A3B4CD3003D89C8 /* TestRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB60EC2A3B4CD3003D89C8 /* TestRealm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		E27C8E692A239A6300841268 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
+		E2FB60EC2A3B4CD3003D89C8 /* TestRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRealm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +109,6 @@
 				085BEBA1AAC48DCB5E8A85E6 /* Pods-CalendarApp.debug.xcconfig */,
 				5C7C585F85B2C9C6BF96C4D0 /* Pods-CalendarApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -211,7 +212,8 @@
 		E27C8E422A23949200841268 /* CalendarApp */ = {
 			isa = PBXGroup;
 			children = (
-				E27C8E512A23984000841268 /* Application */,
+				E2FB60E92A3B4C59003D89C8 /* Lib */,
+				E27C8E512A23984000841268 /* App */,
 				E27C8E522A23985000841268 /* View */,
 				E27C8E5B2A2398F700841268 /* ViewModel */,
 				E27C8E5E2A23993500841268 /* Model */,
@@ -232,13 +234,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		E27C8E512A23984000841268 /* Application */ = {
+		E27C8E512A23984000841268 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				E27C8E432A23949200841268 /* CalendarAppApp.swift */,
 				E27C8E532A23987400841268 /* AppSetting.swift */,
 			);
-			path = Application;
+			path = App;
 			sourceTree = "<group>";
 		};
 		E27C8E522A23985000841268 /* View */ = {
@@ -334,6 +336,30 @@
 				E2120D892A26540D00F08940 /* ButtonStyle+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		E2FB60E92A3B4C59003D89C8 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				E2FB60EA2A3B4CA3003D89C8 /* Support */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		E2FB60EA2A3B4CA3003D89C8 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				E2FB60EB2A3B4CB2003D89C8 /* Realm */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		E2FB60EB2A3B4CB2003D89C8 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				E2FB60EC2A3B4CD3003D89C8 /* TestRealm.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,6 +505,7 @@
 				E20018842A30DCA5009640F0 /* CalendarCellView.swift in Sources */,
 				E225D2C72A2F7A3B0052362D /* SelectedMonthDayView.swift in Sources */,
 				E2120D882A26533A00F08940 /* BackButtonView.swift in Sources */,
+				E2FB60ED2A3B4CD3003D89C8 /* TestRealm.swift in Sources */,
 				E225D2C22A2F766A0052362D /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
