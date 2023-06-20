@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NoticeSettingView: View {
+    let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var isSwitchOn = false
     
     var body: some View {
@@ -15,6 +16,9 @@ struct NoticeSettingView: View {
             Toggle("通知", isOn: $isSwitchOn)
                 .offset(x:0,y:60)
                 .padding(.horizontal, 100)
+                .onChange(of: isSwitchOn) { newValue in
+                    scheduleDetailViewModel.isNotice = newValue
+                }
         }
     }
 }

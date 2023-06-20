@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ScheduleDetailView: View {
+    let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var text = ""
     
     var body: some View {
@@ -15,7 +16,6 @@ struct ScheduleDetailView: View {
             Text("スケジュールの詳細を設定しよう！")
                 .font(.system(size: 16))
                 .offset(x: 0, y: -70)
-            
             
             HStack {
                 Text("詳細タイトル")
@@ -25,6 +25,9 @@ struct ScheduleDetailView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .offset(x: 5, y: -40)
+                    .onChange(of: text) { newValue in
+                        scheduleDetailViewModel.scheduleDetailTitle = newValue
+                    }
                 Spacer()
             }
         }
