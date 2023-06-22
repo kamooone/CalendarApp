@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoticeSettingView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
-    @State private var isSwitchOn = false
+    @State private var isSwitchOn = true
     
     var body: some View {
         VStack {

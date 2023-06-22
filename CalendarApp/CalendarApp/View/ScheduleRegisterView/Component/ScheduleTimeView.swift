@@ -29,6 +29,7 @@ struct ScheduleTimeView: View {
         GeometryReader { geometry in
             HStack {
                 Spacer()
+                // ToDo 開始より終了の方が早い場合はエラーにする。
                 Text("開始")
                     .font(.system(size: 16))
                     .offset(x:0,y:140)

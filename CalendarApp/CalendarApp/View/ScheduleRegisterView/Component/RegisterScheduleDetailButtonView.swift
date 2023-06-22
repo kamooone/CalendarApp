@@ -14,6 +14,7 @@ struct RegisterScheduleDetailButtonView: View {
     @State private var alertMessage = ""
     
     var body: some View {
+        // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
         
         Button(action: {
             if scheduleDetailViewModel.registerScheduleDetail() == 0 {

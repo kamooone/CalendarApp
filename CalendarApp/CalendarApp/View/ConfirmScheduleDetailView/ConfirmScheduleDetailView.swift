@@ -10,6 +10,11 @@ import SwiftUI
 struct ConfirmScheduleDetailView: View {
     let headerTitle: String = "スケジュール詳細確認"
     
+//    init {
+//        // ToDo ScheduleDetailViewモデルのメソッドでデータを取得して、表示させる。
+//
+//    }
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
