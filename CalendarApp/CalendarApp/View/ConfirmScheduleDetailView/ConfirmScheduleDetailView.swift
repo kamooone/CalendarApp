@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ConfirmScheduleDetailView: View {
+    let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     let headerTitle: String = "スケジュール詳細確認"
     
-//    init {
-//        // ToDo ScheduleDetailViewモデルのメソッドでデータを取得して、表示させる。
-//
-//    }
+    init() {
+        if scheduleDetailViewModel.getScheduleDetail() == 0 {
+            print("スケジュール詳細取得成功")
+        } else {
+            print("登録に失敗しました")
+            // ToDo カレンダー画面に戻す処理
+        }
+    }
     
     var body: some View {
         GeometryReader { geometry in
