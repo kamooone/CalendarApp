@@ -13,8 +13,8 @@ final class ScheduleDetailViewModel: ObservableObject {
     static let shared = ScheduleDetailViewModel()
 
     var scheduleDetailTitle = ""
-    var startTime = ""
-    var endTime = ""
+    var startTime = "00:00"
+    var endTime = "00:00"
     var isNotice = true
     
     var scheduleDetailTitleArray: [String] = []
