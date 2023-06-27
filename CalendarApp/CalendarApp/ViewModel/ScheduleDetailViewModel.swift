@@ -17,13 +17,15 @@ final class ScheduleDetailViewModel: ObservableObject {
     var endTime = ""
     var isNotice = true
     
+    var scheduleDetailTitleArray: [String] = []
+    var startTimeArray: [String] = []
+    var endTimeArray: [String] = []
+    var isNoticeArray: [Bool] = []
+    
     private let schemaVersion: UInt64 = 2
     
     // DB登録処理
     func registerScheduleDetail() -> Int {
-        //=======================================
-        // レコードの生成
-        //=======================================
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         // スキーマの設定
@@ -50,22 +52,55 @@ final class ScheduleDetailViewModel: ObservableObject {
     }
     
     func getScheduleDetail() -> Int {
-        //=======================================
-        // レコードの取得
-        //=======================================
-        // スキーマの設定
         let config = Realm.Configuration(schemaVersion: schemaVersion)
+
+        // DB取得の前にパース用の配列を初期化
+        scheduleDetailTitleArray = []
+        startTimeArray = []
+        endTimeArray = []
+        isNoticeArray = []
         
         do {
             let realm = try Realm(configuration: config)
-            let scheduleDetailData = realm.objects(ScheduleDetailData.self)
-            print(scheduleDetailData)
+            let calendarViewModel = CalendarViewModel.shared
+            let calendar = Calendar.current
+
+            // 指定の日付
+            let targetDateComponents = DateComponents(year: calendarViewModel.selectYear, month: calendarViewModel.selectMonth, day: calendarViewModel.selectDay)
+            guard let targetDate = calendar.date(from: targetDateComponents) else {
+                print("指定した日付が無効です。")
+                return 1
+            }
+
+            // 日付を文字列に変換
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy年M月d日"
+            let targetDateString = dateFormatter.string(from: targetDate)
+            
+            // ToDo startTimeが早い順に取得する。もしくは取得後に並べ替える。
+
+            // 日付が一致するレコードをクエリで取得
+            let predicate = NSPredicate(format: "date == %@", targetDateString)
+            let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
+
+            // 取得したデータをパース処理
+            for scheduleDetailData in scheduleDetailData {
+                scheduleDetailTitleArray.append(scheduleDetailData.scheduleDetailTitle)
+                startTimeArray.append(scheduleDetailData.startTime)
+                endTimeArray.append(scheduleDetailData.endTime)
+                isNoticeArray.append(scheduleDetailData.isNotice)
+            }
+            
+//            print("scheduleDetailTitleArray",scheduleDetailTitleArray)
+//            print("startTimeArray",startTimeArray)
+//            print("endTimeArray",endTimeArray)
+//            print("isNoticeArray",isNoticeArray)
+//            print(scheduleDetailData)
+//            print("----")
         } catch {
             print("Realmの読み込みエラー：\(error)")
             return 1
         }
-        // ToDoパース処理を行う (選択した日付と同じレコードのみを取得してパースを行う。なので取得した時用の配列を用意する必要がある。)
-        // ToDo その後、ConfirmScheduleDetailViewで表示させる
         
         return 0
     }

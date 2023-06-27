@@ -32,10 +32,12 @@ struct ConfirmScheduleDetailView: View {
                     HeaderView(_headerTitle: headerTitle)
                 }
                 
+                // ToDo 各種項目編集できるように&編集内容を更新(DB更新)&削除処理。
+                
                 ScrollView {
-                    ForEach(0..<6, id: \.self) { week in
+                    ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
                         VStack {
-                            Text("aaa")
+                            Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index, width: geometry.size.width)
                         }
                         .frame(width: geometry.size.width, height: 80)
                         .background(Color.pink)
@@ -44,5 +46,23 @@ struct ConfirmScheduleDetailView: View {
                 }
             }
         }
+    }
+}
+
+struct Schedule: View {
+    var scheduleDetailViewModel: ScheduleDetailViewModel
+    var index: Int
+    var width: CGFloat
+    
+    var body: some View {
+        VStack {
+            Text(scheduleDetailViewModel.scheduleDetailTitleArray[index])
+            Text(scheduleDetailViewModel.startTimeArray[index])
+            Text(scheduleDetailViewModel.endTimeArray[index])
+            Text(scheduleDetailViewModel.isNoticeArray[index] ? "Notice On" : "Notice Off")
+        }
+        .frame(width: width, height: 80)
+        .background(Color.pink)
+        .offset(x: 0, y: 0)
     }
 }
