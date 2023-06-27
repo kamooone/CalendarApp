@@ -81,7 +81,7 @@ final class ScheduleDetailViewModel: ObservableObject {
 
             // 日付が一致するレコードをクエリで取得
             let predicate = NSPredicate(format: "date == %@", targetDateString)
-            let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
+            let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate).sorted(byKeyPath: "startTime")
 
             // 取得したデータをパース処理
             for scheduleDetailData in scheduleDetailData {
