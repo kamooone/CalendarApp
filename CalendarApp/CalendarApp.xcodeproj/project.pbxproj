@@ -39,6 +39,7 @@
 		E27C8E662A239A4F00841268 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E652A239A4F00841268 /* Route.swift */; };
 		E27C8E682A239A5800841268 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E672A239A5800841268 /* View+.swift */; };
 		E27C8E6A2A239A6300841268 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E692A239A6300841268 /* Color+.swift */; };
+		E29D3C672A4C830200A68BF4 /* EditButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D3C662A4C830200A68BF4 /* EditButtonView.swift */; };
 		E2AA373F2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */; };
 		E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */; };
 		E2FB60ED2A3B4CD3003D89C8 /* ScheduleDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */; };
@@ -80,6 +81,7 @@
 		E27C8E652A239A4F00841268 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		E27C8E672A239A5800841268 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		E27C8E692A239A6300841268 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		E29D3C662A4C830200A68BF4 /* EditButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonView.swift; sourceTree = "<group>"; };
 		E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailData.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		E20CE41F2A375F1E0095C102 /* ConfirmScheduleDetailView */ = {
 			isa = PBXGroup;
 			children = (
+				E29D3C652A4C82C600A68BF4 /* Component */,
 				E20CE4202A375F410095C102 /* ConfirmScheduleDetailView.swift */,
 			);
 			path = ConfirmScheduleDetailView;
@@ -341,6 +344,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E29D3C652A4C82C600A68BF4 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				E29D3C662A4C830200A68BF4 /* EditButtonView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		E2FB60E92A3B4C59003D89C8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +502,7 @@
 				E27C8E462A23949200841268 /* MainView.swift in Sources */,
 				E225D2D12A2F7DAD0052362D /* BannerAdsView.swift in Sources */,
 				E27C8E562A2398BA00841268 /* SplashView.swift in Sources */,
+				E29D3C672A4C830200A68BF4 /* EditButtonView.swift in Sources */,
 				E24F7B832A41EA58002F12C7 /* ScheduleDetailViewModel.swift in Sources */,
 				E2120D8A2A26540D00F08940 /* ButtonStyle+.swift in Sources */,
 				E225D2CD2A2F7C890052362D /* ScheduleDetailView.swift in Sources */,

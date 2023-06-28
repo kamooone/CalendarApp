@@ -76,8 +76,6 @@ final class ScheduleDetailViewModel: ObservableObject {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy年M月d日"
             let targetDateString = dateFormatter.string(from: targetDate)
-            
-            // ToDo startTimeが早い順に取得する。もしくは取得後に並べ替える。
 
             // 日付が一致するレコードをクエリで取得
             let predicate = NSPredicate(format: "date == %@", targetDateString)

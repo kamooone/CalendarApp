@@ -31,19 +31,32 @@ struct ConfirmScheduleDetailView: View {
                 HStack {
                     HeaderView(_headerTitle: headerTitle)
                 }
-                
-                // ToDo 各種項目編集できるように&編集内容を更新(DB更新)&削除処理。
+                HStack {
+                    SelectedMonthDayView()
+                }
+                HStack {
+                    Spacer()
+                    EditButtonView()
+                }
                 
                 ScrollView {
-                    ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
-                        VStack {
-                            Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index, width: geometry.size.width)
+                    VStack(spacing: 20) {
+                        Spacer().frame(height: 20)
+                        ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
+                            VStack {
+                                Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                            }
+                            .frame(width: geometry.size.width - 40, height: 80)
+                            .background(Color.lemonchiffon)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 20)
                         }
-                        .frame(width: geometry.size.width, height: 80)
-                        .background(Color.pink)
-                        .offset(x: 0, y: 0)
+                        Spacer().frame(height: 20)
                     }
                 }
+                .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                .background(Color.lightGray)
+                .offset(x: 0, y: -120)
             }
         }
     }
@@ -52,17 +65,34 @@ struct ConfirmScheduleDetailView: View {
 struct Schedule: View {
     var scheduleDetailViewModel: ScheduleDetailViewModel
     var index: Int
-    var width: CGFloat
     
     var body: some View {
         VStack {
-            Text(scheduleDetailViewModel.scheduleDetailTitleArray[index])
-            Text(scheduleDetailViewModel.startTimeArray[index])
-            Text(scheduleDetailViewModel.endTimeArray[index])
-            Text(scheduleDetailViewModel.isNoticeArray[index] ? "Notice On" : "Notice Off")
+            HStack {
+                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
+                Text("タイトル")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.scheduleDetailTitleArray[index])
+            }
+            
+            HStack {
+                Text("開始")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.startTimeArray[index])
+                
+                Text("〜")
+                    .font(.system(size: 16))
+                
+                Text("終了")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.endTimeArray[index])
+            }
+            
+            HStack {
+                Text("通知")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
+            }
         }
-        .frame(width: width, height: 80)
-        .background(Color.pink)
-        .offset(x: 0, y: 0)
     }
 }
