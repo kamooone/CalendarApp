@@ -11,6 +11,8 @@ import RealmSwift
 final class ScheduleDetailViewModel: ObservableObject {
     //Action trigger for request API
     static let shared = ScheduleDetailViewModel()
+    
+    var isEditMode: Bool = false
 
     var scheduleDetailTitle = ""
     var startTime = "00:00"
@@ -51,7 +53,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         return 0
     }
     
-    func getScheduleDetail() -> Int {
+    func getScheduleDetail(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
 
         // DB取得の前にパース用の配列を初期化
@@ -69,7 +71,8 @@ final class ScheduleDetailViewModel: ObservableObject {
             let targetDateComponents = DateComponents(year: calendarViewModel.selectYear, month: calendarViewModel.selectMonth, day: calendarViewModel.selectDay)
             guard let targetDate = calendar.date(from: targetDateComponents) else {
                 print("指定した日付が無効です。")
-                return 1
+                completion(false)
+                return
             }
 
             // 日付を文字列に変換
@@ -89,18 +92,20 @@ final class ScheduleDetailViewModel: ObservableObject {
                 isNoticeArray.append(scheduleDetailData.isNotice)
             }
             
-//            print("scheduleDetailTitleArray",scheduleDetailTitleArray)
-//            print("startTimeArray",startTimeArray)
-//            print("endTimeArray",endTimeArray)
-//            print("isNoticeArray",isNoticeArray)
-//            print(scheduleDetailData)
-//            print("----")
+            // 非同期処理が成功したことを示す
+            completion(true)
+            
+            //            print("scheduleDetailTitleArray",scheduleDetailTitleArray)
+            //            print("startTimeArray",startTimeArray)
+            //            print("endTimeArray",endTimeArray)
+            //            print("isNoticeArray",isNoticeArray)
+            //            print(scheduleDetailData)
+            //            print("----")
         } catch {
             print("Realmの読み込みエラー：\(error)")
-            return 1
+            completion(false)
+            return
         }
-        
-        return 0
     }
     
     // DB削除処理

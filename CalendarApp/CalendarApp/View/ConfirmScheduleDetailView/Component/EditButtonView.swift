@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EditButtonView: View {
+    var scheduleDetailViewModel: ScheduleDetailViewModel
     
     var body: some View  {
         Button(action: {
@@ -15,6 +16,8 @@ struct EditButtonView: View {
             // スケジュール詳細確認の項目を修正出来るようにする。
             // キャンセルボタン、更新ボタンを押したら、修正ボタンのみを表示
             // 更新ボタンを押したら、更新内容をDBに更新
+            
+            scheduleDetailViewModel.isEditMode = true
         }) {
             Text("修正")
                 .font(.system(size: 16))

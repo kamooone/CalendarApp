@@ -9,34 +9,61 @@ import SwiftUI
 
 struct ConfirmScheduleDetailView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+    @State private var isEditMode = ScheduleDetailViewModel.shared.isEditMode
+    
+    
     @State private var showAlert = false
     @State private var alertMessage = ""
     let headerTitle: String = "スケジュール詳細確認"
     
-    init() {
-        if scheduleDetailViewModel.getScheduleDetail() == 0 {
-            print("スケジュール詳細取得成功")
-        } else {
-            print("登録に失敗しました")
-            // ToDo カレンダー画面に戻す処理
+    // ToDo 非同期処理学習、
+    func bindViewModel() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue(label: "realm").async {
+            scheduleDetailViewModel.getScheduleDetail { success in
+                group.leave()
+                
+                if success {
+                    // 非同期処理が成功した場合の処理
+                    // ビューを更新するなど
+                } else {
+                    // 非同期処理が失敗した場合の処理
+                }
+            }
+        }
+        
+        group.notify(queue: .main) {
+            // 非同期処理が完了した後の処理
         }
     }
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
+                
                 HStack {
                     BackButtonView()
                 }
+                
                 HStack {
                     HeaderView(_headerTitle: headerTitle)
                 }
+                
                 HStack {
                     SelectedMonthDayView()
                 }
+                
+                // ToDo 修正ボタンを押したら、キャンセルボタンと更新ボタンが表示されるように
                 HStack {
                     Spacer()
-                    EditButtonView()
+                    if isEditMode {
+                        CancelButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                        UpdateButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                    } else {
+                        EditButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                    }
                 }
                 
                 ScrollView {
@@ -58,6 +85,9 @@ struct ConfirmScheduleDetailView: View {
                 .background(Color.lightGray)
                 .offset(x: 0, y: -120)
             }
+        }
+        .onAppear {
+            bindViewModel()
         }
     }
 }

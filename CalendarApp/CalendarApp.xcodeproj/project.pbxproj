@@ -39,6 +39,8 @@
 		E27C8E662A239A4F00841268 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E652A239A4F00841268 /* Route.swift */; };
 		E27C8E682A239A5800841268 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E672A239A5800841268 /* View+.swift */; };
 		E27C8E6A2A239A6300841268 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E692A239A6300841268 /* Color+.swift */; };
+		E28890262A4F282F00AE504E /* UpdateButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28890252A4F282F00AE504E /* UpdateButtonView.swift */; };
+		E28890282A4F284200AE504E /* CancelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28890272A4F284200AE504E /* CancelButtonView.swift */; };
 		E29D3C672A4C830200A68BF4 /* EditButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29D3C662A4C830200A68BF4 /* EditButtonView.swift */; };
 		E2AA373F2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */; };
 		E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */; };
@@ -81,6 +83,8 @@
 		E27C8E652A239A4F00841268 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		E27C8E672A239A5800841268 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		E27C8E692A239A6300841268 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		E28890252A4F282F00AE504E /* UpdateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateButtonView.swift; sourceTree = "<group>"; };
+		E28890272A4F284200AE504E /* CancelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButtonView.swift; sourceTree = "<group>"; };
 		E29D3C662A4C830200A68BF4 /* EditButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonView.swift; sourceTree = "<group>"; };
 		E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
@@ -348,6 +352,8 @@
 			isa = PBXGroup;
 			children = (
 				E29D3C662A4C830200A68BF4 /* EditButtonView.swift */,
+				E28890252A4F282F00AE504E /* UpdateButtonView.swift */,
+				E28890272A4F284200AE504E /* CancelButtonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -495,6 +501,7 @@
 				E27C8E5D2A23991A00841268 /* CalendarViewModel.swift in Sources */,
 				E225D2D32A2F7E020052362D /* NoticeSettingView.swift in Sources */,
 				E225D2CF2A2F7CF60052362D /* ScheduleTimeView.swift in Sources */,
+				E28890282A4F284200AE504E /* CancelButtonView.swift in Sources */,
 				E27C8E6A2A239A6300841268 /* Color+.swift in Sources */,
 				E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */,
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
@@ -507,6 +514,7 @@
 				E2120D8A2A26540D00F08940 /* ButtonStyle+.swift in Sources */,
 				E225D2CD2A2F7C890052362D /* ScheduleDetailView.swift in Sources */,
 				E2AA373F2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift in Sources */,
+				E28890262A4F282F00AE504E /* UpdateButtonView.swift in Sources */,
 				E27C8E682A239A5800841268 /* View+.swift in Sources */,
 				E20018822A30DC4B009640F0 /* DaysWeekView.swift in Sources */,
 				E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */,
