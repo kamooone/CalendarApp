@@ -74,8 +74,7 @@ struct ConfirmScheduleDetailView: View {
                 
                 // 非同期処理が完了後にスケジュール詳細登録状況を表示させる
                 if isRequestSuccessful {
-                    // ToDo 編集ボタンが押されたときは編集できるようにする。更新が押されたらDBに登録して再度表示のみに切り替え
-                    // どんな感じで修正するようにするか…
+                    // ToDo 見栄えが悪いので処理を関数にする
                     if isEditMode {
                         ScrollView {
                             VStack(spacing: 20) {
@@ -96,6 +95,7 @@ struct ConfirmScheduleDetailView: View {
                         .background(Color.lightGray)
                         .offset(x: 0, y: -100)
                     } else {
+                        // ToDo 見栄えが悪いので処理を関数にする
                         ScrollView {
                             VStack(spacing: 20) {
                                 Spacer().frame(height: 20)
@@ -138,7 +138,6 @@ struct Schedule: View {
     var body: some View {
         VStack {
             HStack {
-                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
                 Text("タイトル")
                     .font(.system(size: 16))
                 Text(scheduleDetailViewModel.scheduleDetailTitleArray[index])
@@ -173,6 +172,8 @@ struct ScheduleEdit: View {
     
     var body: some View {
         VStack {
+            // ToDo 削除ボタンも必要
+            
             HStack {
                 // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
                 TextField("", text: $textFieldValue)
