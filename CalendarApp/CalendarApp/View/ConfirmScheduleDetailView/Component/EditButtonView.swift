@@ -12,11 +12,6 @@ struct EditButtonView: View {
     
     var body: some View  {
         Button(action: {
-            // ToDo 修正ボタンを押したら、修正ボタンを非表示にしてキャンセルボタンと更新ボタンを表示
-            // スケジュール詳細確認の項目を修正出来るようにする。
-            // キャンセルボタン、更新ボタンを押したら、修正ボタンのみを表示
-            // 更新ボタンを押したら、更新内容をDBに更新
-            
             isEditMode = true
         }) {
             Text("修正")

@@ -74,25 +74,55 @@ struct ConfirmScheduleDetailView: View {
                 
                 // 非同期処理が完了後にスケジュール詳細登録状況を表示させる
                 if isRequestSuccessful {
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            Spacer().frame(height: 20)
-                            ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
-                                VStack {
-                                    Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                    // ToDo 編集ボタンが押されたときは編集できるようにする。更新が押されたらDBに登録して再度表示のみに切り替え
+                    // どんな感じで修正するようにするか…
+                    if isEditMode {
+                        ScrollView {
+                            VStack(spacing: 20) {
+                                Spacer().frame(height: 20)
+                                ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
+                                    VStack {
+                                        ScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                    }
+                                    .frame(width: geometry.size.width - 40, height: 80)
+                                    .background(Color.lemonchiffon)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 20)
                                 }
-                                .frame(width: geometry.size.width - 40, height: 80)
-                                .background(Color.lemonchiffon)
-                                .cornerRadius(10)
-                                .padding(.horizontal, 20)
+                                Spacer().frame(height: 20)
                             }
-                            Spacer().frame(height: 20)
                         }
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                        .background(Color.lightGray)
+                        .offset(x: 0, y: -100)
+                    } else {
+                        ScrollView {
+                            VStack(spacing: 20) {
+                                Spacer().frame(height: 20)
+                                ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
+                                    VStack {
+                                        Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                    }
+                                    .frame(width: geometry.size.width - 40, height: 80)
+                                    .background(Color.lemonchiffon)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 20)
+                                }
+                                Spacer().frame(height: 20)
+                            }
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                        .background(Color.lightGray)
+                        .offset(x: 0, y: -100)
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-                    .background(Color.lightGray)
-                    .offset(x: 0, y: -100)
                 }
+                
+                BannerAdsView()
+                    .frame(width: geometry.size.width, height: 80)
+                    .background(Color.yellow)
+                    .offset(x: 0, y: -70)
+                
+                Spacer()
             }
         }
         .onAppear {
@@ -132,6 +162,51 @@ struct Schedule: View {
                     .font(.system(size: 16))
                 Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
             }
+        }
+    }
+}
+
+struct ScheduleEdit: View {
+    var scheduleDetailViewModel: ScheduleDetailViewModel
+    var index: Int
+    @State private var textFieldValue: String = ""
+    
+    var body: some View {
+        VStack {
+            HStack {
+                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
+                TextField("", text: $textFieldValue)
+                    .frame(width: 300)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .onChange(of: scheduleDetailViewModel.scheduleDetailTitleArray[index]) { newValue in
+                        scheduleDetailViewModel.scheduleDetailTitle = newValue
+                    }
+                Spacer()
+            }
+            
+            // ToDo 時間セレクトボックスの表示と、初期値をDBから取得した値を初期値に設定
+            HStack {
+                Text("開始")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.startTimeArray[index])
+
+                Text("〜")
+                    .font(.system(size: 16))
+
+                Text("終了")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.endTimeArray[index])
+            }
+//
+//            HStack {
+//                Text("通知")
+//                    .font(.system(size: 16))
+//                Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
+//            }
+            .onAppear {
+                        textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
+                    }
         }
     }
 }
