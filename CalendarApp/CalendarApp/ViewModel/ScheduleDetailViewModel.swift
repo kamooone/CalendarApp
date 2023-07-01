@@ -94,19 +94,22 @@ final class ScheduleDetailViewModel: ObservableObject {
             
             // 非同期処理が成功したことを示す
             completion(true)
-            
-            //            print("scheduleDetailTitleArray",scheduleDetailTitleArray)
-            //            print("startTimeArray",startTimeArray)
-            //            print("endTimeArray",endTimeArray)
-            //            print("isNoticeArray",isNoticeArray)
-            //            print(scheduleDetailData)
-            //            print("----")
         } catch {
             print("Realmの読み込みエラー：\(error)")
+            
+            // 非同期処理失敗
             completion(false)
             return
         }
     }
+    
+    
+    //            print("scheduleDetailTitleArray",scheduleDetailTitleArray)
+    //            print("startTimeArray",startTimeArray)
+    //            print("endTimeArray",endTimeArray)
+    //            print("isNoticeArray",isNoticeArray)
+    //            print(scheduleDetailData)
+    //            print("----")
     
     // DB削除処理
 //    func deleteScheduleDetail() -> Int {

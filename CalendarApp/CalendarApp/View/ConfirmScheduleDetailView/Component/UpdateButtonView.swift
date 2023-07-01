@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct UpdateButtonView: View {
-    var scheduleDetailViewModel: ScheduleDetailViewModel
+    @Binding var isEditMode: Bool
     
     var body: some View  {
         Button(action: {
-            scheduleDetailViewModel.isEditMode = false
-            
+            isEditMode = false
             // ToDo DB更新処理
+            
+            // ToDo 更新しましたポップアップ表示
+            
         }) {
             Text("更新")
-                .font(.system(size: 16))
-                .foregroundColor(.white)
-                .padding()
+                .frame(width: 50, height: 30)
         }
-        .offset(x: 0, y: -100)
-        .buttonStyle(MiniButtonStyle.miniButtonStyle())
+        .offset(x: 10, y: -100)
+        .buttonStyle(NormalButtonStyle.normalButtonStyle())
         .padding()
     }
 }

@@ -12,9 +12,6 @@ extension ButtonStyle {
     static func normalButtonStyle() -> some ButtonStyle {
         return NormalButtonStyle()
     }
-    static func miniButtonStyle() -> some ButtonStyle {
-        return MiniButtonStyle()
-    }
 }
 
 struct NormalButtonStyle: ButtonStyle {
@@ -22,17 +19,6 @@ struct NormalButtonStyle: ButtonStyle {
         configuration.label
             .foregroundColor(.primary)
             .padding(6)
-            .background(Color.secondary.opacity(0.5))
-            .cornerRadius(12)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
-    }
-}
-
-struct MiniButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundColor(.primary)
-            .padding(-6)
             .background(Color.secondary.opacity(0.5))
             .cornerRadius(12)
             .scaleEffect(configuration.isPressed ? 0.9 : 1.0)

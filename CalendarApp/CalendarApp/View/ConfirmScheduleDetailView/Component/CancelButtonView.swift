@@ -8,19 +8,18 @@
 import SwiftUI
 
 struct CancelButtonView: View {
-    var scheduleDetailViewModel: ScheduleDetailViewModel
+    @Binding var isEditMode: Bool
     
     var body: some View  {
         Button(action: {
-            scheduleDetailViewModel.isEditMode = false
+            isEditMode = false
         }) {
             Text("キャンセル")
-                .font(.system(size: 16))
-                .foregroundColor(.white)
-                .padding()
+                .font(.system(size: 12))
+                .frame(width: 60, height: 30)
         }
-        .offset(x: 0, y: -100)
-        .buttonStyle(MiniButtonStyle.miniButtonStyle())
+        .offset(x: 40, y: -100)
+        .buttonStyle(NormalButtonStyle.normalButtonStyle())
         .padding()
     }
 }

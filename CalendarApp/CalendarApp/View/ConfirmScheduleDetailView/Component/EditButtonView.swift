@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditButtonView: View {
-    var scheduleDetailViewModel: ScheduleDetailViewModel
+    @Binding var isEditMode: Bool
     
     var body: some View  {
         Button(action: {
@@ -17,15 +17,13 @@ struct EditButtonView: View {
             // キャンセルボタン、更新ボタンを押したら、修正ボタンのみを表示
             // 更新ボタンを押したら、更新内容をDBに更新
             
-            scheduleDetailViewModel.isEditMode = true
+            isEditMode = true
         }) {
             Text("修正")
-                .font(.system(size: 16))
-                .foregroundColor(.white)
-                .padding()
+                .frame(width: 50, height: 30)
         }
         .offset(x: 0, y: -100)
-        .buttonStyle(MiniButtonStyle.miniButtonStyle())
+        .buttonStyle(NormalButtonStyle.normalButtonStyle())
         .padding()
     }
 }

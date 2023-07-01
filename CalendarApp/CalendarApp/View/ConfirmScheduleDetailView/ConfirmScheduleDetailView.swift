@@ -9,14 +9,13 @@ import SwiftUI
 
 struct ConfirmScheduleDetailView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
-    @State private var isEditMode = ScheduleDetailViewModel.shared.isEditMode
     
-    
+    @State private var isRequestSuccessful = false
+    @State private var isEditMode: Bool = false
     @State private var showAlert = false
     @State private var alertMessage = ""
     let headerTitle: String = "スケジュール詳細確認"
     
-    // ToDo 非同期処理学習、
     func bindViewModel() {
         let group = DispatchGroup()
         group.enter()
@@ -26,16 +25,24 @@ struct ConfirmScheduleDetailView: View {
                 group.leave()
                 
                 if success {
-                    // 非同期処理が成功した場合の処理
-                    // ビューを更新するなど
+                    print("非同期処理成功")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        isRequestSuccessful = true
+                    }
                 } else {
-                    // 非同期処理が失敗した場合の処理
+                    print("非同期処理失敗")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        isRequestSuccessful = false
+                    }
                 }
             }
         }
         
+        // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            // 非同期処理が完了した後の処理
+            print("非同期処理終了")
         }
     }
     
@@ -55,35 +62,37 @@ struct ConfirmScheduleDetailView: View {
                     SelectedMonthDayView()
                 }
                 
-                // ToDo 修正ボタンを押したら、キャンセルボタンと更新ボタンが表示されるように
                 HStack {
                     Spacer()
                     if isEditMode {
-                        CancelButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
-                        UpdateButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                        CancelButtonView(isEditMode: $isEditMode)
+                        UpdateButtonView(isEditMode: $isEditMode)
                     } else {
-                        EditButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                        EditButtonView(isEditMode: $isEditMode)
                     }
                 }
                 
-                ScrollView {
-                    VStack(spacing: 20) {
-                        Spacer().frame(height: 20)
-                        ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
-                            VStack {
-                                Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                // 非同期処理が完了後にスケジュール詳細登録状況を表示させる
+                if isRequestSuccessful {
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            Spacer().frame(height: 20)
+                            ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
+                                VStack {
+                                    Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                }
+                                .frame(width: geometry.size.width - 40, height: 80)
+                                .background(Color.lemonchiffon)
+                                .cornerRadius(10)
+                                .padding(.horizontal, 20)
                             }
-                            .frame(width: geometry.size.width - 40, height: 80)
-                            .background(Color.lemonchiffon)
-                            .cornerRadius(10)
-                            .padding(.horizontal, 20)
+                            Spacer().frame(height: 20)
                         }
-                        Spacer().frame(height: 20)
                     }
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                    .background(Color.lightGray)
+                    .offset(x: 0, y: -100)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-                .background(Color.lightGray)
-                .offset(x: 0, y: -120)
             }
         }
         .onAppear {
