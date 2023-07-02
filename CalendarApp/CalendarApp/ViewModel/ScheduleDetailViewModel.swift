@@ -24,6 +24,8 @@ final class ScheduleDetailViewModel: ObservableObject {
     var endTimeArray: [String] = []
     var isNoticeArray: [Bool] = []
     
+    var timeArray: [String] = []
+    
     private let schemaVersion: UInt64 = 2
     
     // DB登録処理

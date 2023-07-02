@@ -83,7 +83,7 @@ struct ConfirmScheduleDetailView: View {
                                     VStack {
                                         ScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
-                                    .frame(width: geometry.size.width - 40, height: 80)
+                                    .frame(width: geometry.size.width - 40, height: 120)
                                     .background(Color.lemonchiffon)
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
@@ -103,7 +103,7 @@ struct ConfirmScheduleDetailView: View {
                                     VStack {
                                         Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
-                                    .frame(width: geometry.size.width - 40, height: 80)
+                                    .frame(width: geometry.size.width - 40, height: 120)
                                     .background(Color.lemonchiffon)
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
@@ -169,45 +169,66 @@ struct ScheduleEdit: View {
     var scheduleDetailViewModel: ScheduleDetailViewModel
     var index: Int
     @State private var textFieldValue: String = ""
+    @State private var selectedStartTime = 0
+    @State private var selectedEndTime = 0
     
     var body: some View {
-        VStack {
-            // ToDo 削除ボタンも必要
-            
-            HStack {
-                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
-                TextField("", text: $textFieldValue)
-                    .frame(width: 300)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .onChange(of: scheduleDetailViewModel.scheduleDetailTitleArray[index]) { newValue in
-                        scheduleDetailViewModel.scheduleDetailTitle = newValue
+        GeometryReader { geometry in
+            VStack {
+                // ToDo 削除ボタンも必要
+                
+                HStack {
+                    // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
+                    TextField("", text: $textFieldValue)
+                        .frame(width: 300)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                        .onChange(of: scheduleDetailViewModel.scheduleDetailTitleArray[index]) { newValue in
+                            scheduleDetailViewModel.scheduleDetailTitle = newValue
+                        }
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("開始")
+                        .font(.system(size: 16))
+                    Picker("Select an StartTIme", selection: $selectedStartTime) {
+                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
+                            Text(scheduleDetailViewModel.timeArray[index])
+                        }
                     }
-                Spacer()
-            }
-            
-            // ToDo 時間セレクトボックスの表示と、初期値をDBから取得した値を初期値に設定
-            HStack {
-                Text("開始")
-                    .font(.system(size: 16))
-                Text(scheduleDetailViewModel.startTimeArray[index])
-
-                Text("〜")
-                    .font(.system(size: 16))
-
-                Text("終了")
-                    .font(.system(size: 16))
-                Text(scheduleDetailViewModel.endTimeArray[index])
-            }
-//
-//            HStack {
-//                Text("通知")
-//                    .font(.system(size: 16))
-//                Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
-//            }
-            .onAppear {
-                        textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
+                    .frame(width: 90, height: geometry.size.height / 10)
+                    .pickerStyle(MenuPickerStyle())
+                    .offset(x:0,y:0)
+                    .onChange(of: selectedStartTime) { newValue in
+                        scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[newValue]
                     }
+                    
+                    Text("〜")
+                        .font(.system(size: 16))
+                    
+                    // ToDo 初期値をDBから取得した値を初期値に設定
+                    Text("終了")
+                        .font(.system(size: 16))
+                    Text(scheduleDetailViewModel.endTimeArray[index])
+                }
+                //
+                //            HStack {
+                //                Text("通知")
+                //                    .font(.system(size: 16))
+                //                Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
+                //            }
+                .onAppear {
+                    textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
+                    
+                    if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.startTimeArray[index]) {
+                        print(scheduleDetailViewModel.startTimeArray[index])
+                        print(selectedIndex)
+                        print(scheduleDetailViewModel.startTimeArray)
+                        selectedStartTime = selectedIndex
+                    }
+                }
+            }
         }
     }
 }

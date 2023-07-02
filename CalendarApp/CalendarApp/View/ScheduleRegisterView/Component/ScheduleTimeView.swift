@@ -11,7 +11,6 @@ struct ScheduleTimeView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var selectedStartTime = 0
     @State private var selectedEndTime = 0
-    var timeArray: [String] = []
     
     init() {
         var array: [String] = []
@@ -22,7 +21,7 @@ struct ScheduleTimeView: View {
                 array.append(time)
             }
         }
-        timeArray = array
+        scheduleDetailViewModel.timeArray = array
     }
     
     var body: some View {
@@ -34,15 +33,15 @@ struct ScheduleTimeView: View {
                     .font(.system(size: 16))
                     .offset(x:0,y:140)
                 Picker("Select an StartTIme", selection: $selectedStartTime) {
-                    ForEach(0..<timeArray.count, id: \.self) { index in
-                        Text(timeArray[index])
+                    ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
+                        Text(scheduleDetailViewModel.timeArray[index])
                     }
                 }
                 .frame(width: 90, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
                 .offset(x:0,y:140)
                 .onChange(of: selectedStartTime) { newValue in
-                    scheduleDetailViewModel.startTime = timeArray[newValue]
+                    scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[newValue]
                 }
                 
                 Text("〜　")
@@ -53,15 +52,15 @@ struct ScheduleTimeView: View {
                     .font(.system(size: 16))
                     .offset(x:0,y:140)
                 Picker("Select an EndTime", selection: $selectedEndTime) {
-                    ForEach(0..<timeArray.count, id: \.self) { index in
-                        Text(timeArray[index])
+                    ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
+                        Text(scheduleDetailViewModel.timeArray[index])
                     }
                 }
                 .frame(width: 90, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
                 .offset(x:0,y:140)
                 .onChange(of: selectedEndTime) { newValue in
-                    scheduleDetailViewModel.endTime = timeArray[newValue]
+                    scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]
                 }
                 
                 Spacer()
