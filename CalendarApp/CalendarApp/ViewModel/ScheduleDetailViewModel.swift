@@ -28,7 +28,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     private let schemaVersion: UInt64 = 2
     
-    // DB登録処理
+    // DB登録処理(一件のみ新規登録の処理)
     func registerScheduleDetail() -> Int {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
@@ -103,6 +103,11 @@ final class ScheduleDetailViewModel: ObservableObject {
             completion(false)
             return
         }
+    }
+    
+    // DB更新処理(更新があったレコードを一括更新処理)
+    func UpdateScheduleDetail() {
+
     }
     
     

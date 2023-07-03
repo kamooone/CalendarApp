@@ -66,6 +66,8 @@ struct ConfirmScheduleDetailView: View {
                     Spacer()
                     if isEditMode {
                         CancelButtonView(isEditMode: $isEditMode)
+                        
+                        // ToDo 編集した内容をDBに更新する
                         UpdateButtonView(isEditMode: $isEditMode)
                     } else {
                         EditButtonView(isEditMode: $isEditMode)
@@ -209,7 +211,6 @@ struct ScheduleEdit: View {
                     Text("〜")
                         .font(.system(size: 16))
                     
-                    // ToDo 初期値をDBから取得した値を初期値に設定
                     Text("終了")
                         .font(.system(size: 16))
                     Picker("Select an EndTime", selection: $selectedEndTime) {
