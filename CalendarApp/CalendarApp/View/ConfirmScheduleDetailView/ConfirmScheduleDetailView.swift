@@ -210,7 +210,18 @@ struct ScheduleEdit: View {
                     // ToDo 初期値をDBから取得した値を初期値に設定
                     Text("終了")
                         .font(.system(size: 16))
-                    Text(scheduleDetailViewModel.endTimeArray[index])
+                    Picker("Select an EndTime", selection: $selectedEndTime) {
+                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
+                            Text(scheduleDetailViewModel.timeArray[index])
+                        }
+                    }
+                    .frame(width: 90, height: geometry.size.height / 10)
+                    .pickerStyle(MenuPickerStyle())
+                    .offset(x:0,y:0)
+                    .onChange(of: selectedEndTime) { newValue in
+                        scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]
+                    }
+                    
                 }
                 //
                 //            HStack {
@@ -222,10 +233,10 @@ struct ScheduleEdit: View {
                     textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
                     
                     if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.startTimeArray[index]) {
-                        print(scheduleDetailViewModel.startTimeArray[index])
-                        print(selectedIndex)
-                        print(scheduleDetailViewModel.startTimeArray)
                         selectedStartTime = selectedIndex
+                    }
+                    if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.endTimeArray[index]) {
+                        selectedEndTime = selectedIndex
                     }
                 }
             }
