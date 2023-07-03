@@ -83,7 +83,7 @@ struct ConfirmScheduleDetailView: View {
                                     VStack {
                                         ScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
-                                    .frame(width: geometry.size.width - 40, height: 120)
+                                    .frame(width: geometry.size.width - 40, height: 150)
                                     .background(Color.lemonchiffon)
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
@@ -103,7 +103,7 @@ struct ConfirmScheduleDetailView: View {
                                     VStack {
                                         Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
-                                    .frame(width: geometry.size.width - 40, height: 120)
+                                    .frame(width: geometry.size.width - 40, height: 100)
                                     .background(Color.lemonchiffon)
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
@@ -171,6 +171,7 @@ struct ScheduleEdit: View {
     @State private var textFieldValue: String = ""
     @State private var selectedStartTime = 0
     @State private var selectedEndTime = 0
+    @State private var isSwitchOn = true
     
     var body: some View {
         GeometryReader { geometry in
@@ -179,6 +180,7 @@ struct ScheduleEdit: View {
                 
                 HStack {
                     // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
+                    Spacer()
                     TextField("", text: $textFieldValue)
                         .frame(width: 300)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -221,24 +223,28 @@ struct ScheduleEdit: View {
                     .onChange(of: selectedEndTime) { newValue in
                         scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]
                     }
-                    
                 }
-                //
-                //            HStack {
-                //                Text("通知")
-                //                    .font(.system(size: 16))
-                //                Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
-                //            }
-                .onAppear {
-                    textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
-                    
-                    if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.startTimeArray[index]) {
-                        selectedStartTime = selectedIndex
-                    }
-                    if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.endTimeArray[index]) {
-                        selectedEndTime = selectedIndex
-                    }
+                
+                HStack {
+                    Toggle("通知", isOn: $isSwitchOn)
+                        .offset(x:0,y:0)
+                        .padding(.horizontal, 100)
+                        .onChange(of: isSwitchOn) { newValue in
+                            scheduleDetailViewModel.isNotice = newValue
+                        }
                 }
+            }
+            .onAppear {
+                textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
+                
+                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.startTimeArray[index]) {
+                    selectedStartTime = selectedIndex
+                }
+                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.endTimeArray[index]) {
+                    selectedEndTime = selectedIndex
+                }
+                
+                isSwitchOn = scheduleDetailViewModel.isNoticeArray[index]
             }
         }
     }
