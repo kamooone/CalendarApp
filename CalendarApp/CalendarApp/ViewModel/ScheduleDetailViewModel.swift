@@ -29,7 +29,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     private let schemaVersion: UInt64 = 2
     
     // DB登録処理(一件のみ新規登録の処理)
-    func registerScheduleDetail() -> Int {
+    func registerScheduleDetail(completion: @escaping (Bool) -> Void) {
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         
         // スキーマの設定
@@ -46,13 +46,22 @@ final class ScheduleDetailViewModel: ObservableObject {
             let realm = try Realm(configuration: config)
             try realm.write {
                 realm.add(scheduleDetailData)
+                
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
+                print("scheduleDetailData.scheduleDetailTitle",scheduleDetailData.scheduleDetailTitle)
+                print("scheduleDetailData.startTime",scheduleDetailData.startTime)
+                print("scheduleDetailData.endTime",scheduleDetailData.endTime)
+                print("scheduleDetailData.isNotice",scheduleDetailData.isNotice)
+                print(scheduleDetailData)
+                
+                // 非同期処理が成功したことを示す
+                completion(true)
             }
         } catch {
             print("Realmの書き込みエラー：\(error)")
-            return 1
+            // 非同期処理失敗
+            completion(false)
         }
-        
-        return 0
     }
     
     func getScheduleDetail(completion: @escaping (Bool) -> Void) {
@@ -101,22 +110,15 @@ final class ScheduleDetailViewModel: ObservableObject {
             
             // 非同期処理失敗
             completion(false)
-            return
         }
     }
     
     // DB更新処理(更新があったレコードを一括更新処理)
     func UpdateScheduleDetail() {
+        // ToDo 編集した内容をDBに更新する
 
     }
     
-    
-    //            print("scheduleDetailTitleArray",scheduleDetailTitleArray)
-    //            print("startTimeArray",startTimeArray)
-    //            print("endTimeArray",endTimeArray)
-    //            print("isNoticeArray",isNoticeArray)
-    //            print(scheduleDetailData)
-    //            print("----")
     
     // DB削除処理
 //    func deleteScheduleDetail() -> Int {
