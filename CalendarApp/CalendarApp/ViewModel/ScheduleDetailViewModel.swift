@@ -131,12 +131,12 @@ final class ScheduleDetailViewModel: ObservableObject {
     }
     
     // DB更新処理(更新があったレコードを一括更新処理)
-    func UpdateScheduleDetail(completion: @escaping (Bool) -> Void) {
+    func UpdateScheduleDetail(_year: String, _month: String, _day: String, completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
         do {
             let realm = try Realm(configuration: config)
-            let predicate = NSPredicate(format: "date == %@", "2023年6月1日")
+            let predicate = NSPredicate(format: "date == %@", "\(_year)年\(_month)月\(_day)日")
             let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
             print(scheduleDetailData)
             try realm.write {

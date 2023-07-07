@@ -17,8 +17,6 @@ struct UpdateButtonView: View {
     var body: some View  {
         Button(action: {
             isEditMode = false
-            
-            // DB更新処理(引数で日付を渡す？)
             update()
         }) {
             Text("更新")
@@ -37,11 +35,12 @@ struct UpdateButtonView: View {
     }
     
     func update() {
+        let calendarViewModel = CalendarViewModel.shared
         let group = DispatchGroup()
         group.enter()
         
         DispatchQueue(label: "realm").async {
-            scheduleDetailViewModel.UpdateScheduleDetail { success in
+            scheduleDetailViewModel.UpdateScheduleDetail(_year: String(calendarViewModel.selectYear), _month: String(calendarViewModel.selectMonth), _day: String(calendarViewModel.selectDay)) { success in
                 group.leave()
                 
                 if success {
