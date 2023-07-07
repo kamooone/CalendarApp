@@ -66,8 +66,6 @@ struct ConfirmScheduleDetailView: View {
                     Spacer()
                     if isEditMode {
                         CancelButtonView(isEditMode: $isEditMode)
-                        
-                        // ToDo 編集した内容をDBに更新する
                         UpdateButtonView(isEditMode: $isEditMode)
                     } else {
                         EditButtonView(isEditMode: $isEditMode)
@@ -187,8 +185,11 @@ struct ScheduleEdit: View {
                         .frame(width: 300)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
-                        .onChange(of: scheduleDetailViewModel.scheduleDetailTitleArray[index]) { newValue in
-                            scheduleDetailViewModel.scheduleDetailTitle = newValue
+                        .onChange(of: scheduleDetailViewModel.scheduleDetailTitleArray[index]) { newTitleDetail in
+                            // 表示用
+                            scheduleDetailViewModel.scheduleDetailTitle = newTitleDetail
+                            // 更新用にバックアップ
+                            scheduleDetailViewModel.updScheduleDetailTitleArray[index] = newTitleDetail
                         }
                     Spacer()
                 }
@@ -197,15 +198,18 @@ struct ScheduleEdit: View {
                     Text("開始")
                         .font(.system(size: 16))
                     Picker("Select an StartTIme", selection: $selectedStartTime) {
-                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
-                            Text(scheduleDetailViewModel.timeArray[index])
+                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
+                            Text(scheduleDetailViewModel.timeArray[_index])
                         }
                     }
                     .frame(width: 90, height: geometry.size.height / 10)
                     .pickerStyle(MenuPickerStyle())
                     .offset(x:0,y:0)
-                    .onChange(of: selectedStartTime) { newValue in
-                        scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[newValue]
+                    .onChange(of: selectedStartTime) { timeIndex in
+                        // 表示用
+                        scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        // 更新用にバックアップ
+                        scheduleDetailViewModel.updStartTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                     }
                     
                     Text("〜")
@@ -214,15 +218,18 @@ struct ScheduleEdit: View {
                     Text("終了")
                         .font(.system(size: 16))
                     Picker("Select an EndTime", selection: $selectedEndTime) {
-                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
-                            Text(scheduleDetailViewModel.timeArray[index])
+                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
+                            Text(scheduleDetailViewModel.timeArray[_index])
                         }
                     }
                     .frame(width: 90, height: geometry.size.height / 10)
                     .pickerStyle(MenuPickerStyle())
                     .offset(x:0,y:0)
-                    .onChange(of: selectedEndTime) { newValue in
-                        scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]
+                    .onChange(of: selectedEndTime) { timeIndex in
+                        // 表示用
+                        scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        // 更新用にバックアップ
+                        scheduleDetailViewModel.updEndTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                     }
                 }
                 
@@ -230,8 +237,11 @@ struct ScheduleEdit: View {
                     Toggle("通知", isOn: $isSwitchOn)
                         .offset(x:0,y:0)
                         .padding(.horizontal, 100)
-                        .onChange(of: isSwitchOn) { newValue in
-                            scheduleDetailViewModel.isNotice = newValue
+                        .onChange(of: isSwitchOn) { newIsNotice in
+                            // 表示用
+                            scheduleDetailViewModel.isNotice = newIsNotice
+                            // 更新用にバックアップ
+                            scheduleDetailViewModel.updIsNoticeArray[index] = newIsNotice
                         }
                 }
             }

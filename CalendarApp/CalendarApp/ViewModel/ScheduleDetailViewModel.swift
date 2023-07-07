@@ -24,6 +24,13 @@ final class ScheduleDetailViewModel: ObservableObject {
     var endTimeArray: [String] = []
     var isNoticeArray: [Bool] = []
     
+    // 修正画面で値を変更した時に一時的に格納する配列
+    var updScheduleDetailTitleArray: [String] = []
+    var updStartTimeArray: [String] = []
+    var updEndTimeArray: [String] = []
+    var updIsNoticeArray: [Bool] = []
+    
+    
     var timeArray: [String] = []
     
     private let schemaVersion: UInt64 = 2
@@ -47,6 +54,9 @@ final class ScheduleDetailViewModel: ObservableObject {
             try realm.write {
                 realm.add(scheduleDetailData)
                 
+                //================================================================
+                // 登録処理デバッグ
+                //================================================================
                 print(Realm.Configuration.defaultConfiguration.fileURL!)
                 print("scheduleDetailData.scheduleDetailTitle",scheduleDetailData.scheduleDetailTitle)
                 print("scheduleDetailData.startTime",scheduleDetailData.startTime)
@@ -64,6 +74,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
+    // レコード取得処理(一件のみ)
     func getScheduleDetail(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
 
@@ -103,6 +114,12 @@ final class ScheduleDetailViewModel: ObservableObject {
                 isNoticeArray.append(scheduleDetailData.isNotice)
             }
             
+            // 編集画面で更新用にバックアップを取っておく
+            updScheduleDetailTitleArray = scheduleDetailTitleArray
+            updStartTimeArray = startTimeArray
+            updEndTimeArray = endTimeArray
+            updIsNoticeArray = isNoticeArray
+            
             // 非同期処理が成功したことを示す
             completion(true)
         } catch {
@@ -114,9 +131,40 @@ final class ScheduleDetailViewModel: ObservableObject {
     }
     
     // DB更新処理(更新があったレコードを一括更新処理)
-    func UpdateScheduleDetail() {
-        // ToDo 編集した内容をDBに更新する
-
+    func UpdateScheduleDetail(completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
+        do {
+            let realm = try Realm(configuration: config)
+            let predicate = NSPredicate(format: "date == %@", "2023年6月1日")
+            let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
+            print(scheduleDetailData)
+            try realm.write {
+                // 更新のあったフィールドのみ更新する
+                for i in 0..<updScheduleDetailTitleArray.count {
+                    // ToDo 更新しても更新されてないので確認する
+                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
+                        scheduleDetailData[i].date = updScheduleDetailTitleArray[i]
+                    }
+                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
+                        scheduleDetailData[i].scheduleDetailTitle = updStartTimeArray[i]
+                    }
+                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
+                        scheduleDetailData[i].startTime = updStartTimeArray[i]
+                    }
+                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
+                        scheduleDetailData[i].endTime = updEndTimeArray[i]
+                    }
+                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
+                        scheduleDetailData[i].isNotice = updIsNoticeArray[i]
+                    }
+                }
+                completion(true)
+            }
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            completion(false)
+        }
     }
     
     

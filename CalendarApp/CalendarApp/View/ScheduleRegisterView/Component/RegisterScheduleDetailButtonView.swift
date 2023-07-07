@@ -26,7 +26,7 @@ struct RegisterScheduleDetailButtonView: View {
         .padding()
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("メッセージ"),
+                title: Text(alertMessage),
                 message: Text(alertMessage),
                 dismissButton: .default(Text("OK"))
             )
