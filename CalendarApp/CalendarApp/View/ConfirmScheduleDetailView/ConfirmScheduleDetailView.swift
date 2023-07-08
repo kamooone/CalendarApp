@@ -185,7 +185,7 @@ struct ScheduleEdit: View {
                         .frame(width: 300)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
-                        .onChange(of: scheduleDetailViewModel.scheduleDetailTitleArray[index]) { newTitleDetail in
+                        .onChange(of: textFieldValue) { newTitleDetail in
                             // 表示用
                             scheduleDetailViewModel.scheduleDetailTitle = newTitleDetail
                             // 更新用にバックアップ

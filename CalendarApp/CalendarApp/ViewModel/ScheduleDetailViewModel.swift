@@ -142,21 +142,21 @@ final class ScheduleDetailViewModel: ObservableObject {
             try realm.write {
                 // 更新のあったフィールドのみ更新する
                 for i in 0..<updScheduleDetailTitleArray.count {
-                    // ToDo 更新しても更新されてないので確認する
                     if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
-                        scheduleDetailData[i].date = updScheduleDetailTitleArray[i]
+                        scheduleDetailTitleArray[i] = updScheduleDetailTitleArray[i]
+                        scheduleDetailData[i].scheduleDetailTitle = updScheduleDetailTitleArray[i]
                     }
-                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
-                        scheduleDetailData[i].scheduleDetailTitle = updStartTimeArray[i]
+                    if startTimeArray[i] != updStartTimeArray[i] {
+                        startTimeArray[i] = updStartTimeArray[i]
+                        scheduleDetailData[i].startTime = startTimeArray[i]
                     }
-                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
-                        scheduleDetailData[i].startTime = updStartTimeArray[i]
+                    if endTimeArray[i] != updEndTimeArray[i] {
+                        endTimeArray[i] = updEndTimeArray[i]
+                        scheduleDetailData[i].endTime = endTimeArray[i]
                     }
-                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
-                        scheduleDetailData[i].endTime = updEndTimeArray[i]
-                    }
-                    if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
-                        scheduleDetailData[i].isNotice = updIsNoticeArray[i]
+                    if isNoticeArray[i] != updIsNoticeArray[i] {
+                        isNoticeArray[i] = updIsNoticeArray[i]
+                        scheduleDetailData[i].isNotice = isNoticeArray[i]
                     }
                 }
                 completion(true)
