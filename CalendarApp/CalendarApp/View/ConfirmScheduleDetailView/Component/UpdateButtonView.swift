@@ -16,7 +16,6 @@ struct UpdateButtonView: View {
     
     var body: some View  {
         Button(action: {
-            isEditMode = false
             update()
         }) {
             Text("更新")
@@ -28,8 +27,9 @@ struct UpdateButtonView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text(alertMessage),
-                message: Text(alertMessage),
-                dismissButton: .default(Text("OK"))
+                dismissButton: .default(Text("OK")) {
+                    isEditMode = false
+                }
             )
         }
     }
@@ -43,18 +43,14 @@ struct UpdateButtonView: View {
             scheduleDetailViewModel.UpdateScheduleDetail(_year: String(calendarViewModel.selectYear), _month: String(calendarViewModel.selectMonth), _day: String(calendarViewModel.selectDay)) { success in
                 group.leave()
                 
-                if success {
-                    print("非同期処理成功")
-                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
-                    DispatchQueue.main.async {
-                        // ToDo 更新しましたポップアップが表示されないので確認する
-                        alertMessage = "更新が完了しました"
-                    }
-                } else {
-                    print("非同期処理失敗")
-                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
-                    DispatchQueue.main.async {
-                        alertMessage = "更新に失敗しました"
+                DispatchQueue.main.async {
+                    withAnimation {
+                        if success {
+                            alertMessage = "更新が完了しました"
+                        } else {
+                            alertMessage = "更新に失敗しました"
+                        }
+                        showAlert = true
                     }
                 }
             }
@@ -63,7 +59,6 @@ struct UpdateButtonView: View {
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
             print("非同期処理終了")
-            showAlert = true
         }
     }
 }
