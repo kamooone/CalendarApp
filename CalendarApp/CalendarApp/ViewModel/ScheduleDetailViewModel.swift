@@ -14,7 +14,6 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var isEditMode: Bool = false
 
-    var uniqueId = ""
     var scheduleDetailTitle = ""
     var startTime = "00:00"
     var endTime = "00:00"
@@ -174,13 +173,15 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     
     // DB削除処理
-    func DeleteScheduleDetail(_year: String, _month: String, _day: String, completion: @escaping (Bool) -> Void) {
+    func DeleteScheduleDetail(_year: String, _month: String, _day: String, _uniqueId: String, completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
         do {
             let realm = try Realm(configuration: config)
             try realm.write {
-                guard let uniqueObjectId = try? ObjectId(string: uniqueId) else {
+                print("uniqueId確認")
+                print(_uniqueId)
+                guard let uniqueObjectId = try? ObjectId(string: _uniqueId) else {
                     print("ObjectIdの変換エラー")
                     completion(false)
                     return

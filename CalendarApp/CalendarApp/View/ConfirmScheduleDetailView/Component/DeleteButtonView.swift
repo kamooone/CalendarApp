@@ -34,9 +34,6 @@ struct DeleteButtonView: View {
                 }
             )
         }
-        .onAppear {
-            scheduleDetailViewModel.uniqueId = _id
-        }
     }
     
     func delete() {
@@ -46,7 +43,7 @@ struct DeleteButtonView: View {
         group.enter()
         
         DispatchQueue(label: "realm").async {
-            scheduleDetailViewModel.DeleteScheduleDetail(_year: String(calendarViewModel.selectYear), _month: String(calendarViewModel.selectMonth), _day: String(calendarViewModel.selectDay)) { success in
+            scheduleDetailViewModel.DeleteScheduleDetail(_year: String(calendarViewModel.selectYear), _month: String(calendarViewModel.selectMonth), _day: String(calendarViewModel.selectDay), _uniqueId: String(_id)) { success in
                 group.leave()
                 
                 DispatchQueue.main.async {
