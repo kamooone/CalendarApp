@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 class ScheduleDetailData: Object {
-    /// SwiftUIだと@objc dynamic、UIkitだと@Persisted と書くのが一般的？
-    @Persisted var date = "20230624"
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var date = ""
     @Persisted var scheduleDetailTitle = ""
     @Persisted var startTime = ""
     @Persisted var endTime = ""

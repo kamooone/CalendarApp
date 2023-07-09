@@ -83,7 +83,7 @@ struct ConfirmScheduleDetailView: View {
                                     VStack {
                                         ScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
-                                    .frame(width: geometry.size.width - 40, height: 150)
+                                    .frame(width: geometry.size.width - 40, height: 220)
                                     .background(Color.lemonchiffon)
                                     .cornerRadius(10)
                                     .padding(.horizontal, 20)
@@ -176,7 +176,6 @@ struct ScheduleEdit: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                // ToDo 削除ボタンも必要
                 
                 HStack {
                     // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
@@ -243,6 +242,10 @@ struct ScheduleEdit: View {
                             // 更新用にバックアップ
                             scheduleDetailViewModel.updIsNoticeArray[index] = newIsNotice
                         }
+                }
+                
+                HStack {
+                    DeleteButtonView(_id: String(describing: scheduleDetailViewModel.uniqueIdArray[index]))
                 }
             }
             .onAppear {

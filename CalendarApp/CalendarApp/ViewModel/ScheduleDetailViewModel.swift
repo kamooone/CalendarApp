@@ -14,11 +14,13 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var isEditMode: Bool = false
 
+    var uniqueId = ""
     var scheduleDetailTitle = ""
     var startTime = "00:00"
     var endTime = "00:00"
     var isNotice = true
-    
+
+    var uniqueIdArray: [ObjectId] = []
     var scheduleDetailTitleArray: [String] = []
     var startTimeArray: [String] = []
     var endTimeArray: [String] = []
@@ -33,7 +35,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var timeArray: [String] = []
     
-    private let schemaVersion: UInt64 = 2
+    private let schemaVersion: UInt64 = 3
     
     // DB登録処理(一件のみ新規登録の処理)
     func registerScheduleDetail(completion: @escaping (Bool) -> Void) {
@@ -44,6 +46,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         
         let scheduleDetailData = ScheduleDetailData()
         let calendarViewModel = CalendarViewModel.shared
+        scheduleDetailData.id = ObjectId.generate()
         scheduleDetailData.date = "\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日"
         scheduleDetailData.scheduleDetailTitle = self.scheduleDetailTitle
         scheduleDetailData.startTime = self.startTime
@@ -74,11 +77,12 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
-    // レコード取得処理(一件のみ)
+    // レコード取得処理
     func getScheduleDetail(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
 
         // DB取得の前にパース用の配列を初期化
+        uniqueIdArray = []
         scheduleDetailTitleArray = []
         startTimeArray = []
         endTimeArray = []
@@ -108,6 +112,7 @@ final class ScheduleDetailViewModel: ObservableObject {
 
             // 取得したデータをパース処理
             for scheduleDetailData in scheduleDetailData {
+                uniqueIdArray.append(scheduleDetailData.id)
                 scheduleDetailTitleArray.append(scheduleDetailData.scheduleDetailTitle)
                 startTimeArray.append(scheduleDetailData.startTime)
                 endTimeArray.append(scheduleDetailData.endTime)
@@ -169,11 +174,26 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     
     // DB削除処理
-//    func deleteScheduleDetail() -> Int {
-//        //=======================================
-//        // レコードの削除
-//        //=======================================
-//
-//        return 0
-//    }
+    func DeleteScheduleDetail(_year: String, _month: String, _day: String, completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
+        do {
+            let realm = try Realm(configuration: config)
+            try realm.write {
+                guard let uniqueObjectId = try? ObjectId(string: uniqueId) else {
+                    print("ObjectIdの変換エラー")
+                    completion(false)
+                    return
+                }
+                let predicate = NSPredicate(format: "id == %@", uniqueObjectId)
+                let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
+                realm.delete(scheduleDetailData)
+                
+                completion(true)
+            }
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            completion(false)
+        }
+    }
 }
