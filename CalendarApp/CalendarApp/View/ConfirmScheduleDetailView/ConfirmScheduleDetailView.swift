@@ -10,13 +10,21 @@ import SwiftUI
 struct ConfirmScheduleDetailView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
+    @EnvironmentObject var setting: Setting
+    
+    // ToDo この@Stateの値はConfirmScheduleDetailViewModelを作成してそこで管理する
     @State private var isRequestSuccessful = false
-    @State private var isEditMode: Bool = false
+    @State private var isEditMode = false
     @State private var showAlert = false
     @State private var alertMessage = ""
     let headerTitle: String = "スケジュール詳細確認"
     
     func bindViewModel() {
+        isRequestSuccessful = false
+        isEditMode = false
+        showAlert = false
+        alertMessage = ""
+        
         let group = DispatchGroup()
         group.enter()
         
@@ -127,6 +135,12 @@ struct ConfirmScheduleDetailView: View {
         }
         .onAppear {
             bindViewModel()
+        }
+        .onChange(of: setting.isReload) { isReload in
+            if isReload {
+                bindViewModel()
+                setting.isReload = false
+            }
         }
     }
 }

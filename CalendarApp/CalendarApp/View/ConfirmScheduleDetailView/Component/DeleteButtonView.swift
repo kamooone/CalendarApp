@@ -9,6 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct DeleteButtonView: View {
+    @EnvironmentObject var setting: Setting
     let _id: String
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
@@ -30,7 +31,7 @@ struct DeleteButtonView: View {
             Alert(
                 title: Text(alertMessage),
                 dismissButton: .default(Text("OK")) {
-                    
+                    setting.isReload = true
                 }
             )
         }
