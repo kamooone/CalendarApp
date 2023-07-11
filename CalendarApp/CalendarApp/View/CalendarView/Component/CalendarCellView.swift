@@ -24,6 +24,7 @@ struct CalendarCellView: View {
                     }
                 }
                 
+                // ToDo コードを分割させたい
                 HStack(spacing: 0) {
                     ForEach(1..<8, id: \.self) { i in
                         if !(1..<calendarViewModel.numDaysMonth + 1).contains(i + week*7 - calendarViewModel.firstDayWeek.rawValue) {
@@ -48,29 +49,33 @@ struct CalendarCellView: View {
                         }
                     }
                 }
-                
-                // ToDo 登録したスケジュール詳細の内容を表示する
-                // カレンダーのセルに文字を表示させる場合
-                //                        HStack(spacing: 0) {
-                //                            ForEach(1..<8, id: \.self) { i in
-                //                                if ((i+week*7) - firstDayWeek.rawValue <= 0) {
-                //                                    Text("")
-                //                                        .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
-                //                                } else if ((i+week*7) - firstDayWeek.rawValue > numDaysMonth) {
-                //                                    Text("")
-                //                                        .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
-                //                                } else {
-                //                                    Text("aaaa")
-                //                                        .frame(width: geometry.size.width / columns, height: geometry.size.height / rows)
-                //                                        .offset(x: 0, y: 10)
-                //                                }
-                //                            }
-                //                        }
-                
-                
             }
             .padding(.bottom, -8)
             .offset(x: 0, y: -70)
         }
+        
+        // ToDo スケジュール詳細をセルに表示させる
+        ForEach(0..<6, id: \.self) { week in
+            ZStack {
+                HStack(spacing: 0) {
+                    ForEach(1..<8, id: \.self) { i in
+                        if !(1..<calendarViewModel.numDaysMonth + 1).contains(i + week*7 - calendarViewModel.firstDayWeek.rawValue) {
+                            Text("")
+                                .frame(width: 50, height: 80)
+                        } else {
+                            // ToDo 表示させる文字は一つの詳細スケジュールにつき6文字まで、二つ目以降は改行して代入して、一つのStringにする
+                            Text("テストテスト\nテストテスト\nテストテスト\nテストテスト\nテストテスト\nテストテスト")
+                                .font(.system(size: 7))
+                                .frame(width: 50, height: 80)
+                                .foregroundColor(Color.black) // ToDo 大事な予定には色を付けれるようにすればいいかも
+                                .offset(x: 0, y: -470)
+                        }
+                    }
+                }
+            }
+            .padding(.bottom, -8)
+            .offset(x: 0, y: -70)
+        }
+        
     }
 }
