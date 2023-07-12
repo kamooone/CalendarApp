@@ -10,40 +10,49 @@ import SwiftUI
 struct CalendarCellView: View {
     @EnvironmentObject var route: RouteObserver
     let calendarViewModel = CalendarViewModel.shared
+    let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+    
+    // ToDo この@Stateの値はConfirmScheduleDetailViewModelを作成してそこで管理する
+    @State private var isRequestSuccessful = false
+    @State private var isEditMode = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     
     func bindViewModel() {
-        //        isRequestSuccessful = false
-        //        isEditMode = false
-        //        showAlert = false
-        //        alertMessage = ""
-        //
-        //        let group = DispatchGroup()
-        //        group.enter()
-        //
-        //        DispatchQueue(label: "realm").async {
-        //            scheduleDetailViewModel.getScheduleDetail { success in
-        //                group.leave()
-        //
-        //                if success {
-        //                    print("非同期処理成功")
-        //                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
-        //                    DispatchQueue.main.async {
-        //                        isRequestSuccessful = true
-        //                    }
-        //                } else {
-        //                    print("非同期処理失敗")
-        //                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
-        //                    DispatchQueue.main.async {
-        //                        isRequestSuccessful = false
-        //                    }
-        //                }
-        //            }
-        //        }
-        //
-        //        // 成功失敗に関わらず呼ばれる
-        //        group.notify(queue: .main) {
-        //            print("非同期処理終了")
-        //        }
+        isRequestSuccessful = false
+        isEditMode = false
+        showAlert = false
+        alertMessage = ""
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue(label: "realm").async {
+            scheduleDetailViewModel.getScheduleDetailMonth { success in
+                group.leave()
+                
+                if success {
+                    print("非同期処理成功")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        isRequestSuccessful = true
+                    }
+                } else {
+                    print("非同期処理失敗")
+                    // ToDo 取得失敗エラーアラート表示
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        isRequestSuccessful = false
+                    }
+                }
+            }
+        }
+        
+        // 成功失敗に関わらず呼ばれる
+        group.notify(queue: .main) {
+            // ToDo 取得失敗エラーアラート表示
+            print("非同期処理終了")
+        }
     }
     
     var body: some View {

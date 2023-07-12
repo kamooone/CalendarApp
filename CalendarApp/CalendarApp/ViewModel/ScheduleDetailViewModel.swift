@@ -76,7 +76,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
-    // レコード取得処理
+    // レコード取得処理(日にち単位で取得 ToDo 月単位と同一メソッドにする)
     func getScheduleDetail(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
 
@@ -194,6 +194,51 @@ final class ScheduleDetailViewModel: ObservableObject {
             }
         } catch {
             print("Realmの書き込みエラー：\(error)")
+            completion(false)
+        }
+    }
+    
+    
+    // レコード取得処理(月単位で取得 ToDo 日にち単位と同一メソッドにする)
+    func getScheduleDetailMonth(completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+
+        // DB取得の前にパース用の配列を初期化
+        uniqueIdArray = []
+        scheduleDetailTitleArray = []
+        startTimeArray = []
+        endTimeArray = []
+        isNoticeArray = []
+        
+        do {
+            let realm = try Realm(configuration: config)
+            let calendarViewModel = CalendarViewModel.shared
+
+            // 該当する月のレコードをクエリで取得
+            let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter("date CONTAINS '\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月'").sorted(byKeyPath: "startTime")
+
+            // 取得したデータをパース処理
+            for scheduleDetailData in scheduleDetailData {
+                uniqueIdArray.append(scheduleDetailData.id)
+                scheduleDetailTitleArray.append(scheduleDetailData.scheduleDetailTitle)
+                startTimeArray.append(scheduleDetailData.startTime)
+                endTimeArray.append(scheduleDetailData.endTime)
+                isNoticeArray.append(scheduleDetailData.isNotice)
+            }
+            
+            // ToDo 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
+            print("月毎のスケジュール詳細取得確認")
+            print(scheduleDetailTitleArray)
+            print(startTimeArray)
+            print(endTimeArray)
+            print(isNoticeArray)
+            
+            // 非同期処理が成功したことを示す
+            completion(true)
+        } catch {
+            print("Realmの読み込みエラー：\(error)")
+            
+            // 非同期処理失敗
             completion(false)
         }
     }
