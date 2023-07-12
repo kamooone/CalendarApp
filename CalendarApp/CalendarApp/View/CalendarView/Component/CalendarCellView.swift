@@ -12,7 +12,7 @@ struct CalendarCellView: View {
     let calendarViewModel = CalendarViewModel.shared
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
-    // ToDo この@Stateの値はConfirmScheduleDetailViewModelを作成してそこで管理する
+    // ToDo このStateの値はConfirmScheduleDetailViewModelを作成してそこで管理する
     @State private var isRequestSuccessful = false
     @State private var isEditMode = false
     @State private var showAlert = false
@@ -109,6 +109,7 @@ struct CalendarCellView: View {
                                     .frame(width: 50, height: 80)
                             } else {
                                 // ToDo 表示させる文字は一つの詳細スケジュールにつき6文字まで、二つ目以降は改行して代入して、一つのStringにする
+                                // ToDo Text()にscheduleDetailMonthList[]を使用して日付に該当する内容を表示させる
                                 Text("テストテスト\nテストテスト\nテストテスト\nテストテスト\nテストテスト\nテストテスト")
                                     .font(.system(size: 7))
                                     .frame(width: 50, height: 80)

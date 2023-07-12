@@ -13,12 +13,12 @@ final class ScheduleDetailViewModel: ObservableObject {
     static let shared = ScheduleDetailViewModel()
     
     var isEditMode: Bool = false
-
+    
     var scheduleDetailTitle = ""
     var startTime = "00:00"
     var endTime = "00:00"
     var isNotice = true
-
+    
     var uniqueIdArray: [ObjectId] = []
     var scheduleDetailTitleArray: [String] = []
     var startTimeArray: [String] = []
@@ -31,6 +31,8 @@ final class ScheduleDetailViewModel: ObservableObject {
     var updEndTimeArray: [String] = []
     var updIsNoticeArray: [Bool] = []
     
+    // カレンダー画面のセルに表示する用の配列
+    var scheduleDetailMonthList: [String] = []
     
     var timeArray: [String] = []
     
@@ -79,7 +81,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     // レコード取得処理(日にち単位で取得 ToDo 月単位と同一メソッドにする)
     func getScheduleDetail(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
-
+        
         // DB取得の前にパース用の配列を初期化
         uniqueIdArray = []
         scheduleDetailTitleArray = []
@@ -91,7 +93,7 @@ final class ScheduleDetailViewModel: ObservableObject {
             let realm = try Realm(configuration: config)
             let calendarViewModel = CalendarViewModel.shared
             let calendar = Calendar.current
-
+            
             // 指定の日付
             let targetDateComponents = DateComponents(year: calendarViewModel.selectYear, month: calendarViewModel.selectMonth, day: calendarViewModel.selectDay)
             guard let targetDate = calendar.date(from: targetDateComponents) else {
@@ -99,16 +101,16 @@ final class ScheduleDetailViewModel: ObservableObject {
                 completion(false)
                 return
             }
-
+            
             // 日付を文字列に変換
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy年M月d日"
             let targetDateString = dateFormatter.string(from: targetDate)
-
+            
             // 日付が一致するレコードをクエリで取得
             let predicate = NSPredicate(format: "date == %@", targetDateString)
             let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate).sorted(byKeyPath: "startTime")
-
+            
             // 取得したデータをパース処理
             for scheduleDetailData in scheduleDetailData {
                 uniqueIdArray.append(scheduleDetailData.id)
@@ -202,36 +204,49 @@ final class ScheduleDetailViewModel: ObservableObject {
     // レコード取得処理(月単位で取得 ToDo 日にち単位と同一メソッドにする)
     func getScheduleDetailMonth(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
-
+        
         // DB取得の前にパース用の配列を初期化
-        uniqueIdArray = []
-        scheduleDetailTitleArray = []
-        startTimeArray = []
-        endTimeArray = []
-        isNoticeArray = []
+        scheduleDetailMonthList = []
         
         do {
             let realm = try Realm(configuration: config)
             let calendarViewModel = CalendarViewModel.shared
-
-            // 該当する月のレコードをクエリで取得
-            let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter("date CONTAINS '\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月'").sorted(byKeyPath: "startTime")
-
+            
+            // 該当する月のレコードをクエリで取得(表示するカレンダーの年月と同じレコードかつ、日付が早い順に取得)
+            let scheduleDetailData = realm.objects(ScheduleDetailData.self)
+                // ToDo どのようなロジックになっているのかを理解する
+                .filter("date CONTAINS '\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月'")
+                .sorted { (data1, data2) -> Bool in
+                    guard let day1 = getDayFromString(data1.date), let day2 = getDayFromString(data2.date) else {
+                        return false
+                    }
+                    return day1 < day2
+                }
+            
             // 取得したデータをパース処理
             for scheduleDetailData in scheduleDetailData {
-                uniqueIdArray.append(scheduleDetailData.id)
-                scheduleDetailTitleArray.append(scheduleDetailData.scheduleDetailTitle)
-                startTimeArray.append(scheduleDetailData.startTime)
-                endTimeArray.append(scheduleDetailData.endTime)
-                isNoticeArray.append(scheduleDetailData.isNotice)
+                var day:String = ""
+                let date = scheduleDetailData.date
+                
+                if let index = date.index(date.endIndex, offsetBy: -3, limitedBy: date.startIndex) {
+                    let thirdLastCharacter = date[index]
+                    
+                    if CharacterSet.decimalDigits.contains(UnicodeScalar(String(thirdLastCharacter))!) {
+                        let secondLastCharacter = date[date.index(date.endIndex, offsetBy: -2)]
+                        day = String(thirdLastCharacter) + String(secondLastCharacter)
+                    } else {
+                        let secondLastCharacter = date[date.index(date.endIndex, offsetBy: -2)]
+                        day = String(secondLastCharacter)
+                    }
+                }
+                // ToDo 要素数を節約するため、辞書型の配列を使用する
+                scheduleDetailMonthList.append(day)
+                scheduleDetailMonthList.append(scheduleDetailData.scheduleDetailTitle)
             }
             
             // ToDo 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
             print("月毎のスケジュール詳細取得確認")
-            print(scheduleDetailTitleArray)
-            print(startTimeArray)
-            print(endTimeArray)
-            print(isNoticeArray)
+            print(scheduleDetailMonthList)
             
             // 非同期処理が成功したことを示す
             completion(true)
@@ -241,5 +256,15 @@ final class ScheduleDetailViewModel: ObservableObject {
             // 非同期処理失敗
             completion(false)
         }
+    }
+    
+    func getDayFromString(_ dateString: String) -> Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy年M月d日"
+        if let date = dateFormatter.date(from: dateString) {
+            let calendar = Calendar.current
+            return calendar.component(.day, from: date)
+        }
+        return nil
     }
 }
