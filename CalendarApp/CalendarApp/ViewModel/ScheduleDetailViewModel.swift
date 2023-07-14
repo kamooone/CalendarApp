@@ -242,22 +242,41 @@ final class ScheduleDetailViewModel: ObservableObject {
                         day = String(secondLastCharacter)
                     }
                 }
-                // ToDo 文字が六文字以上であれば、6文字までを格納する
                 // ToDo 要素数を節約するため、辞書型の配列を使用する
                 if scheduleDetailMonthDayList.count == 0 {
                     scheduleDetailMonthDayList.append(day)
-                    scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
+                    // 内容が7文字以上であれば、6文字+...を格納する
+                    if scheduleDetailData.scheduleDetailTitle.count > 7 {
+                        let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex
+                        let endIndex = scheduleDetailData.scheduleDetailTitle.index(startIndex, offsetBy: 5)
+                        let truncatedTitle = scheduleDetailData.scheduleDetailTitle[startIndex...endIndex] + "..."
+                        scheduleDetailMonthTextList.append(String(truncatedTitle))
+                    } else {
+                        scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
+                    }
                 } else if scheduleDetailMonthDayList[scheduleDetailMonthDayList.count - 1] != day {
                     scheduleDetailMonthDayList.append(day)
-                    scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
+                    // 内容が7文字以上であれば、6文字+...を格納する
+                    if scheduleDetailData.scheduleDetailTitle.count > 7 {
+                        let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex
+                        let endIndex = scheduleDetailData.scheduleDetailTitle.index(startIndex, offsetBy: 5)
+                        let truncatedTitle = scheduleDetailData.scheduleDetailTitle[startIndex...endIndex] + "..."
+                        scheduleDetailMonthTextList.append(String(truncatedTitle))
+                    } else {
+                        scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
+                    }
                 } else {
-                    // 同じ日付であれば、内容を連結させる
-                    scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + scheduleDetailData.scheduleDetailTitle
+                    // 内容が7文字以上であれば、6文字+...を格納する
+                    if scheduleDetailData.scheduleDetailTitle.count > 7 {
+                        let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex
+                        let endIndex = scheduleDetailData.scheduleDetailTitle.index(startIndex, offsetBy: 5)
+                        let truncatedTitle = scheduleDetailData.scheduleDetailTitle[startIndex...endIndex] + "..."
+                        scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + String(truncatedTitle)
+                    } else {
+                        scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + scheduleDetailData.scheduleDetailTitle
+                    }
                 }
             }
-            print(scheduleDetailMonthDayList)
-            print(scheduleDetailMonthTextList)
-            
             
             var foundMatch = false
             var startIndex = 0
