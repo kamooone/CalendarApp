@@ -143,9 +143,7 @@ struct CellTextView: View {
             Text("")
                 .frame(width: 50, height: 80)
         } else {
-            // ToDo 表示させる文字は一つの詳細スケジュールにつき6文字まで、二つ目以降は改行して代入して、一つのStringにする
-            // ToDo Text()にscheduleDetailMonthList[]を使用して日付に該当する内容を表示させる
-            Text("\(scheduleDetailViewModel.scheduleDetailMonthList[1])")
+            Text("\(scheduleDetailViewModel.scheduleDetailMonthList[i + week*7 - calendarViewModel.firstDayWeek.rawValue - 1])")
                 .font(.system(size: 7))
                 .frame(width: 50, height: 80)
                 .foregroundColor(Color.black) // ToDo 大事な予定には色を付けれるようにすればいいかも

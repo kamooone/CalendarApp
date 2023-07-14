@@ -32,6 +32,9 @@ final class ScheduleDetailViewModel: ObservableObject {
     var updIsNoticeArray: [Bool] = []
     
     // カレンダー画面のセルに表示する用の配列
+    var scheduleDetailMonthDayList: [String] = []
+    var scheduleDetailMonthTextList: [String] = []
+    
     var scheduleDetailMonthList: [String] = []
     
     var timeArray: [String] = []
@@ -201,7 +204,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     }
     
     
-    // レコード取得処理(月単位で取得 ToDo 日にち単位と同一メソッドにする)
+    // レコード取得処理(月単位で取得 ToDo 日にち単位で取得のメソッドと同一メソッドにする)
     func getScheduleDetailMonth(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
@@ -239,9 +242,42 @@ final class ScheduleDetailViewModel: ObservableObject {
                         day = String(secondLastCharacter)
                     }
                 }
+                // ToDo 文字が六文字以上であれば、6文字までを格納する
                 // ToDo 要素数を節約するため、辞書型の配列を使用する
-                scheduleDetailMonthList.append(day)
-                scheduleDetailMonthList.append(scheduleDetailData.scheduleDetailTitle)
+                if scheduleDetailMonthDayList.count == 0 {
+                    scheduleDetailMonthDayList.append(day)
+                    scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
+                } else if scheduleDetailMonthDayList[scheduleDetailMonthDayList.count - 1] != day {
+                    scheduleDetailMonthDayList.append(day)
+                    scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
+                } else {
+                    // 同じ日付であれば、内容を連結させる
+                    scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + scheduleDetailData.scheduleDetailTitle
+                }
+            }
+            print(scheduleDetailMonthDayList)
+            print(scheduleDetailMonthTextList)
+            
+            
+            var foundMatch = false
+            var startIndex = 0
+            scheduleDetailMonthList = Array(repeating: "", count: 31)
+
+            // ToDo 31を該当する月の日数に該当する変数にする
+            for i in 0..<31 {
+                if foundMatch {
+                    foundMatch = false
+                    continue
+                }
+
+                for cnt in startIndex..<scheduleDetailMonthDayList.count {
+                    if (i + 1) == Int(scheduleDetailMonthDayList[cnt]) {
+                        scheduleDetailMonthList[i] = scheduleDetailMonthTextList[cnt]
+                        foundMatch = true
+                        startIndex = cnt + 1
+                        break
+                    }
+                }
             }
             
             // ToDo 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
