@@ -282,8 +282,7 @@ final class ScheduleDetailViewModel: ObservableObject {
             var startIndex = 0
             scheduleDetailMonthList = Array(repeating: "", count: 31)
 
-            // ToDo 31を該当する月の日数に該当する変数にする
-            for i in 0..<31 {
+            for i in 0..<calendarViewModel.numDaysMonth {
                 if foundMatch {
                     foundMatch = false
                     continue
