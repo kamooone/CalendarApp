@@ -15,7 +15,7 @@ struct YearMonthView: View {
         Button(action: {
             reloadView.toggle()
             // ToDo 月が1未満になったら12月になるようにして、年数を一つ下げる
-            calendarViewModel.currentMonth -= 1
+            calendarViewModel.selectMonth -= 1
             calendarViewModel.bindViewModel()
         }){
             Text("◀︎")
@@ -23,14 +23,14 @@ struct YearMonthView: View {
         }
         .offset(x: 0, y: -50)
         
-        Text("\(String(calendarViewModel.selectYear))年\(calendarViewModel.selectMonth + calendarViewModel.currentMonth)月")
+        Text("\(String(calendarViewModel.selectYear))年\(calendarViewModel.selectMonth)月")
             .font(.system(size: 20))
             .offset(x: 0, y: -50)
         
         Button(action: {
             reloadView.toggle()
             // ToDo 月が12以上になったら1月になるようにして、年数を一つ上げる
-            calendarViewModel.currentMonth += 1
+            calendarViewModel.selectMonth += 1
             calendarViewModel.bindViewModel()
         }){
             Text("▶︎")

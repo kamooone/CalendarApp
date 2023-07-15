@@ -79,7 +79,7 @@ struct CalendarCellView: View {
                     .offset(x: 0, y: -70)
                 }
                 
-                // ToDo スケジュール詳細をセルに表示させる
+                // スケジュール詳細をセルに表示させる
                 ForEach(0..<6, id: \.self) { week in
                     ZStack {
                         HStack(spacing: 0) {
@@ -117,7 +117,6 @@ struct DayStringtView: View {
                 
                 // ルートをスケジュール登録に変更して、選択したセルの月日を取得
                 route.path = .ScheduleConfirm
-                calendarViewModel.selectMonth = calendarViewModel.selectMonth + calendarViewModel.currentMonth
                 calendarViewModel.selectDay = i+week*7 - calendarViewModel.firstDayWeek.rawValue
             }) {
                 Text("\(i + (week*7) - calendarViewModel.firstDayWeek.rawValue)")

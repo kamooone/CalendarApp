@@ -33,8 +33,6 @@ final class CalendarViewModel: ObservableObject {
     // 日のみを取得
     var selectDay : Int = Calendar.current.component(.day, from: Date())
     
-    var currentMonth: Int = 0
-    
     // 閏年の判定
     func leapYear(year:Int) -> Bool {
         return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)
@@ -77,9 +75,10 @@ final class CalendarViewModel: ObservableObject {
         }
     }
     
+    // ToDo bindViewModelというメソッド名はおかしい
     func bindViewModel() {
-        firstDayWeek = dayOfWeekCalc(year: selectYear, month: selectMonth + currentMonth,  day: 1)
-        numDaysMonth = dayNumber(year: selectYear, month: selectMonth + currentMonth)
+        firstDayWeek = dayOfWeekCalc(year: selectYear, month: selectMonth,  day: 1)
+        numDaysMonth = dayNumber(year: selectYear, month: selectMonth)
         print(firstDayWeek)
         print(numDaysMonth)
     }
