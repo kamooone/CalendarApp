@@ -36,6 +36,10 @@ extension Color{
         Color.fromHex("#27272e")
     }
     
+    static var lemonchiffon: Color {
+        Color.fromHex("#fffacd")
+    }
+    
     static var lightGray: Color {
         Color.fromHex("#DEDEDE")
     }

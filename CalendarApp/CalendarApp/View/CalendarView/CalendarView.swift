@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var shouldReloadView = false
+    @State private var isShouldReloadView: Int = 0
     let calendarViewModel = CalendarViewModel.shared
     let headerTitle: String = "スケジュール登録"
     
@@ -17,27 +17,34 @@ struct CalendarView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    Spacer()
+                    HamburgerView()
+                }
+                HStack() {
+                    HeaderView(_headerTitle: headerTitle)
+                }
+                
+                HStack() {
+                    YearMonthView(isShouldReloadView: $isShouldReloadView)
+                }
+                
+                HStack() {
+                    DaysWeekView()
+                }
+                CalendarCellView()
+                
+                BannerAdsView()
+                    .frame(width: geometry.size.width, height: 80)
+                    .background(Color.yellow)
+                    .offset(x: 0, y: -470)
+                
                 Spacer()
-                HamburgerView()
             }
-            HStack() {
-                HeaderView(_headerTitle: headerTitle)
-            }
-            
-            HStack() {
-                YearMonthView(reloadView: $shouldReloadView)
-            }
-            
-            HStack() {
-                DaysWeekView()
-            }
-            CalendarCellView()
-            
-            Spacer()
         }
-        .id(shouldReloadView) // reloadViewの変更によってViewの再描画をトリガーする
+        .id(isShouldReloadView) // reloadViewの変更によってViewの再描画をトリガーする
     }
 }
 

@@ -12,6 +12,9 @@ class Setting: ObservableObject{
     // Loading view
     @Published var isLoading = true
     
+    // Update view
+    @Published var isReload = false
+    
     // Disable screen touch
     @Published var isEnableLeftMenu = false
 }

@@ -11,6 +11,7 @@ struct HamburgerView: View {
     
     var body: some View  {
         Button(action: {
+            // 2023/7/16 次回ハンバーガメニューの中身の実装
         }) {
             if let image = UIImage(named: "hamburger") {
                 Image(uiImage: image)
