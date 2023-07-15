@@ -15,6 +15,7 @@ struct RegisterScheduleDetailButtonView: View {
     
     var body: some View {
         // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
+        // ToDo 登録完了したら入力内容を初期化する
         Button(action: {
             regist()
         }) {
@@ -59,6 +60,7 @@ struct RegisterScheduleDetailButtonView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
+            // ToDo 失敗エラーアラート表示
             print("非同期処理終了")
             showAlert = true
         }
