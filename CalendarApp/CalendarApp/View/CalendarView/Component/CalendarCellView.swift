@@ -22,6 +22,7 @@ struct CalendarCellView: View {
         isEditMode = false
         showAlert = false
         alertMessage = ""
+        calendarViewModel.isSelectMonthSwitchButton = true
         
         let group = DispatchGroup()
         group.enter()
@@ -51,6 +52,7 @@ struct CalendarCellView: View {
         group.notify(queue: .main) {
             // ToDo 取得失敗エラーアラート表示
             print("非同期処理終了")
+            calendarViewModel.isSelectMonthSwitchButton = false
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var shouldReloadView = false
+    @State private var isShouldReloadView: Int = 0
     let calendarViewModel = CalendarViewModel.shared
     let headerTitle: String = "スケジュール登録"
     
@@ -28,7 +28,7 @@ struct CalendarView: View {
                 }
                 
                 HStack() {
-                    YearMonthView(reloadView: $shouldReloadView)
+                    YearMonthView(isShouldReloadView: $isShouldReloadView)
                 }
                 
                 HStack() {
@@ -44,7 +44,7 @@ struct CalendarView: View {
                 Spacer()
             }
         }
-        .id(shouldReloadView) // reloadViewの変更によってViewの再描画をトリガーする
+        .id(isShouldReloadView) // reloadViewの変更によってViewの再描画をトリガーする
     }
 }
 

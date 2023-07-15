@@ -305,7 +305,6 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
-            print("月毎のスケジュール詳細取得確認")
             print(scheduleDetailMonthList)
             
             // 非同期処理が成功したことを示す
