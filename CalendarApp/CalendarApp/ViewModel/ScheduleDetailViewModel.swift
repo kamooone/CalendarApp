@@ -305,7 +305,6 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
-            // ToDo 2023/7/15 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
             print("月毎のスケジュール詳細取得確認")
             print(scheduleDetailMonthList)
             

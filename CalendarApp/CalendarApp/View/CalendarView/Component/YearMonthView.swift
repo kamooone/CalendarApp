@@ -14,8 +14,11 @@ struct YearMonthView: View {
     var body: some View {
         Button(action: {
             reloadView.toggle()
-            // ToDo 月が1未満になったら12月になるようにして、年数を一つ下げる
             calendarViewModel.selectMonth -= 1
+            if calendarViewModel.selectMonth == 0 {
+                calendarViewModel.selectMonth = 12
+                calendarViewModel.selectYear -= 1
+            }
             calendarViewModel.bindViewModel()
         }){
             Text("◀︎")
@@ -29,8 +32,11 @@ struct YearMonthView: View {
         
         Button(action: {
             reloadView.toggle()
-            // ToDo 月が12以上になったら1月になるようにして、年数を一つ上げる
             calendarViewModel.selectMonth += 1
+            if calendarViewModel.selectMonth == 13 {
+                calendarViewModel.selectMonth = 1
+                calendarViewModel.selectYear += 1
+            }
             calendarViewModel.bindViewModel()
         }){
             Text("▶︎")

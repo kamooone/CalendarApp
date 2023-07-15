@@ -27,7 +27,7 @@ final class CalendarViewModel: ObservableObject {
     let rows: CGFloat = 9
     
     // 年のみを取得
-    let selectYear : Int = Calendar.current.component(.year, from: Date())
+    var selectYear : Int = Calendar.current.component(.year, from: Date())
     // 月のみを取得
     var selectMonth : Int = Calendar.current.component(.month, from: Date())
     // 日のみを取得
