@@ -210,6 +210,8 @@ final class ScheduleDetailViewModel: ObservableObject {
         
         // DB取得の前にパース用の配列を初期化
         scheduleDetailMonthList = []
+        scheduleDetailMonthDayList = []
+        scheduleDetailMonthTextList = []
         
         do {
             let realm = try Realm(configuration: config)
@@ -266,6 +268,7 @@ final class ScheduleDetailViewModel: ObservableObject {
                         scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
                     }
                 } else {
+                    // ToDo 同一日の最大表示詳細スケジュールは7つまでにする
                     // 内容が7文字以上であれば、6文字+...を格納する
                     if scheduleDetailData.scheduleDetailTitle.count > 7 {
                         let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex
@@ -298,6 +301,7 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
+            // ToDo 2023/7/15 この辺りの修正のToDoを直す & セルに表示させる詳細スケジュールの表示修正
             // ToDo 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
             print("月毎のスケジュール詳細取得確認")
             print(scheduleDetailMonthList)
