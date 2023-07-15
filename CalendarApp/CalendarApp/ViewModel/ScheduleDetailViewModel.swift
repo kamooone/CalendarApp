@@ -244,7 +244,6 @@ final class ScheduleDetailViewModel: ObservableObject {
                         day = String(secondLastCharacter)
                     }
                 }
-                // ToDo 要素数を節約するため、辞書型の配列を使用する
                 if scheduleDetailMonthDayList.count == 0 {
                     scheduleDetailMonthDayList.append(day)
                     // 内容が7文字以上であれば、6文字+...を格納する
@@ -268,15 +267,20 @@ final class ScheduleDetailViewModel: ObservableObject {
                         scheduleDetailMonthTextList.append(scheduleDetailData.scheduleDetailTitle)
                     }
                 } else {
-                    // ToDo 同一日の最大表示詳細スケジュールは7つまでにする
-                    // 内容が7文字以上であれば、6文字+...を格納する
-                    if scheduleDetailData.scheduleDetailTitle.count > 7 {
-                        let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex
-                        let endIndex = scheduleDetailData.scheduleDetailTitle.index(startIndex, offsetBy: 5)
-                        let truncatedTitle = scheduleDetailData.scheduleDetailTitle[startIndex...endIndex] + "..."
-                        scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + String(truncatedTitle)
-                    } else {
-                        scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + scheduleDetailData.scheduleDetailTitle
+                    let existingTitle = scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1]
+                    let newlineCount = existingTitle.components(separatedBy: "\n").count - 1
+                    
+                    // 同一日の最大表示詳細スケジュールは7つまでにする
+                    if newlineCount < 6 {
+                        // 内容が7文字以上であれば、6文字+...を格納する
+                        if scheduleDetailData.scheduleDetailTitle.count > 7 {
+                            let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex
+                            let endIndex = scheduleDetailData.scheduleDetailTitle.index(startIndex, offsetBy: 5)
+                            let truncatedTitle = scheduleDetailData.scheduleDetailTitle[startIndex...endIndex] + "..."
+                            scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + String(truncatedTitle)
+                        } else {
+                            scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1] += "\n" + scheduleDetailData.scheduleDetailTitle
+                        }
                     }
                 }
             }
@@ -301,8 +305,7 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
-            // ToDo 2023/7/15 この辺りの修正のToDoを直す & セルに表示させる詳細スケジュールの表示修正
-            // ToDo 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
+            // ToDo 2023/7/15 前月翌月に移動するボタンを押してもcalendarViewModel.selectMonthの値が変わっていない(ボタンを押す度に再描画は行われてるので良し)
             print("月毎のスケジュール詳細取得確認")
             print(scheduleDetailMonthList)
             
