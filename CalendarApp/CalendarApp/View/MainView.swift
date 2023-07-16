@@ -26,6 +26,8 @@ struct MainView: View {
                     ScheduleRegisterView()
                 case .ConfirmScheduleDetail:
                     ConfirmScheduleDetailView()
+                case .Setting:
+                    SettingView()
                 }
             }
         }

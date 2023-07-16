@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct HamburgerView: View {
+    @EnvironmentObject var route: RouteObserver
     
     var body: some View  {
         Button(action: {
-            // 2023/7/16 次回ハンバーガメニューの中身の実装
+            route.path = .Setting
         }) {
             if let image = UIImage(named: "hamburger") {
                 Image(uiImage: image)
