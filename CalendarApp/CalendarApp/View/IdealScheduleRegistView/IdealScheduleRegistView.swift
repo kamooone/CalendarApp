@@ -1,5 +1,5 @@
 //
-//  IdealScheduleView.swift
+//  IdealScheduleRegistView.swift
 //  CalendarApp
 //
 //  Created by Kazusa Kondo on 2023/07/16.
@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct IdealScheduleView: View {
+struct IdealScheduleRegistView: View {
     let headerTitle: String = "理想のスケジュールを作成"
     
+    // ToDo 2023/7/16 理想のスケジュール保存処理
     var body: some View {
         Color.lightGray.edgesIgnoringSafeArea(.all)
         GeometryReader { geometry in
@@ -37,7 +38,7 @@ struct IdealScheduleView: View {
                         
                         HStack {
                             Spacer()
-                            RegisterScheduleDetailButtonView()
+                            IdealRegisterScheduleDetailButtonView()
                                 .offset(x:0, y:0)
                             Spacer()
                         }
@@ -76,6 +77,6 @@ struct IdealScheduleView: View {
 
 struct IdealScheduleView_Previews: PreviewProvider {
     static var previews: some View {
-        IdealScheduleView()
+        IdealScheduleRegistView()
     }
 }

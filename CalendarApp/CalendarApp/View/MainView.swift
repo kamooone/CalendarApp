@@ -29,7 +29,7 @@ struct MainView: View {
                 case .Setting:
                     SettingView()
                 case .IdealSchedule:
-                    IdealScheduleView()
+                    IdealScheduleRegistView()
                 case .IdealConfirmScheduleDetail:
                     IdealConfirmScheduleDetailView()
                 }

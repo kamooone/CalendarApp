@@ -69,7 +69,7 @@ struct IdealConfirmScheduleDetailView: View {
                 }
                 
                 HStack {
-                    SelectedMonthDayView()
+                    // ToDo 入力している理想のスケジュールタイトルを表示させる
                 }
                 
                 HStack {
@@ -91,7 +91,7 @@ struct IdealConfirmScheduleDetailView: View {
                                 Spacer().frame(height: 20)
                                 ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
                                     VStack {
-                                        ScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                        IdealScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
                                     .frame(width: geometry.size.width - 40, height: 220)
                                     .background(Color.lemonchiffon)
@@ -111,7 +111,7 @@ struct IdealConfirmScheduleDetailView: View {
                                 Spacer().frame(height: 20)
                                 ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
                                     VStack {
-                                        Schedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                        IdealSchedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                     }
                                     .frame(width: geometry.size.width - 40, height: 100)
                                     .background(Color.lemonchiffon)
@@ -142,6 +142,139 @@ struct IdealConfirmScheduleDetailView: View {
             if isReload {
                 bindViewModel()
                 setting.isReload = false
+            }
+        }
+    }
+}
+
+struct IdealSchedule: View {
+    var scheduleDetailViewModel: ScheduleDetailViewModel
+    var index: Int
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text("タイトル")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.scheduleDetailTitleArray[index])
+            }
+            
+            HStack {
+                Text("開始")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.startTimeArray[index])
+                
+                Text("〜")
+                    .font(.system(size: 16))
+                
+                Text("終了")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.endTimeArray[index])
+            }
+            
+            HStack {
+                Text("通知")
+                    .font(.system(size: 16))
+                Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
+            }
+        }
+    }
+}
+
+struct IdealScheduleEdit: View {
+    var scheduleDetailViewModel: ScheduleDetailViewModel
+    var index: Int
+    @State private var textFieldValue: String = ""
+    @State private var selectedStartTime = 0
+    @State private var selectedEndTime = 0
+    @State private var isSwitchOn = true
+    
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                
+                HStack {
+                    // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
+                    Spacer()
+                    TextField("", text: $textFieldValue)
+                        .frame(width: 300)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                        .onChange(of: textFieldValue) { newTitleDetail in
+                            // 表示用
+                            scheduleDetailViewModel.scheduleDetailTitle = newTitleDetail
+                            // 更新用にバックアップ
+                            scheduleDetailViewModel.updScheduleDetailTitleArray[index] = newTitleDetail
+                        }
+                    Spacer()
+                }
+                
+                HStack {
+                    Text("開始")
+                        .font(.system(size: 16))
+                    Picker("Select an StartTIme", selection: $selectedStartTime) {
+                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
+                            Text(scheduleDetailViewModel.timeArray[_index])
+                        }
+                    }
+                    .frame(width: 90, height: geometry.size.height / 10)
+                    .pickerStyle(MenuPickerStyle())
+                    .offset(x:0,y:0)
+                    .onChange(of: selectedStartTime) { timeIndex in
+                        // 表示用
+                        scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        // 更新用にバックアップ
+                        scheduleDetailViewModel.updStartTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
+                    }
+                    
+                    Text("〜")
+                        .font(.system(size: 16))
+                    
+                    Text("終了")
+                        .font(.system(size: 16))
+                    Picker("Select an EndTime", selection: $selectedEndTime) {
+                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
+                            Text(scheduleDetailViewModel.timeArray[_index])
+                        }
+                    }
+                    .frame(width: 90, height: geometry.size.height / 10)
+                    .pickerStyle(MenuPickerStyle())
+                    .offset(x:0,y:0)
+                    .onChange(of: selectedEndTime) { timeIndex in
+                        // 表示用
+                        scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        // 更新用にバックアップ
+                        scheduleDetailViewModel.updEndTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
+                    }
+                }
+                
+                HStack {
+                    Toggle("通知", isOn: $isSwitchOn)
+                        .offset(x:0,y:0)
+                        .padding(.horizontal, 100)
+                        .onChange(of: isSwitchOn) { newIsNotice in
+                            // 表示用
+                            scheduleDetailViewModel.isNotice = newIsNotice
+                            // 更新用にバックアップ
+                            scheduleDetailViewModel.updIsNoticeArray[index] = newIsNotice
+                        }
+                }
+                
+                HStack {
+                    DeleteButtonView(_id: String(describing: scheduleDetailViewModel.uniqueIdArray[index]))
+                }
+            }
+            .onAppear {
+                textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
+                
+                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.startTimeArray[index]) {
+                    selectedStartTime = selectedIndex
+                }
+                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.endTimeArray[index]) {
+                    selectedEndTime = selectedIndex
+                }
+                
+                isSwitchOn = scheduleDetailViewModel.isNoticeArray[index]
             }
         }
     }

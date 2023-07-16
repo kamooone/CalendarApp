@@ -17,3 +17,11 @@ class ScheduleDetailData: Object {
     @Persisted var isNotice = true
 }
 
+class IdealScheduleDetailData: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var scheduleTitle = ""
+    @Persisted var scheduleDetailTitle = ""
+    @Persisted var startTime = ""
+    @Persisted var endTime = ""
+    @Persisted var isNotice = true
+}
