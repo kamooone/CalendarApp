@@ -21,4 +21,6 @@ public enum Route{
     case ScheduleConfirm
     case ConfirmScheduleDetail
     case Setting
+    case IdealSchedule
+    case IdealConfirmScheduleDetail
 }

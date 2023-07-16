@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoadScheduleView: View {
     @State private var selectedOption = 0
+    // ToDo 登録してある理想のスケジュールに差し替える
     let options = ["-------------------", "作成した理想のスケ1", "作成した理想のスケ2", "作成した理想のスケ3"]
     
     var body: some View {

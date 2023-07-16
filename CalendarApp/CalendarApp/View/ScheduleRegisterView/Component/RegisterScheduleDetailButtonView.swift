@@ -19,7 +19,7 @@ struct RegisterScheduleDetailButtonView: View {
         Button(action: {
             regist()
         }) {
-            Text("登録")
+            Text("追加")
                 .frame(width: 50, height: 30)
         }
         .offset(x:0,y:105)

@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct IdealScheduleButtonView: View {
+    @EnvironmentObject var route: RouteObserver
     
     var body: some View  {
         Button(action: {
-            // ToDo 理想のスケジュール作成画面に遷移させる
+            route.path = .IdealSchedule
         }) {
             Text("理想のスケジュールを作成")
                 .frame(width: 300, height: 30)

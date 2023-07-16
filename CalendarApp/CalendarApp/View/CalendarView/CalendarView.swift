@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarView: View {
     @State private var isShouldReloadView: Int = 0
     let calendarViewModel = CalendarViewModel.shared
-    let headerTitle: String = "スケジュール登録"
+    let headerTitle: String = "スケジュール管理アプリ"
     
     init() {
         calendarViewModel.bindViewModel()
