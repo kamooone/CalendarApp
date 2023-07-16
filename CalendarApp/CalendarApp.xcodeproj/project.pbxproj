@@ -46,6 +46,12 @@
 		E2AA373F2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */; };
 		E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */; };
 		E2B363212A639420008C3E20 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363202A639420008C3E20 /* SettingView.swift */; };
+		E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363222A63B1BA008C3E20 /* IdealScheduleButtonView.swift */; };
+		E2B363252A63B2A3008C3E20 /* MiniGameButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363242A63B2A3008C3E20 /* MiniGameButtonView.swift */; };
+		E2B363272A63B2F6008C3E20 /* LanguageSwitchButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363262A63B2F6008C3E20 /* LanguageSwitchButtonView.swift */; };
+		E2B363292A63B35C008C3E20 /* CharacterSwitchingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363282A63B35C008C3E20 /* CharacterSwitchingButtonView.swift */; };
+		E2B3632B2A63B3E6008C3E20 /* DonationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B3632A2A63B3E6008C3E20 /* DonationButtonView.swift */; };
+		E2B3632D2A63B60B008C3E20 /* InquiryButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B3632C2A63B60B008C3E20 /* InquiryButtonView.swift */; };
 		E2FB60ED2A3B4CD3003D89C8 /* ScheduleDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +98,12 @@
 		E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2B363202A639420008C3E20 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		E2B363222A63B1BA008C3E20 /* IdealScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleButtonView.swift; sourceTree = "<group>"; };
+		E2B363242A63B2A3008C3E20 /* MiniGameButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameButtonView.swift; sourceTree = "<group>"; };
+		E2B363262A63B2F6008C3E20 /* LanguageSwitchButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSwitchButtonView.swift; sourceTree = "<group>"; };
+		E2B363282A63B35C008C3E20 /* CharacterSwitchingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSwitchingButtonView.swift; sourceTree = "<group>"; };
+		E2B3632A2A63B3E6008C3E20 /* DonationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationButtonView.swift; sourceTree = "<group>"; };
+		E2B3632C2A63B60B008C3E20 /* InquiryButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryButtonView.swift; sourceTree = "<group>"; };
 		E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -376,6 +388,12 @@
 		E2B3631F2A63940C008C3E20 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				E2B363222A63B1BA008C3E20 /* IdealScheduleButtonView.swift */,
+				E2B363242A63B2A3008C3E20 /* MiniGameButtonView.swift */,
+				E2B363262A63B2F6008C3E20 /* LanguageSwitchButtonView.swift */,
+				E2B363282A63B35C008C3E20 /* CharacterSwitchingButtonView.swift */,
+				E2B3632A2A63B3E6008C3E20 /* DonationButtonView.swift */,
+				E2B3632C2A63B60B008C3E20 /* InquiryButtonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -521,21 +539,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27C8E5D2A23991A00841268 /* CalendarViewModel.swift in Sources */,
+				E2B363292A63B35C008C3E20 /* CharacterSwitchingButtonView.swift in Sources */,
 				E225D2D32A2F7E020052362D /* NoticeSettingView.swift in Sources */,
 				E225D2CF2A2F7CF60052362D /* ScheduleTimeView.swift in Sources */,
 				E28890282A4F284200AE504E /* CancelButtonView.swift in Sources */,
 				E27C8E6A2A239A6300841268 /* Color+.swift in Sources */,
 				E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */,
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
+				E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */,
+				E2B363252A63B2A3008C3E20 /* MiniGameButtonView.swift in Sources */,
 				E20018802A30D3D1009640F0 /* YearMonthView.swift in Sources */,
 				E27C8E462A23949200841268 /* MainView.swift in Sources */,
 				E225D2D12A2F7DAD0052362D /* BannerAdsView.swift in Sources */,
 				E27C8E562A2398BA00841268 /* SplashView.swift in Sources */,
+				E2B3632B2A63B3E6008C3E20 /* DonationButtonView.swift in Sources */,
 				E29D3C672A4C830200A68BF4 /* EditButtonView.swift in Sources */,
 				E24F7B832A41EA58002F12C7 /* ScheduleDetailViewModel.swift in Sources */,
 				E2120D8A2A26540D00F08940 /* ButtonStyle+.swift in Sources */,
 				E225D2CD2A2F7C890052362D /* ScheduleDetailView.swift in Sources */,
 				E2AA373F2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift in Sources */,
+				E2B3632D2A63B60B008C3E20 /* InquiryButtonView.swift in Sources */,
 				E28890262A4F282F00AE504E /* UpdateButtonView.swift in Sources */,
 				E27C8E682A239A5800841268 /* View+.swift in Sources */,
 				E20018822A30DC4B009640F0 /* DaysWeekView.swift in Sources */,
@@ -554,6 +577,7 @@
 				E2B363212A639420008C3E20 /* SettingView.swift in Sources */,
 				E27477382A5AAA0B0054317D /* DeleteButtonView.swift in Sources */,
 				E2FB60ED2A3B4CD3003D89C8 /* ScheduleDetailData.swift in Sources */,
+				E2B363272A63B2F6008C3E20 /* LanguageSwitchButtonView.swift in Sources */,
 				E225D2C22A2F766A0052362D /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

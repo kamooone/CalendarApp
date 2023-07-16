@@ -118,8 +118,10 @@ struct DayStringtView: View {
                 print("\(i+week*7 - calendarViewModel.firstDayWeek.rawValue)日をタップ")
                 
                 // ルートをスケジュール登録に変更して、選択したセルの月日を取得
-                route.path = .ScheduleConfirm
                 calendarViewModel.selectDay = i+week*7 - calendarViewModel.firstDayWeek.rawValue
+                
+                // ToDo 今は登録画面その次に確認画面という流れにしているが、先に確認画面を表示した方がいいかも。そして確認画面の中に登録ボタンを作る。
+                route.path = .ScheduleConfirm
             }) {
                 Text("\(i + (week*7) - calendarViewModel.firstDayWeek.rawValue)")
                     .frame(width: 50, height: 80)

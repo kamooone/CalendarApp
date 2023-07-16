@@ -13,6 +13,7 @@ struct SettingView: View {
     
     var body: some View {
         GeometryReader { geometry in
+            // ToDo 間間に書くボタンの説明をしてるキャラクターを表示させる
             VStack {
                 HStack {
                     BackButtonView()
@@ -20,14 +21,33 @@ struct SettingView: View {
                 HStack {
                     HeaderView(_headerTitle: headerTitle)
                 }
-                
+                HStack {
+                    IdealScheduleButtonView()
+                }
+                HStack {
+                    MiniGameButtonView()
+                }
+                HStack {
+                    LanguageSwitcButtonView()
+                }
+                HStack {
+                    CharacterSwitchingButtonView()
+                }
+                HStack {
+                    DonationButtonView()
+                }
+                HStack {
+                    InquiryButtonView()
+                }
+
+                Spacer()
                 
                 BannerAdsView()
                     .frame(width: geometry.size.width, height: 80)
                     .background(Color.yellow)
                     .offset(x: 0, y: -70)
                 
-                Spacer()
+
             }
         }
     }
