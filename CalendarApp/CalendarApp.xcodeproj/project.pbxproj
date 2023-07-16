@@ -17,10 +17,8 @@
 		E2120D882A26533A00F08940 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D872A26533A00F08940 /* BackButtonView.swift */; };
 		E2120D8A2A26540D00F08940 /* ButtonStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2120D892A26540D00F08940 /* ButtonStyle+.swift */; };
 		E225D2C22A2F766A0052362D /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2C12A2F766A0052362D /* HeaderView.swift */; };
-		E225D2C52A2F79CD0052362D /* RegisterScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2C42A2F79CD0052362D /* RegisterScheduleButtonView.swift */; };
 		E225D2C72A2F7A3B0052362D /* SelectedMonthDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2C62A2F7A3B0052362D /* SelectedMonthDayView.swift */; };
 		E225D2C92A2F7AC90052362D /* LoadScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2C82A2F7AC90052362D /* LoadScheduleView.swift */; };
-		E225D2CB2A2F7BF00052362D /* ScheduleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2CA2A2F7BF00052362D /* ScheduleTitleView.swift */; };
 		E225D2CD2A2F7C890052362D /* ScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2CC2A2F7C890052362D /* ScheduleDetailView.swift */; };
 		E225D2CF2A2F7CF60052362D /* ScheduleTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2CE2A2F7CF60052362D /* ScheduleTimeView.swift */; };
 		E225D2D12A2F7DAD0052362D /* BannerAdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2D02A2F7DAD0052362D /* BannerAdsView.swift */; };
@@ -68,10 +66,8 @@
 		E2120D872A26533A00F08940 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		E2120D892A26540D00F08940 /* ButtonStyle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonStyle+.swift"; sourceTree = "<group>"; };
 		E225D2C12A2F766A0052362D /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		E225D2C42A2F79CD0052362D /* RegisterScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleButtonView.swift; sourceTree = "<group>"; };
 		E225D2C62A2F7A3B0052362D /* SelectedMonthDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMonthDayView.swift; sourceTree = "<group>"; };
 		E225D2C82A2F7AC90052362D /* LoadScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadScheduleView.swift; sourceTree = "<group>"; };
-		E225D2CA2A2F7BF00052362D /* ScheduleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleView.swift; sourceTree = "<group>"; };
 		E225D2CC2A2F7C890052362D /* ScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailView.swift; sourceTree = "<group>"; };
 		E225D2CE2A2F7CF60052362D /* ScheduleTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeView.swift; sourceTree = "<group>"; };
 		E225D2D02A2F7DAD0052362D /* BannerAdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdsView.swift; sourceTree = "<group>"; };
@@ -158,10 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				E2120D872A26533A00F08940 /* BackButtonView.swift */,
-				E225D2C42A2F79CD0052362D /* RegisterScheduleButtonView.swift */,
 				E225D2C62A2F7A3B0052362D /* SelectedMonthDayView.swift */,
 				E225D2C82A2F7AC90052362D /* LoadScheduleView.swift */,
-				E225D2CA2A2F7BF00052362D /* ScheduleTitleView.swift */,
 				E225D2CC2A2F7C890052362D /* ScheduleDetailView.swift */,
 				E225D2CE2A2F7CF60052362D /* ScheduleTimeView.swift */,
 				E225D2D22A2F7E020052362D /* NoticeSettingView.swift */,
@@ -563,9 +557,7 @@
 				E27C8E682A239A5800841268 /* View+.swift in Sources */,
 				E20018822A30DC4B009640F0 /* DaysWeekView.swift in Sources */,
 				E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */,
-				E225D2C52A2F79CD0052362D /* RegisterScheduleButtonView.swift in Sources */,
 				E20CE4212A375F410095C102 /* ConfirmScheduleDetailView.swift in Sources */,
-				E225D2CB2A2F7BF00052362D /* ScheduleTitleView.swift in Sources */,
 				E27C8E442A23949200841268 /* CalendarAppApp.swift in Sources */,
 				E2120D842A264F5C00F08940 /* ScheduleRegisterView.swift in Sources */,
 				E27C8E662A239A4F00841268 /* Route.swift in Sources */,

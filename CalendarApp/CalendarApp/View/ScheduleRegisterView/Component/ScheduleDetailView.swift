@@ -13,13 +13,13 @@ struct ScheduleDetailView: View {
     
     var body: some View {
         VStack {
-            Text("スケジュールの詳細を設定しよう！")
+            Text("スケジュールを登録しよう！")
                 .font(.system(size: 16))
                 .offset(x: 0, y: -70)
             
             HStack {
                 // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
-                Text("詳細タイトル")
+                Text("タイトル")
                     .font(.system(size: 16))
                     .offset(x: 20, y: -40)
                 TextField("例 : 午後の買い物", text: $text)

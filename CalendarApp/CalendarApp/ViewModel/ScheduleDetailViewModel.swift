@@ -39,7 +39,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var timeArray: [String] = []
     
-    private let schemaVersion: UInt64 = 3
+    private let schemaVersion: UInt64 = 5
     
     // DB登録処理(一件のみ新規登録の処理)
     func registerScheduleDetail(completion: @escaping (Bool) -> Void) {

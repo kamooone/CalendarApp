@@ -36,8 +36,8 @@ struct LoadScheduleView: View {
                 Button(action: {
                     
                 }) {
-                    Text("追加")
-                        .frame(width: 50, height: 30)
+                    Text("設定する")
+                        .frame(width: 80, height: 30)
                 }
                 .buttonStyle(NormalButtonStyle.normalButtonStyle())
                 .padding() // ボタンの余白を調整

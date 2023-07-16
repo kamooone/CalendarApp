@@ -15,8 +15,8 @@ struct ConfirmScheduleDetailButtonView: View {
         Button(action: {
             route.path = .ConfirmScheduleDetail
         }) {
-            Text("確認")
-                .frame(width: 50, height: 30)
+            Text("現在の登録状況を確認")
+                .frame(width: 200, height: 30)
         }
         .offset(x:0,y:105)
         .buttonStyle(NormalButtonStyle.normalButtonStyle())

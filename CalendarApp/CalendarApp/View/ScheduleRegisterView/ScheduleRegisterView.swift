@@ -25,24 +25,12 @@ struct ScheduleRegisterView: View {
                         SelectedMonthDayView()
                     }
                     
-                    HStack {
-                        RegisterScheduleButtonView()
-                    }
-                    
                     ZStack {
                         LoadScheduleView()
                     }
                     .frame(width: geometry.size.width, height: 80)
                     .background(Color.lightWhite)
                     .offset(x: 0, y: -100)
-                    
-                    
-                    ZStack {
-                        ScheduleTitleView()
-                    }
-                    .frame(width: geometry.size.width, height: 150)
-                    .background(Color.lightWhite)
-                    .offset(x: 0, y: -90)
     
                     
                     ZStack {
@@ -54,13 +42,17 @@ struct ScheduleRegisterView: View {
                         
                         HStack {
                             Spacer()
-                            ConfirmScheduleDetailButtonView()
-                                .offset(x:-30, y:0)
                             RegisterScheduleDetailButtonView()
-                                .offset(x:30, y:0)
+                                .offset(x:0, y:0)
                             Spacer()
                         }
 
+                        HStack {
+                            Spacer()
+                            ConfirmScheduleDetailButtonView()
+                                .offset(x:0, y:100)
+                            Spacer()
+                        }
                     }
                     .frame(width:geometry.size.width, height:270)
                     .background(Color.lightWhite)
