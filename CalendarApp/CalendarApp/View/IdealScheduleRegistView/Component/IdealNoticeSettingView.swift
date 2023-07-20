@@ -1,13 +1,13 @@
 //
-//  NoticeSettingView.swift
+//  IdealNoticeSettingView.swift
 //  CalendarApp
 //
-//  Created by Kazusa Kondo on 2023/06/06.
+//  Created by Kazusa Kondo on 2023/07/20.
 //
 
 import SwiftUI
 
-struct NoticeSettingView: View {
+struct IdealNoticeSettingView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var isSwitchOn = true
     

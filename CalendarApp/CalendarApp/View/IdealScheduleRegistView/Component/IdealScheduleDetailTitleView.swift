@@ -1,5 +1,5 @@
 //
-//  IdealScheduleTitleView.swift
+//  IdealScheduleDetailTitleView.swift
 //  CalendarApp
 //
 //  Created by Kazusa Kondo on 2023/07/16.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct IdealScheduleTitleView: View {
+struct IdealScheduleDetailTitleView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var text = ""
     
@@ -17,20 +17,23 @@ struct IdealScheduleTitleView: View {
                 Text("※")
                     .foregroundColor(Color.red)
                     .font(.system(size: 16))
-                    .offset(x: 0, y: 20)
-                Text("理想のスケジュールのタイトルを入力しよう！")
+                    .offset(x: 0, y: -70)
+                Text("スケジュールを追加しよう！")
                     .font(.system(size: 16))
-                    .offset(x: 0, y: 20)
+                    .offset(x: 0, y: -70)
             }
             
             HStack {
                 // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
-                TextField("例 : 休日Aの理想スケジュール", text: $text)
+                Text("タイトル")
+                    .font(.system(size: 16))
+                    .offset(x: 20, y: -40)
+                TextField("例 : 午後の買い物", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    .offset(x: 5, y: 0)
+                    .offset(x: 5, y: -40)
                     .onChange(of: text) { newValue in
-                        scheduleDetailViewModel.idealScheduleTitle = newValue
+                        scheduleDetailViewModel.scheduleDetailTitle = newValue
                     }
                 Spacer()
             }

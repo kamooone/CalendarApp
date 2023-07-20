@@ -14,7 +14,7 @@ struct IdealScheduleButtonView: View {
         Button(action: {
             route.path = .IdealScheduleEnterTitle
         }) {
-            Text("理想のスケジュールを作成")
+            Text("理想のスケジュール")
                 .frame(width: 300, height: 30)
         }
         .offset(x: 0, y: -50)

@@ -29,8 +29,7 @@ struct MainView: View {
                 case .Setting:
                     SettingView()
                 case .IdealScheduleEnterTitle:
-                    // ToDo 2023/7/20
-                    IdealScheduleRegistView()
+                    IdealScheduleTitleView()
                 case .IdealSchedule:
                     IdealScheduleRegistView()
                 case .IdealConfirmScheduleDetail:

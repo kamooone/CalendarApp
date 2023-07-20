@@ -1,13 +1,13 @@
 //
-//  ScheduleTimeView.swift
+//  IdealScheduleTimeView.swift
 //  CalendarApp
 //
-//  Created by Kazusa Kondo on 2023/06/06.
+//  Created by Kazusa Kondo on 2023/07/20.
 //
 
 import SwiftUI
 
-struct ScheduleTimeView: View {
+struct IdealScheduleTimeView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var selectedStartTime = 0
     @State private var selectedEndTime = 0

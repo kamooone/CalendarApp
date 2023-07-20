@@ -23,6 +23,8 @@ struct BackButtonView: View {
                 route.path = .Calendar
             } else if route.path == .IdealConfirmScheduleDetail {
                 route.path = .IdealSchedule
+            } else if route.path == .IdealScheduleEnterTitle {
+                route.path = .Calendar
             }
         }) {
             if let image = UIImage(named: "back") {
