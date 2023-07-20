@@ -55,7 +55,7 @@
 		E2B363352A63E20D008C3E20 /* IdealScheduleRegistButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363342A63E20D008C3E20 /* IdealScheduleRegistButtonView.swift */; };
 		E2B363372A63E681008C3E20 /* IdealConfirmScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363362A63E681008C3E20 /* IdealConfirmScheduleDetailButtonView.swift */; };
 		E2B3633A2A63E7C7008C3E20 /* IdealConfirmScheduleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363392A63E7C7008C3E20 /* IdealConfirmScheduleDetailView.swift */; };
-		E2B3633E2A63E9FE008C3E20 /* IdealRegisterScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B3633D2A63E9FE008C3E20 /* IdealRegisterScheduleDetailButtonView.swift */; };
+		E2B3633E2A63E9FE008C3E20 /* IdealAppendScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B3633D2A63E9FE008C3E20 /* IdealAppendScheduleDetailButtonView.swift */; };
 		E2C1BB6D2A691D3A00AB4403 /* IdealScheduleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB6C2A691D3A00AB4403 /* IdealScheduleTitleView.swift */; };
 		E2C1BB6F2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB6E2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift */; };
 		E2C1BB712A69239900AB4403 /* IdealScheduleTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */; };
@@ -116,7 +116,7 @@
 		E2B363342A63E20D008C3E20 /* IdealScheduleRegistButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleRegistButtonView.swift; sourceTree = "<group>"; };
 		E2B363362A63E681008C3E20 /* IdealConfirmScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealConfirmScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2B363392A63E7C7008C3E20 /* IdealConfirmScheduleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealConfirmScheduleDetailView.swift; sourceTree = "<group>"; };
-		E2B3633D2A63E9FE008C3E20 /* IdealRegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealRegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
+		E2B3633D2A63E9FE008C3E20 /* IdealAppendScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealAppendScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2C1BB6C2A691D3A00AB4403 /* IdealScheduleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleTitleView.swift; sourceTree = "<group>"; };
 		E2C1BB6E2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealRegistScheduleTitleView.swift; sourceTree = "<group>"; };
 		E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleTimeView.swift; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B363322A63E0AD008C3E20 /* IdealScheduleDetailTitleView.swift */,
-				E2B3633D2A63E9FE008C3E20 /* IdealRegisterScheduleDetailButtonView.swift */,
+				E2B3633D2A63E9FE008C3E20 /* IdealAppendScheduleDetailButtonView.swift */,
 				E2B363362A63E681008C3E20 /* IdealConfirmScheduleDetailButtonView.swift */,
 				E2B363342A63E20D008C3E20 /* IdealScheduleRegistButtonView.swift */,
 				E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */,
@@ -622,7 +622,7 @@
 				E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */,
 				E2B363252A63B2A3008C3E20 /* MiniGameButtonView.swift in Sources */,
 				E2B363352A63E20D008C3E20 /* IdealScheduleRegistButtonView.swift in Sources */,
-				E2B3633E2A63E9FE008C3E20 /* IdealRegisterScheduleDetailButtonView.swift in Sources */,
+				E2B3633E2A63E9FE008C3E20 /* IdealAppendScheduleDetailButtonView.swift in Sources */,
 				E2B363372A63E681008C3E20 /* IdealConfirmScheduleDetailButtonView.swift in Sources */,
 				E20018802A30D3D1009640F0 /* YearMonthView.swift in Sources */,
 				E27C8E462A23949200841268 /* MainView.swift in Sources */,

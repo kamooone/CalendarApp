@@ -41,7 +41,7 @@ struct IdealScheduleTimeView: View {
                 .pickerStyle(MenuPickerStyle())
                 .offset(x:0,y:140)
                 .onChange(of: selectedStartTime) { newValue in
-                    scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[newValue]
+                    scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[newValue]
                 }
                 
                 Text("〜　")
@@ -60,7 +60,7 @@ struct IdealScheduleTimeView: View {
                 .pickerStyle(MenuPickerStyle())
                 .offset(x:0,y:140)
                 .onChange(of: selectedEndTime) { newValue in
-                    scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]
+                    scheduleDetailViewModel.idealEndTime = scheduleDetailViewModel.timeArray[newValue]
                 }
                 
                 Spacer()

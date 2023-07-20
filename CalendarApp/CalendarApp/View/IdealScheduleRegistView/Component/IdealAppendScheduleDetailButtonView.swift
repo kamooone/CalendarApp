@@ -1,5 +1,5 @@
 //
-//  IdealRegisterScheduleDetailButtonView.swift
+//  IdealAppendScheduleDetailButtonView.swift
 //  CalendarApp
 //
 //  Created by Kazusa Kondo on 2023/07/16.
@@ -8,7 +8,7 @@
 import SwiftUI
 import RealmSwift
 
-struct IdealRegisterScheduleDetailButtonView: View {
+struct IdealAppendScheduleDetailButtonView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var showAlert = false
     @State private var alertMessage = ""
@@ -29,7 +29,6 @@ struct IdealRegisterScheduleDetailButtonView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text(alertMessage),
-                message: Text(alertMessage),
                 dismissButton: .default(Text("OK"))
             )
         }
@@ -42,7 +41,7 @@ struct IdealRegisterScheduleDetailButtonView: View {
         scheduleDetailViewModel.idealEndTimeArray.append(scheduleDetailViewModel.idealEndTime)
         scheduleDetailViewModel.idealIsNoticeArray.append(scheduleDetailViewModel.idealIsNotice)
         
-        alertMessage = "登録が成功しました"
+        alertMessage = "追加しました"
         showAlert = true
     }
 }

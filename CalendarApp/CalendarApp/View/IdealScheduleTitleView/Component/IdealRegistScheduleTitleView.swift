@@ -16,7 +16,7 @@ struct IdealRegistScheduleTitleView: View {
         VStack {
             Spacer()
             HStack {
-                Text("理想のスケジュールタイトルを入力しよう")
+                Text("理想のスケジュールのタイトルを入力しよう")
                     .font(.system(size: 16))
                     .offset(x: 0, y: 20)
             }

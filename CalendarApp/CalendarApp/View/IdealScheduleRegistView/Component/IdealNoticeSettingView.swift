@@ -17,7 +17,7 @@ struct IdealNoticeSettingView: View {
                 .offset(x:0,y:60)
                 .padding(.horizontal, 100)
                 .onChange(of: isSwitchOn) { newValue in
-                    scheduleDetailViewModel.isNotice = newValue
+                    scheduleDetailViewModel.idealIsNotice = newValue
                 }
         }
     }

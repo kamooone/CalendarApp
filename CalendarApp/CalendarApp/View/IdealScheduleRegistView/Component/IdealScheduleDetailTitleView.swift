@@ -33,7 +33,7 @@ struct IdealScheduleDetailTitleView: View {
                     .padding()
                     .offset(x: 5, y: -40)
                     .onChange(of: text) { newValue in
-                        scheduleDetailViewModel.scheduleDetailTitle = newValue
+                        scheduleDetailViewModel.idealScheduleDetailTitle = newValue
                     }
                 Spacer()
             }
