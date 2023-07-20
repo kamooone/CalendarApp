@@ -22,12 +22,14 @@ struct IdealScheduleRegistView: View {
                     HeaderView(_headerTitle: headerTitle)
                 }
                 VStack {
-                    ZStack {
-                        IdealScheduleTitleView()
-                    }
-                    .frame(width: geometry.size.width, height: 80)
-                    .background(Color.lightWhite)
-                    .offset(x: 0, y: -50)
+                    
+                    // 別の画面に分けて入力させる
+//                    ZStack {
+//                        IdealScheduleTitleView()
+//                    }
+//                    .frame(width: geometry.size.width, height: 80)
+//                    .background(Color.lightWhite)
+//                    .offset(x: 0, y: -50)
                     
                     ZStack {
                         ScheduleDetailView()

@@ -1,5 +1,5 @@
 //
-//  TestRealm.swift
+//  ScheduleDetailData.swift
 //  CalendarApp
 //
 //  Created by Kazusa Kondo on 2023/06/15.
@@ -17,9 +17,14 @@ class ScheduleDetailData: Object {
     @Persisted var isNotice = true
 }
 
-class IdealScheduleDetailData: Object {
+class IdealScheduleData: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var scheduleTitle = ""
+    @Persisted var scheduleDetails = List<IdealScheduleDetailData>()
+}
+
+// スケジュール詳細を保持するための新しいクラスを作成します。
+class IdealScheduleDetailData: Object {
     @Persisted var scheduleDetailTitle = ""
     @Persisted var startTime = ""
     @Persisted var endTime = ""

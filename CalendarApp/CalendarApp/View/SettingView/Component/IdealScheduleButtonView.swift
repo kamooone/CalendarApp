@@ -12,7 +12,7 @@ struct IdealScheduleButtonView: View {
     
     var body: some View  {
         Button(action: {
-            route.path = .IdealSchedule
+            route.path = .IdealScheduleEnterTitle
         }) {
             Text("理想のスケジュールを作成")
                 .frame(width: 300, height: 30)

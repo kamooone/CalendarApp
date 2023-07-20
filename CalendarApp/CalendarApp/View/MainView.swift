@@ -28,6 +28,9 @@ struct MainView: View {
                     ConfirmScheduleDetailView()
                 case .Setting:
                     SettingView()
+                case .IdealScheduleEnterTitle:
+                    // ToDo 2023/7/20
+                    IdealScheduleRegistView()
                 case .IdealSchedule:
                     IdealScheduleRegistView()
                 case .IdealConfirmScheduleDetail:

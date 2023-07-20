@@ -37,9 +37,21 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var scheduleDetailMonthList: [String] = []
     
+    
+    var idealScheduleTitle = ""
+    var idealScheduleDetailTitle = ""
+    var idealStartTime = "00:00"
+    var idealEndTime = "00:00"
+    var idealIsNotice = true
+    
+    var idealScheduleDetailTitleArray: [String] = []
+    var idealStartTimeArray: [String] = []
+    var idealEndTimeArray: [String] = []
+    var idealIsNoticeArray: [Bool] = []
+    
     var timeArray: [String] = []
     
-    private let schemaVersion: UInt64 = 5
+    private let schemaVersion: UInt64 = 6
     
     // DB登録処理(一件のみ新規登録の処理)
     func registerScheduleDetail(completion: @escaping (Bool) -> Void) {
@@ -325,5 +337,53 @@ final class ScheduleDetailViewModel: ObservableObject {
             return calendar.component(.day, from: date)
         }
         return nil
+    }
+    
+    // 理想のスケジュールDB登録処理
+    func registerIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        // スキーマの設定
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
+        let scheduleDetailData = IdealScheduleData()
+        scheduleDetailData.scheduleTitle = self.idealScheduleTitle
+        
+        
+        let idealScheduleDetailData1 = IdealScheduleDetailData()
+        idealScheduleDetailData1.scheduleDetailTitle = "詳細1"
+        idealScheduleDetailData1.startTime = "10:00"
+        idealScheduleDetailData1.endTime = "12:00"
+        idealScheduleDetailData1.isNotice = true
+
+        let idealScheduleDetailData2 = IdealScheduleDetailData()
+        idealScheduleDetailData2.scheduleDetailTitle = "詳細2"
+        idealScheduleDetailData2.startTime = "14:00"
+        idealScheduleDetailData2.endTime = "16:00"
+        idealScheduleDetailData2.isNotice = false
+        
+        scheduleDetailData.scheduleDetails.append(objectsIn: [idealScheduleDetailData1, idealScheduleDetailData2])
+        
+        do {
+            let realm = try Realm(configuration: config)
+            try realm.write {
+                realm.add(scheduleDetailData)
+                
+                //================================================================
+                // 登録処理デバッグ
+                //================================================================
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
+                print("scheduleDetailData",scheduleDetailData)
+                print("idealScheduleDetailData1",idealScheduleDetailData1)
+                
+                
+                // 非同期処理が成功したことを示す
+                completion(true)
+            }
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            // 非同期処理失敗
+            completion(false)
+        }
     }
 }
