@@ -29,7 +29,14 @@ struct IdealScheduleTitleView: View {
                     .background(Color.lightWhite)
                     .offset(x: 0, y: -50)
                 }
-                // ToDo 過去に登録したスケジュールの編集と削除もできるようにする。
+                VStack {
+                    ZStack {
+                        IdealRegisteredScheduleTitleView()
+                            .frame(width: geometry.size.width, height: 180)
+                            .background(Color.lightWhite)
+                            .offset(x: 0, y: -20)
+                    }
+                }
                 
                 BannerAdsView()
                     .frame(width: geometry.size.width, height: 80)

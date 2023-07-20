@@ -60,6 +60,7 @@
 		E2C1BB6F2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB6E2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift */; };
 		E2C1BB712A69239900AB4403 /* IdealScheduleTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */; };
 		E2C1BB732A6923D600AB4403 /* IdealNoticeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB722A6923D600AB4403 /* IdealNoticeSettingView.swift */; };
+		E2C1BB752A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB742A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift */; };
 		E2FB60ED2A3B4CD3003D89C8 /* ScheduleDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +121,7 @@
 		E2C1BB6E2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealRegistScheduleTitleView.swift; sourceTree = "<group>"; };
 		E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleTimeView.swift; sourceTree = "<group>"; };
 		E2C1BB722A6923D600AB4403 /* IdealNoticeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealNoticeSettingView.swift; sourceTree = "<group>"; };
+		E2C1BB742A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealRegisteredScheduleTitleView.swift; sourceTree = "<group>"; };
 		E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -467,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				E2C1BB6E2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift */,
+				E2C1BB742A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				E2B3633A2A63E7C7008C3E20 /* IdealConfirmScheduleDetailView.swift in Sources */,
 				E2C1BB6D2A691D3A00AB4403 /* IdealScheduleTitleView.swift in Sources */,
 				E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */,
+				E2C1BB752A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift in Sources */,
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
 				E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */,
 				E2B363252A63B2A3008C3E20 /* MiniGameButtonView.swift in Sources */,

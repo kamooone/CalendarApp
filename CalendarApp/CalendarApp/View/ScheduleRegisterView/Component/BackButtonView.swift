@@ -20,11 +20,11 @@ struct BackButtonView: View {
             } else if route.path == .Setting {
                 route.path = .Calendar
             } else if route.path == .IdealSchedule {
-                route.path = .Calendar
+                route.path = .IdealScheduleEnterTitle
             } else if route.path == .IdealConfirmScheduleDetail {
                 route.path = .IdealSchedule
             } else if route.path == .IdealScheduleEnterTitle {
-                route.path = .Calendar
+                route.path = .Setting
             }
         }) {
             if let image = UIImage(named: "back") {

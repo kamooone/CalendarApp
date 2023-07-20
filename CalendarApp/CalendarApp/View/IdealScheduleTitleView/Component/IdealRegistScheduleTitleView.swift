@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IdealRegistScheduleTitleView: View {
+    @EnvironmentObject var route: RouteObserver
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var text = ""
     
@@ -17,7 +18,7 @@ struct IdealRegistScheduleTitleView: View {
             HStack {
                 Text("理想のスケジュールタイトルを入力しよう")
                     .font(.system(size: 16))
-                    .offset(x: 0, y: 40)
+                    .offset(x: 0, y: 20)
             }
             
             HStack {
@@ -33,6 +34,7 @@ struct IdealRegistScheduleTitleView: View {
             
             HStack {
                 Button(action: {
+                    route.path = .IdealSchedule
                 }) {
                     Text("次へ")
                         .frame(width: 50, height: 30)
