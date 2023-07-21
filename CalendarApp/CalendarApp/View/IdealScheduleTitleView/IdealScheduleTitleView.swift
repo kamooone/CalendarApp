@@ -37,13 +37,12 @@ struct IdealScheduleTitleView: View {
                             .offset(x: 0, y: -20)
                     }
                 }
-                
-                BannerAdsView()
-                    .frame(width: geometry.size.width, height: 80)
-                    .background(Color.yellow)
-                    .offset(x: 0, y: 0)
-                
-                Spacer()
+                VStack {
+                    BannerAdsView()
+                        .frame(width: geometry.size.width, height: 80)
+                        .background(Color.yellow)
+                        .offset(x: 0, y: 150)
+                }
             }
         }
     }

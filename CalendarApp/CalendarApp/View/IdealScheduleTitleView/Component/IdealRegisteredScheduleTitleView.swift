@@ -56,19 +56,56 @@ struct IdealRegisteredScheduleTitleView: View {
     }
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("登録済みの理想のスケジュール")
-                    .font(.system(size: 16))
+        GeometryReader { geometry in
+            VStack {
+                if isRequestSuccessful {
+                    HStack {
+                        Text("登録済みの理想のスケジュール")
+                            .font(.system(size: 16))
+                            .offset(x: 0, y: 20)
+                    }
+                    
+                    ScrollView {
+                        VStack(spacing: 10) {
+                            Spacer().frame(height: 10)
+                            ForEach(0..<scheduleDetailViewModel.idealScheduleTitleArray.count, id: \.self) { index in
+                                VStack {
+                                    IdealScheduleTitle(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                }
+                                .frame(width: geometry.size.width - 40, height: 60)
+                                .background(Color.lemonchiffon)
+                                .cornerRadius(10)
+                                .padding(.horizontal, 20)
+                            }
+                            Spacer().frame(height: 10)
+                        }
+                    }
+                    .frame(width: geometry.size.width, height: 270)
+                    .background(Color.lightWhite)
                     .offset(x: 0, y: 20)
+                }
             }
-            
-            // ToDo 過去に登録したスケジュールをfor文で表示させて、さらにそれぞれ編集と削除もできるようにする。
-            
-            Spacer()
         }
         .onAppear {
             bindViewModel()
+        }
+    }
+}
+
+
+struct IdealScheduleTitle: View {
+    var scheduleDetailViewModel: ScheduleDetailViewModel
+    var index: Int
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Text(scheduleDetailViewModel.idealScheduleTitleArray[index])
+                Spacer()
+                // ToDo 編集ボタン
+                DeleteIdealScheduleButtonView(_titleStr: scheduleDetailViewModel.idealScheduleTitleArray[index])
+            }
         }
     }
 }

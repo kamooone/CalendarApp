@@ -409,4 +409,23 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
+    // DB削除処理(登録済みの理想のスケジュールを削除)
+    func DeleteIdealSchedule(_titleStr: String, completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+
+        do {
+            let realm = try Realm(configuration: config)
+            try realm.write {
+                let predicate = NSPredicate(format: "scheduleTitle == %@", _titleStr)
+                let scheduleDetailData = realm.objects(IdealScheduleData.self).filter(predicate)
+                realm.delete(scheduleDetailData)
+
+                completion(true)
+            }
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            completion(false)
+        }
+    }
+    
 }
