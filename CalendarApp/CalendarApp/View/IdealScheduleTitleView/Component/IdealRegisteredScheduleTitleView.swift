@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct IdealRegisteredScheduleTitleView: View {
-    @EnvironmentObject var route: RouteObserver
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var text = ""
     
@@ -103,7 +102,7 @@ struct IdealScheduleTitle: View {
                 Spacer()
                 Text(scheduleDetailViewModel.idealScheduleTitleArray[index])
                 Spacer()
-                // ToDo 編集ボタン
+                EditIdealScheduleButtonView(_titleStr: scheduleDetailViewModel.idealScheduleTitleArray[index])
                 DeleteIdealScheduleButtonView(_titleStr: scheduleDetailViewModel.idealScheduleTitleArray[index])
             }
         }

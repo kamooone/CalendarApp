@@ -28,6 +28,7 @@
 		E24F7B832A41EA58002F12C7 /* ScheduleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */; };
 		E2661EDD2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EDC2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift */; };
 		E2661EDF2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EDE2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift */; };
+		E2661EE12A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EE02A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift */; };
 		E27477382A5AAA0B0054317D /* DeleteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27477372A5AAA0B0054317D /* DeleteButtonView.swift */; };
 		E27C8E442A23949200841268 /* CalendarAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E432A23949200841268 /* CalendarAppApp.swift */; };
 		E27C8E462A23949200841268 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E452A23949200841268 /* MainView.swift */; };
@@ -90,6 +91,7 @@
 		E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewModel.swift; sourceTree = "<group>"; };
 		E2661EDC2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIdealScheduleTitle.swift; sourceTree = "<group>"; };
 		E2661EDE2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteIdealScheduleButtonView.swift; sourceTree = "<group>"; };
+		E2661EE02A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIdealScheduleButtonView.swift; sourceTree = "<group>"; };
 		E27477372A5AAA0B0054317D /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
 		E27C8E402A23949200841268 /* CalendarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27C8E432A23949200841268 /* CalendarAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAppApp.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				E2C1BB6E2A6921E100AB4403 /* IdealRegistScheduleTitleView.swift */,
 				E2C1BB742A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift */,
 				E2661EDE2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift */,
+				E2661EE02A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				E2120D882A26533A00F08940 /* BackButtonView.swift in Sources */,
 				E2B363212A639420008C3E20 /* SettingView.swift in Sources */,
 				E27477382A5AAA0B0054317D /* DeleteButtonView.swift in Sources */,
+				E2661EE12A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift in Sources */,
 				E2C1BB712A69239900AB4403 /* IdealScheduleTimeView.swift in Sources */,
 				E2FB60ED2A3B4CD3003D89C8 /* ScheduleDetailData.swift in Sources */,
 				E2B363272A63B2F6008C3E20 /* LanguageSwitchButtonView.swift in Sources */,

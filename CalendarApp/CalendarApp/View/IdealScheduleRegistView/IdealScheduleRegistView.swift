@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct IdealScheduleRegistView: View {
-    let headerTitle: String = "理想のスケジュールを作成"
+    let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+    let headerTitle: String = "のスケジュール"
     
     // ToDo 2023/7/16 理想のスケジュール保存処理
     var body: some View {
@@ -19,7 +20,7 @@ struct IdealScheduleRegistView: View {
                     BackButtonView()
                 }
                 HStack {
-                    HeaderView(_headerTitle: headerTitle)
+                    HeaderView(_headerTitle: scheduleDetailViewModel.idealScheduleTitle + headerTitle)
                 }
                 VStack {
                     ZStack {
