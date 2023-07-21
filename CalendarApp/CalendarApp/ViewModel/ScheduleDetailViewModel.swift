@@ -43,7 +43,8 @@ final class ScheduleDetailViewModel: ObservableObject {
     var idealStartTime = "00:00"
     var idealEndTime = "00:00"
     var idealIsNotice = true
-    
+
+    var idealScheduleTitleArray: [String] = []
     var idealScheduleDetailTitleArray: [String] = []
     var idealStartTimeArray: [String] = []
     var idealEndTimeArray: [String] = []
@@ -379,4 +380,33 @@ final class ScheduleDetailViewModel: ObservableObject {
             completion(false)
         }
     }
+    
+    
+    // 登録済みの理想のスケジュールのタイトルのみを取得する
+    func getIdealScheduleTitle(completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
+        // DB取得の前にパース用の配列を初期化(この中にRealmから取得したタイトルの文字列を格納する)
+        idealScheduleTitleArray = []
+        
+        do {
+            let realm = try Realm(configuration: config)
+            
+            // 保存されている理想のスケジュールのタイトルのみを全て取得する
+            let results = realm.objects(IdealScheduleData.self).distinct(by: ["scheduleTitle"])
+            idealScheduleTitleArray = Array(results.map { $0.scheduleTitle })
+            
+            print("idealScheduleTitleArrayの値確認")
+            print(idealScheduleTitleArray)
+            
+            // 非同期処理が成功したことを示す
+            completion(true)
+        } catch {
+            print("Realmの読み込みエラー：\(error)")
+            
+            // 非同期処理失敗
+            completion(false)
+        }
+    }
+    
 }
