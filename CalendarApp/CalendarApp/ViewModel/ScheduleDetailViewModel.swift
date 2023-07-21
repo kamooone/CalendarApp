@@ -341,28 +341,22 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     // 理想のスケジュールDB登録処理
     func registerIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
-        // スキーマの設定
+        let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
         
         let scheduleDetailData = IdealScheduleData()
         scheduleDetailData.scheduleTitle = self.idealScheduleTitle
         
-        
-        let idealScheduleDetailData1 = IdealScheduleDetailData()
-        idealScheduleDetailData1.scheduleDetailTitle = "詳細1"
-        idealScheduleDetailData1.startTime = "10:00"
-        idealScheduleDetailData1.endTime = "12:00"
-        idealScheduleDetailData1.isNotice = true
+        for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
+            let idealScheduleDetailData = IdealScheduleDetailData()
+            idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitleArray[i]
+            idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTimeArray[i]
+            idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTimeArray[i]
+            idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNoticeArray[i]
 
-        let idealScheduleDetailData2 = IdealScheduleDetailData()
-        idealScheduleDetailData2.scheduleDetailTitle = "詳細2"
-        idealScheduleDetailData2.startTime = "14:00"
-        idealScheduleDetailData2.endTime = "16:00"
-        idealScheduleDetailData2.isNotice = false
-        
-        scheduleDetailData.scheduleDetails.append(objectsIn: [idealScheduleDetailData1, idealScheduleDetailData2])
+            scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
+        }
         
         do {
             let realm = try Realm(configuration: config)
@@ -374,7 +368,6 @@ final class ScheduleDetailViewModel: ObservableObject {
                 //================================================================
                 print(Realm.Configuration.defaultConfiguration.fileURL!)
                 print("scheduleDetailData",scheduleDetailData)
-                print("idealScheduleDetailData1",idealScheduleDetailData1)
                 
                 
                 // 非同期処理が成功したことを示す

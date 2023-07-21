@@ -25,6 +25,7 @@ struct IdealConfirmScheduleDetailView: View {
         showAlert = false
         alertMessage = ""
         
+        // ToDo 編集処理とDBから取得処理
 //        let group = DispatchGroup()
 //        group.enter()
 //
