@@ -38,7 +38,6 @@ struct IdealScheduleRegistView: View {
 
                         HStack {
                             Spacer()
-                            // ToDo 2023/7/20 詳細スケジュール確認画面
                             IdealConfirmScheduleDetailButtonView()
                                 .offset(x:0, y:100)
                             Spacer()
