@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IdealRegisteredScheduleTitleView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+    @EnvironmentObject var setting: Setting
     @State private var text = ""
     
     // ToDo この@Stateの値はConfirmScheduleDetailViewModelを作成してそこで管理する
@@ -88,6 +89,12 @@ struct IdealRegisteredScheduleTitleView: View {
         }
         .onAppear {
             bindViewModel()
+        }
+        .onChange(of: setting.isReload) { isReload in
+            if isReload {
+                bindViewModel()
+                setting.isReload = false
+            }
         }
     }
 }
