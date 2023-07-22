@@ -53,7 +53,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var timeArray: [String] = []
     
-    private let schemaVersion: UInt64 = 6
+    private let schemaVersion: UInt64 = 8
     
     // DB登録処理(一件のみ新規登録の処理)
     func registerScheduleDetail(completion: @escaping (Bool) -> Void) {
@@ -493,6 +493,12 @@ final class ScheduleDetailViewModel: ObservableObject {
             print(idealStartTimeArray)
             print(idealEndTimeArray)
             print(idealIsNoticeArray)
+            
+            // 編集画面で更新用にバックアップを取っておく
+            updScheduleDetailTitleArray = idealScheduleDetailTitleArray
+            updStartTimeArray = idealStartTimeArray
+            updEndTimeArray = idealEndTimeArray
+            updIsNoticeArray = idealIsNoticeArray
             
             // 非同期処理が成功したことを示す
             completion(true)

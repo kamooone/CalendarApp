@@ -11,7 +11,6 @@ struct IdealScheduleRegistView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     let headerTitle: String = "のスケジュール"
     
-    // ToDo 2023/7/16 理想のスケジュール保存処理
     var body: some View {
         Color.lightGray.edgesIgnoringSafeArea(.all)
         GeometryReader { geometry in

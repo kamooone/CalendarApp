@@ -19,44 +19,6 @@ struct IdealConfirmScheduleDetailView: View {
     @State private var alertMessage = ""
     let headerTitle: String = "理想のスケジュール確認"
     
-    func bindViewModel() {
-        isRequestSuccessful = false
-        isEditMode = false
-        showAlert = false
-        alertMessage = ""
-        
-        // ToDo 編集処理とDBから取得処理
-//        let group = DispatchGroup()
-//        group.enter()
-//
-//        DispatchQueue(label: "realm").async {
-//            scheduleDetailViewModel.getScheduleDetail { success in
-//                group.leave()
-//
-//                if success {
-//                    print("非同期処理成功")
-//                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
-//                    DispatchQueue.main.async {
-//                        isRequestSuccessful = true
-//                    }
-//                } else {
-//                    print("非同期処理失敗")
-//                    // ToDo 取得失敗エラーアラート表示
-//                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
-//                    DispatchQueue.main.async {
-//                        isRequestSuccessful = false
-//                    }
-//                }
-//            }
-//        }
-//
-//        // 成功失敗に関わらず呼ばれる
-//        group.notify(queue: .main) {
-//            // ToDo 失敗エラーアラート表示
-//            print("非同期処理終了")
-//        }
-    }
-    
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -70,7 +32,6 @@ struct IdealConfirmScheduleDetailView: View {
                 }
                 
                 HStack {
-                    // ToDo 前の画面で入力したタイトルの表示に差し替える
                     SelectIdealScheduleTitle()
                 }
                 
@@ -84,50 +45,47 @@ struct IdealConfirmScheduleDetailView: View {
                     }
                 }
                 
-                // 非同期処理が完了後にスケジュール詳細登録状況を表示させる
-                //if isRequestSuccessful {
-                    // ToDo 見栄えが悪いので処理を関数にする
-//                    if isEditMode {
-//                        ScrollView {
-//                            VStack(spacing: 20) {
-//                                Spacer().frame(height: 20)
-//                                ForEach(0..<scheduleDetailViewModel.scheduleDetailTitleArray.count, id: \.self) { index in
-//                                    VStack {
-//                                        IdealScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
-//                                    }
-//                                    .frame(width: geometry.size.width - 40, height: 220)
-//                                    .background(Color.lemonchiffon)
-//                                    .cornerRadius(10)
-//                                    .padding(.horizontal, 20)
-//                                }
-//                                Spacer().frame(height: 20)
-//                            }
-//                        }
-//                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-//                        .background(Color.lightGray)
-//                        .offset(x: 0, y: -100)
-//                    } else {
-                        // ToDo 見栄えが悪いので処理を関数にする
-                        ScrollView {
-                            VStack(spacing: 20) {
-                                Spacer().frame(height: 20)
-                                ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
-                                    VStack {
-                                        IdealSchedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
-                                    }
-                                    .frame(width: geometry.size.width - 40, height: 100)
-                                    .background(Color.lemonchiffon)
-                                    .cornerRadius(10)
-                                    .padding(.horizontal, 20)
+                // ToDo 見栄えが悪いので処理を関数にする
+                if isEditMode {
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            Spacer().frame(height: 20)
+                            ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
+                                VStack {
+                                    IdealScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                 }
-                                Spacer().frame(height: 20)
+                                .frame(width: geometry.size.width - 40, height: 220)
+                                .background(Color.lemonchiffon)
+                                .cornerRadius(10)
+                                .padding(.horizontal, 20)
                             }
+                            Spacer().frame(height: 20)
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
-                        .background(Color.lightGray)
-                        .offset(x: 0, y: -100)
-                    //}
-                //}
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                    .background(Color.lightGray)
+                    .offset(x: 0, y: -100)
+                } else {
+                    // ToDo 見栄えが悪いので処理を関数にする
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            Spacer().frame(height: 20)
+                            ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
+                                VStack {
+                                    IdealSchedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                }
+                                .frame(width: geometry.size.width - 40, height: 100)
+                                .background(Color.lemonchiffon)
+                                .cornerRadius(10)
+                                .padding(.horizontal, 20)
+                            }
+                            Spacer().frame(height: 20)
+                        }
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                    .background(Color.lightGray)
+                    .offset(x: 0, y: -100)
+                }
                 
                 BannerAdsView()
                     .frame(width: geometry.size.width, height: 80)
@@ -135,15 +93,6 @@ struct IdealConfirmScheduleDetailView: View {
                     .offset(x: 0, y: -70)
                 
                 Spacer()
-            }
-        }
-        .onAppear {
-            bindViewModel()
-        }
-        .onChange(of: setting.isReload) { isReload in
-            if isReload {
-                bindViewModel()
-                setting.isReload = false
             }
         }
     }
@@ -204,7 +153,7 @@ struct IdealScheduleEdit: View {
                         .padding()
                         .onChange(of: textFieldValue) { newTitleDetail in
                             // 表示用
-                            scheduleDetailViewModel.scheduleDetailTitle = newTitleDetail
+                            scheduleDetailViewModel.idealScheduleDetailTitle = newTitleDetail
                             // 更新用にバックアップ
                             scheduleDetailViewModel.updScheduleDetailTitleArray[index] = newTitleDetail
                         }
@@ -224,7 +173,7 @@ struct IdealScheduleEdit: View {
                     .offset(x:0,y:0)
                     .onChange(of: selectedStartTime) { timeIndex in
                         // 表示用
-                        scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[timeIndex]
                         // 更新用にバックアップ
                         scheduleDetailViewModel.updStartTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                     }
@@ -244,7 +193,7 @@ struct IdealScheduleEdit: View {
                     .offset(x:0,y:0)
                     .onChange(of: selectedEndTime) { timeIndex in
                         // 表示用
-                        scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        scheduleDetailViewModel.idealEndTime = scheduleDetailViewModel.timeArray[timeIndex]
                         // 更新用にバックアップ
                         scheduleDetailViewModel.updEndTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                     }
@@ -256,27 +205,27 @@ struct IdealScheduleEdit: View {
                         .padding(.horizontal, 100)
                         .onChange(of: isSwitchOn) { newIsNotice in
                             // 表示用
-                            scheduleDetailViewModel.isNotice = newIsNotice
+                            scheduleDetailViewModel.idealIsNotice = newIsNotice
                             // 更新用にバックアップ
                             scheduleDetailViewModel.updIsNoticeArray[index] = newIsNotice
                         }
                 }
                 
                 HStack {
-                    DeleteButtonView(_id: String(describing: scheduleDetailViewModel.uniqueIdArray[index]))
+                    DeleteIdealDetailScheduleButtonView(_id: index)
                 }
             }
             .onAppear {
-                textFieldValue = scheduleDetailViewModel.scheduleDetailTitleArray[index]
+                textFieldValue = scheduleDetailViewModel.idealScheduleDetailTitleArray[index]
                 
-                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.startTimeArray[index]) {
+                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.idealStartTimeArray[index]) {
                     selectedStartTime = selectedIndex
                 }
-                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.endTimeArray[index]) {
+                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.idealEndTimeArray[index]) {
                     selectedEndTime = selectedIndex
                 }
                 
-                isSwitchOn = scheduleDetailViewModel.isNoticeArray[index]
+                isSwitchOn = scheduleDetailViewModel.idealIsNoticeArray[index]
             }
         }
     }

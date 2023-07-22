@@ -41,6 +41,12 @@ struct IdealAppendScheduleDetailButtonView: View {
         scheduleDetailViewModel.idealEndTimeArray.append(scheduleDetailViewModel.idealEndTime)
         scheduleDetailViewModel.idealIsNoticeArray.append(scheduleDetailViewModel.idealIsNotice)
         
+        // 編集画面で更新用にバックアップを取っておく
+        scheduleDetailViewModel.updScheduleDetailTitleArray.append(scheduleDetailViewModel.idealScheduleDetailTitle)
+        scheduleDetailViewModel.updStartTimeArray.append(scheduleDetailViewModel.idealStartTime)
+        scheduleDetailViewModel.updEndTimeArray.append(scheduleDetailViewModel.idealEndTime)
+        scheduleDetailViewModel.updIsNoticeArray.append(scheduleDetailViewModel.idealIsNotice)
+        
         alertMessage = "追加しました"
         showAlert = true
     }
