@@ -409,6 +409,53 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
+    // 登録済みの理想のスケジュールの詳細スケジュールを取得する
+    func getIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
+        // DB取得の前にパース用の配列を初期化
+        idealScheduleDetailTitleArray = []
+        idealStartTimeArray = []
+        idealEndTimeArray = []
+        idealIsNoticeArray = []
+        
+        do {
+            let realm = try Realm(configuration: config)
+            
+            // "理想のスケA"という値が入ったレコードを取得
+            let results = realm.objects(IdealScheduleData.self).filter("scheduleTitle == %@", self.idealScheduleTitle)
+            guard let idealScheduleA = results.first else {
+                print("該当するレコードが見つかりませんでした")
+                // 非同期処理失敗
+                completion(false)
+                return
+            }
+            
+            // idealScheduleAのscheduleDetailsのカラムの値を取得
+            let scheduleDetails = idealScheduleA.scheduleDetails
+            
+            // scheduleDetailsをidealScheduleDetailTitleArrayに代入
+            idealScheduleDetailTitleArray = Array(scheduleDetails.map { $0.scheduleDetailTitle })
+            idealStartTimeArray = Array(scheduleDetails.map { $0.startTime })
+            idealEndTimeArray = Array(scheduleDetails.map { $0.endTime })
+            idealIsNoticeArray = Array(scheduleDetails.map { $0.isNotice })
+            
+            print("idealScheduleDetailTitleArrayの値確認")
+            print(idealScheduleDetailTitleArray)
+            print(idealStartTimeArray)
+            print(idealEndTimeArray)
+            print(idealIsNoticeArray)
+            
+            // 非同期処理が成功したことを示す
+            completion(true)
+        } catch {
+            print("Realmの読み込みエラー：\(error)")
+            // 非同期処理失敗
+            completion(false)
+        }
+    }
+
+    
     // DB削除処理(登録済みの理想のスケジュールを削除)
     func DeleteIdealSchedule(_titleStr: String, completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
