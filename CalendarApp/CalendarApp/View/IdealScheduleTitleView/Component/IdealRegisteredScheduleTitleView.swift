@@ -22,6 +22,7 @@ struct IdealRegisteredScheduleTitleView: View {
         isEditMode = false
         showAlert = false
         alertMessage = ""
+        scheduleDetailViewModel.isIdealScheduleUpdate = false
         
         let group = DispatchGroup()
         group.enter()

@@ -37,6 +37,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var scheduleDetailMonthList: [String] = []
     
+    var isIdealScheduleUpdate: Bool = false
     
     var idealScheduleTitle = ""
     var idealScheduleDetailTitle = ""
@@ -381,7 +382,54 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
-    
+    // 登録済みの理想のスケジュールDB更新処理
+    func updateIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
+        let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+
+        do {
+            let realm = try Realm(configuration: config)
+            
+            // 更新対象のレコードを取得
+            guard let scheduleDetailData = realm.objects(IdealScheduleData.self).filter("scheduleTitle == %@", self.idealScheduleTitle).first else {
+                print("更新対象のレコードが見つかりません")
+                // 非同期処理失敗
+                completion(false)
+                return
+            }
+
+            // レコードのプロパティを更新
+            try realm.write {
+                // 既存のスケジュール詳細を削除
+                scheduleDetailData.scheduleDetails.removeAll()
+                
+                // 新しいスケジュール詳細を追加
+                for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
+                    let idealScheduleDetailData = IdealScheduleDetailData()
+                    idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitleArray[i]
+                    idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTimeArray[i]
+                    idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTimeArray[i]
+                    idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNoticeArray[i]
+
+                    scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
+                }
+            }
+            
+            //================================================================
+            // 更新処理デバッグ
+            //================================================================
+            print(Realm.Configuration.defaultConfiguration.fileURL!)
+            print("scheduleDetailData", scheduleDetailData)
+
+            // 非同期処理が成功したことを示す
+            completion(true)
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            // 非同期処理失敗
+            completion(false)
+        }
+    }
+
     // 登録済みの理想のスケジュールのタイトルのみを取得する
     func getIdealScheduleTitle(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)

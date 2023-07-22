@@ -14,7 +14,11 @@ struct IdealScheduleRegistButtonView: View {
     
     var body: some View  {
         Button(action: {
-            regist()
+            if scheduleDetailViewModel.isIdealScheduleUpdate {
+                update()
+            } else {
+                regist()
+            }
         }) {
             Text("理想のスケジュールを登録")
                 .frame(width: 200, height: 30)
@@ -36,8 +40,40 @@ struct IdealScheduleRegistButtonView: View {
         group.enter()
         
         DispatchQueue(label: "realm").async {
-            // ToDo 理想のスケジュール用の登録処理修正
             scheduleDetailViewModel.registerIdealScheduleDetail { success in
+                group.leave()
+                
+                if success {
+                    print("非同期処理成功")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        alertMessage = "登録が成功しました"
+                    }
+                } else {
+                    print("非同期処理失敗")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        alertMessage = "登録に失敗しました"
+                    }
+                }
+            }
+        }
+        
+        // 成功失敗に関わらず呼ばれる
+        group.notify(queue: .main) {
+            // ToDo 失敗エラーアラート表示
+            print("非同期処理終了")
+            showAlert = true
+        }
+    }
+    
+    func update() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue(label: "realm").async {
+            // ToDo 理想のスケジュール用の登録処理修正(登録済みのスケジュールは新規登録ではなくて更新になるようにする)
+            scheduleDetailViewModel.updateIdealScheduleDetail { success in
                 group.leave()
                 
                 if success {

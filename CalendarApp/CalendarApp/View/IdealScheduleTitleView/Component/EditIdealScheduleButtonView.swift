@@ -15,6 +15,7 @@ struct EditIdealScheduleButtonView: View {
     var body: some View  {
         Button(action: {
             scheduleDetailViewModel.idealScheduleTitle = _titleStr
+            scheduleDetailViewModel.isIdealScheduleUpdate = true
             bindViewModel()
         }) {
             Text("修正")
