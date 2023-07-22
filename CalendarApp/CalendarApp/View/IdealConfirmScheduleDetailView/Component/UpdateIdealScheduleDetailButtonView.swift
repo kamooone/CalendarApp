@@ -50,7 +50,8 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録に失敗しました"
+                        alertMessage = "更新が完了しました"
+                        showAlert = true
                     }
                 }
             }

@@ -390,10 +390,16 @@ final class ScheduleDetailViewModel: ObservableObject {
         do {
             let realm = try Realm(configuration: config)
             
+            // 更新用のバックアップを反映
+            scheduleDetailViewModel.idealScheduleDetailTitleArray = scheduleDetailViewModel.updScheduleDetailTitleArray
+            scheduleDetailViewModel.idealStartTimeArray = scheduleDetailViewModel.updStartTimeArray
+            scheduleDetailViewModel.idealEndTimeArray = scheduleDetailViewModel.updEndTimeArray
+            scheduleDetailViewModel.idealIsNoticeArray = scheduleDetailViewModel.updIsNoticeArray
+            
             // 更新対象のレコードを取得
             guard let scheduleDetailData = realm.objects(IdealScheduleData.self).filter("scheduleTitle == %@", self.idealScheduleTitle).first else {
-                print("更新対象のレコードが見つかりません")
-                // 非同期処理失敗
+                print("まだDBにレコードは登録していない状態での詳細スケジュールの更新")
+                // この時、登録時は時間の昇順にしないが、保存してそれを取得して再度表示するときは昇順で取得して表示するようになる仕様
                 completion(false)
                 return
             }
@@ -415,13 +421,6 @@ final class ScheduleDetailViewModel: ObservableObject {
 
                     scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
                 }
-                
-                // 更新用のバックアップを反映
-                scheduleDetailViewModel.idealScheduleDetailTitleArray = scheduleDetailViewModel.updScheduleDetailTitleArray
-                scheduleDetailViewModel.idealStartTimeArray = scheduleDetailViewModel.updStartTimeArray
-                scheduleDetailViewModel.idealEndTimeArray = scheduleDetailViewModel.updEndTimeArray
-                scheduleDetailViewModel.idealIsNoticeArray = scheduleDetailViewModel.updIsNoticeArray
-                
             }
             
             //================================================================
