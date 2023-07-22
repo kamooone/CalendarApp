@@ -406,13 +406,22 @@ final class ScheduleDetailViewModel: ObservableObject {
                 // 新しいスケジュール詳細を追加
                 for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
                     let idealScheduleDetailData = IdealScheduleDetailData()
-                    idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitleArray[i]
-                    idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTimeArray[i]
-                    idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTimeArray[i]
-                    idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNoticeArray[i]
+                    
+                    // 更新用のバックアップを代入してDB更新
+                    idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.updScheduleDetailTitleArray[i]
+                    idealScheduleDetailData.startTime = scheduleDetailViewModel.updStartTimeArray[i]
+                    idealScheduleDetailData.endTime = scheduleDetailViewModel.updEndTimeArray[i]
+                    idealScheduleDetailData.isNotice = scheduleDetailViewModel.updIsNoticeArray[i]
 
                     scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
                 }
+                
+                // 更新用のバックアップを反映
+                scheduleDetailViewModel.idealScheduleDetailTitleArray = scheduleDetailViewModel.updScheduleDetailTitleArray
+                scheduleDetailViewModel.idealStartTimeArray = scheduleDetailViewModel.updStartTimeArray
+                scheduleDetailViewModel.idealEndTimeArray = scheduleDetailViewModel.updEndTimeArray
+                scheduleDetailViewModel.idealIsNoticeArray = scheduleDetailViewModel.updIsNoticeArray
+                
             }
             
             //================================================================

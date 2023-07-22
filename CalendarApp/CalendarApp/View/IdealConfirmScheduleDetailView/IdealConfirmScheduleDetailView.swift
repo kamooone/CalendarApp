@@ -39,7 +39,7 @@ struct IdealConfirmScheduleDetailView: View {
                     Spacer()
                     if isEditMode {
                         CancelButtonView(isEditMode: $isEditMode)
-                        UpdateButtonView(isEditMode: $isEditMode)
+                        UpdateIdealScheduleDetailButtonView(isEditMode: $isEditMode)
                     } else {
                         EditButtonView(isEditMode: $isEditMode)
                     }

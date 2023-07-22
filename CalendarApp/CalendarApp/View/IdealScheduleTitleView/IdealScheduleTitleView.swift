@@ -9,8 +9,24 @@ import SwiftUI
 
 struct IdealScheduleTitleView: View {
     let headerTitle: String = "理想のスケジュール"
+    let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
-    // ToDo 2023/7/16 理想のスケジュール保存処理
+    func bindViewModel() {
+        scheduleDetailViewModel.isIdealScheduleUpdate = false
+        
+        scheduleDetailViewModel.idealScheduleTitle = ""
+        scheduleDetailViewModel.idealScheduleDetailTitle = ""
+        scheduleDetailViewModel.idealStartTime = "00:00"
+        scheduleDetailViewModel.idealEndTime = "00:00"
+        scheduleDetailViewModel.idealIsNotice = true
+
+        scheduleDetailViewModel.idealScheduleTitleArray = []
+        scheduleDetailViewModel.idealScheduleDetailTitleArray = []
+        scheduleDetailViewModel.idealStartTimeArray = []
+        scheduleDetailViewModel.idealEndTimeArray = []
+        scheduleDetailViewModel.idealIsNoticeArray = []
+    }
+
     var body: some View {
         Color.lightGray.edgesIgnoringSafeArea(.all)
         GeometryReader { geometry in
@@ -44,6 +60,9 @@ struct IdealScheduleTitleView: View {
                         .offset(x: 0, y: 150)
                 }
             }
+        }
+        .onAppear{
+            bindViewModel()
         }
     }
 }
