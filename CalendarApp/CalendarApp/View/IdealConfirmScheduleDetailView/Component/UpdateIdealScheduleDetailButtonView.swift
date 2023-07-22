@@ -44,15 +44,45 @@ struct UpdateIdealScheduleDetailButtonView: View {
                 
                 if success {
                     print("非同期処理成功")
+                    // 最新のデータ取得処理
+                    bindViewModel()
+                } else {
+                    print("非同期処理失敗")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        alertMessage = "登録に失敗しました"
+                    }
+                }
+            }
+        }
+        
+        // 成功失敗に関わらず呼ばれる
+        group.notify(queue: .main) {
+            // ToDo 失敗エラーアラート表示
+            print("非同期処理終了")
+        }
+    }
+    
+    func bindViewModel() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue(label: "realm").async {
+            scheduleDetailViewModel.getIdealScheduleDetail { success in
+                group.leave()
+                
+                if success {
+                    print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "登録が成功しました"
                     }
                 } else {
                     print("非同期処理失敗")
+                    // ToDo 取得失敗エラーアラート表示
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録に失敗しました"
+                        
                     }
                 }
             }
