@@ -488,8 +488,8 @@ final class ScheduleDetailViewModel: ObservableObject {
                 return
             }
             
-            // idealScheduleAのscheduleDetailsのカラムの値を取得
-            let scheduleDetails = idealScheduleA.scheduleDetails
+            // idealScheduleAのscheduleDetailsのカラムの値を取得し、startTimeの早い順に並び替える
+            let scheduleDetails = idealScheduleA.scheduleDetails.sorted(byKeyPath: "startTime")
             
             // scheduleDetailsをidealScheduleDetailTitleArrayに代入
             idealScheduleDetailTitleArray = Array(scheduleDetails.map { $0.scheduleDetailTitle })
