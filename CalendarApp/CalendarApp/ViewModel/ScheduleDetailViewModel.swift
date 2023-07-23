@@ -537,4 +537,70 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
+    
+    // 理想のスケジュールの設定を反映させるために既存のレコードを削除する処理。
+    func DeleteScheduleDetail(_year: String, _month: String, _day: String, completion: @escaping (Bool) -> Void) {
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+        
+        do {
+            let realm = try Realm(configuration: config)
+            try realm.write {
+                let predicate = NSPredicate(format: "date == %@ AND date CONTAINS %@ AND date CONTAINS %@", "\(_year)年\(_month)月\(_day)日", _year, _month)
+                let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
+                realm.delete(scheduleDetailData)
+                
+                completion(true)
+            }
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            completion(false)
+        }
+    }
+    
+    // DB登録処理(複数件の新規登録処理)
+    func setIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
+        let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+
+        // スキーマの設定
+        let config = Realm.Configuration(schemaVersion: schemaVersion)
+
+        let calendarViewModel = CalendarViewModel.shared
+
+        do {
+            let realm = try Realm(configuration: config)
+            try realm.write {
+                for i in 0..<scheduleDetailViewModel.scheduleDetailTitleArray.count {
+                    let scheduleDetailData = ScheduleDetailData()
+                    scheduleDetailData.id = ObjectId.generate()
+                    scheduleDetailData.date = "\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日"
+                    scheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.scheduleDetailTitleArray[i]
+                    scheduleDetailData.startTime = scheduleDetailViewModel.startTimeArray[i]
+                    scheduleDetailData.endTime = scheduleDetailViewModel.endTimeArray[i]
+                    scheduleDetailData.isNotice = scheduleDetailViewModel.isNoticeArray[i]
+
+                    realm.add(scheduleDetailData)
+                    
+                    //================================================================
+                    // 登録処理デバッグ
+                    //================================================================
+                    print(Realm.Configuration.defaultConfiguration.fileURL!)
+                    print("scheduleDetailData.scheduleDetailTitle",scheduleDetailData.scheduleDetailTitle)
+                    print("scheduleDetailData.startTime",scheduleDetailData.startTime)
+                    print("scheduleDetailData.endTime",scheduleDetailData.endTime)
+                    print("scheduleDetailData.isNotice",scheduleDetailData.isNotice)
+                    print(scheduleDetailData)
+                }
+
+                // 非同期処理が成功したことを示す
+                completion(true)
+            }
+        } catch {
+            print("Realmの書き込みエラー：\(error)")
+            // 非同期処理失敗
+            completion(false)
+        }
+    }
+
+    
 }
