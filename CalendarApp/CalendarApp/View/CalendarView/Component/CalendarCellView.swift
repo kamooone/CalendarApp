@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CalendarCellView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
+    
     let calendarViewModel = CalendarViewModel.shared
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
@@ -60,26 +62,28 @@ struct CalendarCellView: View {
         VStack {
             if isRequestSuccessful {
                 //7*6のマスを表示する
-                ForEach(0..<6, id: \.self) { week in
-                    ZStack {
-                        HStack(spacing: 0) {
-                            ForEach(0..<7, id: \.self) { _ in
-                                Rectangle()
-                                    .stroke(Color.black)
-                                    .frame(width: 50, height: 80)
-                                    .offset(x: 0, y: 0)
+                VStack(spacing: 0) {
+                    ForEach(0..<6, id: \.self) { week in
+                        ZStack {
+                            HStack(spacing: 0) {
+                                ForEach(0..<7, id: \.self) { _ in
+                                    Rectangle()
+                                        .stroke(Color.black)
+                                        .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                                }
+                            }
+                            
+                            HStack(spacing: 0) {
+                                ForEach(1..<8, id: \.self) { i in
+                                    DayStringtView(i: i, week: week)
+                                        .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                                }
                             }
                         }
-                        
-                        HStack(spacing: 0) {
-                            ForEach(1..<8, id: \.self) { i in
-                                DayStringtView(i: i, week: week)
-                            }
-                        }
+                        .frame(height: screenSizeObject.screenSize.height / 10)
                     }
-                    .padding(.bottom, -8)
-                    .offset(x: 0, y: -70)
                 }
+                .offset(x: 0, y: -70)
                 
                 // スケジュール詳細をセルに表示させる
                 ForEach(0..<6, id: \.self) { week in
@@ -96,6 +100,9 @@ struct CalendarCellView: View {
             }
         }
         .onAppear {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
             bindViewModel()
         }
     }
@@ -110,31 +117,37 @@ struct DayStringtView: View {
     let week: Int
     
     var body: some View {
-        if !(1..<calendarViewModel.numDaysMonth + 1).contains(i + week*7 - calendarViewModel.firstDayWeek.rawValue) {
-            Text("")
-                .frame(width: 50, height: 80)
-        } else {
-            Button(action: {
-                print("\(i+week*7 - calendarViewModel.firstDayWeek.rawValue)日をタップ")
-                
-                // ルートをスケジュール登録に変更して、選択したセルの月日を取得
-                calendarViewModel.selectDay = i+week*7 - calendarViewModel.firstDayWeek.rawValue
-                
-                // ToDo 今は登録画面その次に確認画面という流れにしているが、先に確認画面を表示した方がいいかも。そして確認画面の中に登録ボタンを作る。
-                route.path = .ScheduleConfirm
-            }) {
-                Text("\(i + (week*7) - calendarViewModel.firstDayWeek.rawValue)")
-                    .frame(width: 50, height: 80)
-                    .foregroundColor((i+week*7) == 1 || (i+week*7) == 8 || (i+week*7) == 15 || (i+week*7) == 22 || (i+week*7) == 29 || (i+week*7) == 36 ? Color.red : ((i+week*7) == 7 || (i+week*7) == 14 || (i+week*7) == 21 || (i+week*7) == 28 || (i+week*7) == 35 ? Color.blue : Color.black))
-                    .offset(x: 0, y: -30)
+        GeometryReader { geometry in
+            let cellSize = CGSize(width: geometry.size.width / 8, height: geometry.size.height / 10)
+            
+            if !(1..<calendarViewModel.numDaysMonth + 1).contains(i + week*7 - calendarViewModel.firstDayWeek.rawValue) {
+                Text("")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                Button(action: {
+                    print("\(i+week*7 - calendarViewModel.firstDayWeek.rawValue)日をタップ")
+                    
+                    // ルートをスケジュール登録に変更して、選択したセルの月日を取得
+                    calendarViewModel.selectDay = i+week*7 - calendarViewModel.firstDayWeek.rawValue
+                    
+                    // ToDo 今は登録画面その次に確認画面という流れにしているが、先に確認画面を表示した方がいいかも。そして確認画面の中に登録ボタンを作る。
+                    route.path = .ScheduleConfirm
+                }) {
+                    VStack(spacing: 0) {
+                        Text("\(i + (week*7) - calendarViewModel.firstDayWeek.rawValue)")
+                            .foregroundColor((i+week*7) == 1 || (i+week*7) == 8 || (i+week*7) == 15 || (i+week*7) == 22 || (i+week*7) == 29 || (i+week*7) == 36 ? Color.red : ((i+week*7) == 7 || (i+week*7) == 14 || (i+week*7) == 21 || (i+week*7) == 28 || (i+week*7) == 35 ? Color.blue : Color.black))
+                            .alignmentGuide(.top) { d in d[.bottom] }
+                            .padding(.top, -cellSize.height * 5)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(width: 50, height: 80)
-            .offset(x: 0, y: 0)
         }
     }
 }
 
-
+// ToDo 表示位置の最適化
 struct CellTextView: View {
     let calendarViewModel = CalendarViewModel.shared
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared

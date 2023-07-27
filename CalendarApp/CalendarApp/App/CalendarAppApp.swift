@@ -11,10 +11,11 @@ import SwiftUI
 struct Calendar_SwiftUIApp: App {
     @StateObject var route = RouteObserver()
     @StateObject var setting = Setting()
+    @StateObject var screenSizeObject = ScreenSizeObject()
     
     var body: some Scene {
         WindowGroup {
-            MainView().environmentObject(route).environmentObject(setting)
+            MainView().environmentObject(route).environmentObject(setting).environmentObject(screenSizeObject)
         }
     }
 }

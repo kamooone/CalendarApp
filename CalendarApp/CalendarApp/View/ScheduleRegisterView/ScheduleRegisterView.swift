@@ -61,10 +61,12 @@ struct ScheduleRegisterView: View {
                     Spacer()
                 }
                 
-                BannerAdsView()
-                    .frame(width: geometry.size.width, height: 80)
-                    .background(Color.yellow)
-                    .offset(x: 0, y: -70)
+                HStack {
+                    BannerAdsView()
+                        .frame(width: geometry.size.width, height: 80)
+                        .background(Color.yellow)
+                        .offset(x: 0, y: 0)
+                }
                 
                 Spacer()
             }

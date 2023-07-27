@@ -66,6 +66,7 @@
 		E2C1BB712A69239900AB4403 /* IdealScheduleTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */; };
 		E2C1BB732A6923D600AB4403 /* IdealNoticeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB722A6923D600AB4403 /* IdealNoticeSettingView.swift */; };
 		E2C1BB752A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C1BB742A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift */; };
+		E2F05E502A712E670072AF20 /* ScreenSizeObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F05E4F2A712E670072AF20 /* ScreenSizeObject.swift */; };
 		E2FB60ED2A3B4CD3003D89C8 /* ScheduleDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,7 @@
 		E2C1BB702A69239900AB4403 /* IdealScheduleTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleTimeView.swift; sourceTree = "<group>"; };
 		E2C1BB722A6923D600AB4403 /* IdealNoticeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealNoticeSettingView.swift; sourceTree = "<group>"; };
 		E2C1BB742A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealRegisteredScheduleTitleView.swift; sourceTree = "<group>"; };
+		E2F05E4F2A712E670072AF20 /* ScreenSizeObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSizeObject.swift; sourceTree = "<group>"; };
 		E2FB60EC2A3B4CD3003D89C8 /* ScheduleDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -381,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				E27C8E652A239A4F00841268 /* Route.swift */,
+				E2F05E4F2A712E670072AF20 /* ScreenSizeObject.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				E225D2D12A2F7DAD0052362D /* BannerAdsView.swift in Sources */,
 				E27C8E562A2398BA00841268 /* SplashView.swift in Sources */,
 				E2B3632B2A63B3E6008C3E20 /* DonationButtonView.swift in Sources */,
+				E2F05E502A712E670072AF20 /* ScreenSizeObject.swift in Sources */,
 				E29D3C672A4C830200A68BF4 /* EditButtonView.swift in Sources */,
 				E2BE41CE2A6BD7B30062D5EC /* DeleteIdealDetailScheduleButtonView.swift in Sources */,
 				E24F7B832A41EA58002F12C7 /* ScheduleDetailViewModel.swift in Sources */,
@@ -819,6 +823,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kazusa-Kondo.CalendarApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -849,6 +856,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kazusa-Kondo.CalendarApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
