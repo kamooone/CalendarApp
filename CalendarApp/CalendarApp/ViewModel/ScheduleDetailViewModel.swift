@@ -299,23 +299,20 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
-            var foundMatch = false
             var startIndex = 0
             scheduleDetailMonthList = Array(repeating: "", count: 31)
 
             for i in 0..<calendarViewModel.numDaysMonth {
-                if foundMatch {
-                    foundMatch = false
-                    continue
-                }
-
+                var matchedIndex: Int?
                 for cnt in startIndex..<scheduleDetailMonthDayList.count {
                     if (i + 1) == Int(scheduleDetailMonthDayList[cnt]) {
                         scheduleDetailMonthList[i] = scheduleDetailMonthTextList[cnt]
-                        foundMatch = true
-                        startIndex = cnt + 1
+                        matchedIndex = cnt
                         break
                     }
+                }
+                if let matchedIndex = matchedIndex {
+                    startIndex = matchedIndex + 1
                 }
             }
             
