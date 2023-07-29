@@ -75,8 +75,16 @@ struct CalendarCellView: View {
                             
                             HStack(spacing: 0) {
                                 ForEach(1..<8, id: \.self) { i in
-                                    DayStringtView(i: i, week: week)
-                                        .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                                    ZStack {
+                                        VStack {
+                                            DayStringtView(i: i, week: week)
+                                                .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                                        }
+                                        VStack {
+                                            CellTextView(i: i, week: week)
+                                                .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -84,19 +92,6 @@ struct CalendarCellView: View {
                     }
                 }
                 .offset(x: 0, y: -70)
-                
-                // スケジュール詳細をセルに表示させる
-                ForEach(0..<6, id: \.self) { week in
-                    ZStack {
-                        HStack(spacing: 0) {
-                            ForEach(1..<8, id: \.self) { i in
-                                CellTextView(i: i, week: week)
-                            }
-                        }
-                    }
-                    .padding(.bottom, -8)
-                    .offset(x: 0, y: -70)
-                }
             }
         }
         .onAppear {
@@ -147,7 +142,6 @@ struct DayStringtView: View {
     }
 }
 
-// ToDo 表示位置の最適化
 struct CellTextView: View {
     let calendarViewModel = CalendarViewModel.shared
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
@@ -155,15 +149,20 @@ struct CellTextView: View {
     let week: Int
     
     var body: some View {
-        if !(1..<calendarViewModel.numDaysMonth + 1).contains(i + week*7 - calendarViewModel.firstDayWeek.rawValue) {
-            Text("")
-                .frame(width: 50, height: 80)
-        } else {
-            Text("\(scheduleDetailViewModel.scheduleDetailMonthList[i + week*7 - calendarViewModel.firstDayWeek.rawValue - 1])")
-                .font(.system(size: 7))
-                .frame(width: 50, height: 80)
-                .foregroundColor(Color.black) // ToDo 大事な予定には色を付けれるようにすればいいかも
-                .offset(x: 0, y: -470)
+        GeometryReader { geometry in
+            let cellSize = CGSize(width: geometry.size.width / 8, height: geometry.size.height / 10)
+            
+            if !(1..<calendarViewModel.numDaysMonth + 1).contains(i + week*7 - calendarViewModel.firstDayWeek.rawValue) {
+                Text("")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                Text("\(scheduleDetailViewModel.scheduleDetailMonthList[i + week*7 - calendarViewModel.firstDayWeek.rawValue - 1])")
+                    .font(.system(size: cellSize.height))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .foregroundColor(Color.black) // ToDo 大事な予定には色を付けれるようにすればいいかも
+                    .alignmentGuide(.top) { d in d[.bottom] }
+                    .padding(.top, cellSize.height * 2)
+            }
         }
     }
 }

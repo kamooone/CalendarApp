@@ -284,8 +284,8 @@ final class ScheduleDetailViewModel: ObservableObject {
                     let existingTitle = scheduleDetailMonthTextList[scheduleDetailMonthDayList.count - 1]
                     let newlineCount = existingTitle.components(separatedBy: "\n").count - 1
                     
-                    // 同一日の最大表示詳細スケジュールは7つまでにする
-                    if newlineCount < 6 {
+                    // 同一日の最大表示詳細スケジュールは6つまでにする
+                    if newlineCount < 5 {
                         // 内容が7文字以上であれば、6文字+...を格納する
                         if scheduleDetailData.scheduleDetailTitle.count > 7 {
                             let startIndex = scheduleDetailData.scheduleDetailTitle.startIndex

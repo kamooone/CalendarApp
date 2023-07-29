@@ -43,7 +43,6 @@ struct CalendarView: View {
                     BannerAdsView()
                         .frame(width: geometry.size.width, height: 80)
                         .background(Color.yellow)
-                        .offset(x: 0, y: -500)
                 }
                 Spacer()
             }
