@@ -11,10 +11,13 @@ struct HeaderView: View {
     var _headerTitle: String
 
     var body: some View {
-        Spacer()
-        Text(_headerTitle)
-            .font(.system(size: 24))
-            .offset(x: 0, y: -60)
-        Spacer()
+        GeometryReader { geometry in
+            HStack {
+                Spacer()
+                Text(_headerTitle)
+                    .font(.system(size: geometry.size.width / 20))
+                Spacer()
+            }
+        }
     }
 }

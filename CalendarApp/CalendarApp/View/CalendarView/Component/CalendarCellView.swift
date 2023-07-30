@@ -61,6 +61,11 @@ struct CalendarCellView: View {
     var body: some View {
         VStack {
             if isRequestSuccessful {
+                HStack {
+                    DaysWeekView()
+                        .offset(x:0, y: -screenSizeObject.screenSize.height / 30)
+                }
+                
                 //7*6のマスを表示する
                 VStack(spacing: 0) {
                     ForEach(0..<6, id: \.self) { week in
@@ -91,7 +96,6 @@ struct CalendarCellView: View {
                         .frame(height: screenSizeObject.screenSize.height / 10)
                     }
                 }
-                .offset(x: 0, y: -70)
             }
         }
         .onAppear {
@@ -103,6 +107,27 @@ struct CalendarCellView: View {
     }
 }
 
+struct DaysWeekView: View {
+    let calendarViewModel = CalendarViewModel.shared
+    let dayofweek = ["日", "月", "火", "水", "木", "金", "土"]
+    
+    var body: some View {
+        GeometryReader { geometry in
+            HStack(spacing: geometry.size.width / 15) {
+                Spacer()
+                ForEach(self.dayofweek, id: \.self) { day in
+                    HStack {
+                        Text(day)
+                            .font(.system(size: geometry.size.width / 20))
+                            .foregroundColor(day == "土" ? Color.blue : (day == "日" ? Color.red : Color.black))
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                Spacer()
+            }
+        }
+    }
+}
 
 struct DayStringtView: View {
     @EnvironmentObject var route: RouteObserver
@@ -128,10 +153,10 @@ struct DayStringtView: View {
                     // ToDo 今は登録画面その次に確認画面という流れにしているが、先に確認画面を表示した方がいいかも。そして確認画面の中に登録ボタンを作る。
                     route.path = .ScheduleConfirm
                 }) {
-                    VStack(spacing: 0) {
+                    VStack {
                         Text("\(i + (week*7) - calendarViewModel.firstDayWeek.rawValue)")
+                            .font(.system(size: cellSize.height * 2))
                             .foregroundColor((i+week*7) == 1 || (i+week*7) == 8 || (i+week*7) == 15 || (i+week*7) == 22 || (i+week*7) == 29 || (i+week*7) == 36 ? Color.red : ((i+week*7) == 7 || (i+week*7) == 14 || (i+week*7) == 21 || (i+week*7) == 28 || (i+week*7) == 35 ? Color.blue : Color.black))
-                            .alignmentGuide(.top) { d in d[.bottom] }
                             .padding(.top, -cellSize.height * 5)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -157,7 +182,7 @@ struct CellTextView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 Text("\(scheduleDetailViewModel.scheduleDetailMonthList[i + week*7 - calendarViewModel.firstDayWeek.rawValue - 1])")
-                    .font(.system(size: cellSize.height))
+                    .font(.system(size: cellSize.height * 1.5))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .foregroundColor(Color.black) // ToDo 大事な予定には色を付けれるようにすればいいかも
                     .alignmentGuide(.top) { d in d[.bottom] }

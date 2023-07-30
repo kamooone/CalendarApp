@@ -32,10 +32,6 @@ struct CalendarView: View {
                 }
                 
                 HStack() {
-                    DaysWeekView()
-                }
-                
-                HStack() {
                     CalendarCellView()
                 }
                 
