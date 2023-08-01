@@ -18,7 +18,6 @@ struct ConfirmScheduleDetailButtonView: View {
             Text("現在の追加状況を確認")
                 .frame(width: 200, height: 30)
         }
-        .offset(x:0,y:105)
         .buttonStyle(NormalButtonStyle.normalButtonStyle())
         .padding() // ボタンの余白を調整
     }

@@ -16,23 +16,28 @@ struct ScheduleRegisterView: View {
             VStack {
                 HStack {
                     BackButtonView()
+                    Spacer()
                 }
-                HStack {
+                .frame(width: geometry.size.width, height: geometry.size.height / 12)
+                
+                VStack {
                     HeaderView(_headerTitle: headerTitle)
                 }
+                .frame(width: geometry.size.width, height: geometry.size.height / 30)
+
                 VStack {
-                    HStack {
-                        SelectedMonthDayView()
-                    }
-                    
-                    ZStack {
-                        LoadScheduleView()
-                    }
-                    .frame(width: geometry.size.width, height: 80)
-                    .background(Color.lightWhite)
-                    .offset(x: 0, y: -100)
-    
-                    
+                    SelectedMonthDayView()
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height / 20)
+                
+                // ToDo 2023/8/2　ここから表示の最適化修正
+                VStack {
+                    LoadScheduleView()
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height / 8)
+                .background(Color.lightWhite)
+                
+                VStack {
                     ZStack {
                         ScheduleDetailView()
                         
@@ -40,32 +45,21 @@ struct ScheduleRegisterView: View {
                         
                         NoticeSettingView()
                         
-                        HStack {
-                            Spacer()
-                            RegisterScheduleDetailButtonView()
-                                .offset(x:0, y:0)
-                            Spacer()
-                        }
-
-                        HStack {
-                            Spacer()
+                        VStack {
                             ConfirmScheduleDetailButtonView()
-                                .offset(x:0, y:100)
-                            Spacer()
+                            RegisterScheduleDetailButtonView()
                         }
                     }
                     .frame(width:geometry.size.width, height:270)
                     .background(Color.lightWhite)
-                    .offset(x: 0, y: -80)
 
                     Spacer()
                 }
                 
                 HStack {
                     BannerAdsView()
-                        .frame(width: geometry.size.width, height: 80)
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.1)
                         .background(Color.yellow)
-                        .offset(x: 0, y: 0)
                 }
                 
                 Spacer()

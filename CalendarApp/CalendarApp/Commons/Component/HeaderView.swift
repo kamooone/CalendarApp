@@ -16,6 +16,7 @@ struct HeaderView: View {
                 Spacer()
                 Text(_headerTitle)
                     .font(.system(size: geometry.size.width / 20))
+                    .fontWeight(.bold)
                 Spacer()
             }
         }

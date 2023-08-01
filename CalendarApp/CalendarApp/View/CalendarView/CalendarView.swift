@@ -37,7 +37,7 @@ struct CalendarView: View {
                 
                 HStack() {
                     BannerAdsView()
-                        .frame(width: geometry.size.width, height: 80)
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.1)
                         .background(Color.yellow)
                 }
                 Spacer()

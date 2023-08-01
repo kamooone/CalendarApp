@@ -22,7 +22,6 @@ struct RegisterScheduleDetailButtonView: View {
             Text("追加")
                 .frame(width: 50, height: 30)
         }
-        .offset(x:0,y:105)
         .buttonStyle(NormalButtonStyle.normalButtonStyle())
         .padding()
         .alert(isPresented: $showAlert) {

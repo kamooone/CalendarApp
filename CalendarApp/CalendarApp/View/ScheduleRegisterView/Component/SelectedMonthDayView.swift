@@ -11,8 +11,13 @@ struct SelectedMonthDayView: View {
     let calendarViewModel = CalendarViewModel.shared
     
     var body: some View {
-        Text("\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日")
-            .font(.system(size: 24))
-            .offset(x: 0, y: -40)
+        GeometryReader { geometry in
+            HStack {
+                Spacer()
+                Text("\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日")
+                    .font(.system(size: geometry.size.width / 20))
+                Spacer()
+            }
+        }
     }
 }
