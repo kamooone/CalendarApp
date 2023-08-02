@@ -52,35 +52,33 @@ struct LoadScheduleView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Spacer()
-            HStack {
-                Spacer()
-                Text("作成した理想のスケジュールを使用する")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:10)
-                Spacer()
-            }
-            
             if isRequestSuccessful {
-                HStack {
-                    Spacer()
-                    // ToDo 設定後は次回以降もその設定している項目が選択されているようにしておく？
-                    Picker("Select an option", selection: $selectedOption) {
-                        ForEach(0..<options.count, id: \.self) { index in
-                            Text(options[index])
-                        }
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("作成した理想のスケジュールを使用する")
+                            .font(.system(size: geometry.size.width / 25))
+                            .offset(x:0, y:10)
+                        Spacer()
                     }
-                    .frame(width: geometry.size.width * 0.6, height: geometry.size.height / 10)
-                    .pickerStyle(MenuPickerStyle())
-                    .offset(x: 0, y: 25)
-                    .onChange(of: selectedOption) { index in
-                        scheduleDetailViewModel.idealScheduleTitle = options[index]
-                    }
-
                     
-                    SetButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                    HStack {
+                        // ToDo 設定後は次回以降もその設定している項目が選択されているようにしておく？
+                        Picker("Select an option", selection: $selectedOption) {
+                            ForEach(0..<options.count, id: \.self) { index in
+                                Text(options[index])
+                            }
+                        }
+                        .offset(x:geometry.size.width * 0.1, y:20)
+                        .frame(width: geometry.size.width * 0.5, height: geometry.size.height / 5)
+                        .onChange(of: selectedOption) { index in
+                            scheduleDetailViewModel.idealScheduleTitle = options[index]
+                        }
+                        
+                        SetButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                            .frame(width: geometry.size.width * 0.5, height: geometry.size.height / 5)
+                    }
                 }
-                Spacer()
             }
         }
         .onAppear{
@@ -111,17 +109,10 @@ struct SetButtonView: View {
                         scheduleDetailViewModel.endTimeArray = scheduleDetailViewModel.idealEndTimeArray
                         scheduleDetailViewModel.isNoticeArray = scheduleDetailViewModel.idealIsNoticeArray
                         
-                        print("ToDo うまく表示されてないのでデバッグ")
                         print(scheduleDetailViewModel.scheduleDetailTitleArray)
                         print(scheduleDetailViewModel.startTimeArray)
                         print(scheduleDetailViewModel.endTimeArray)
                         print(scheduleDetailViewModel.isNoticeArray)
-                        
-//                        // 更新用にupdに代入
-//                        scheduleDetailViewModel.updScheduleDetailTitleArray = scheduleDetailViewModel.scheduleDetailTitleArray
-//                        scheduleDetailViewModel.updStartTimeArray = scheduleDetailViewModel.startTimeArray
-//                        scheduleDetailViewModel.updEndTimeArray = scheduleDetailViewModel.endTimeArray
-//                        scheduleDetailViewModel.updIsNoticeArray = scheduleDetailViewModel.isNoticeArray
                         
                         // 先にレコード削除してから登録処理を行う
                         delete()
@@ -151,18 +142,16 @@ struct SetButtonView: View {
                 bindViewModel()
             }) {
                 Text("設定する")
-                    .frame(width: 80, height: 30)
+                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
             }
             .buttonStyle(NormalButtonStyle.normalButtonStyle())
-            .padding() // ボタンの余白を調整
-            .offset(x:0,y:20)
+            .padding()
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text(alertMessage),
                     dismissButton: .default(Text("OK")) {}
                 )
             }
-            Spacer()
         }
     }
     
