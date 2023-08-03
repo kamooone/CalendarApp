@@ -11,14 +11,23 @@ struct ConfirmScheduleDetailButtonView: View {
     @EnvironmentObject var route: RouteObserver
     
     var body: some View {
-        
-        Button(action: {
-            route.path = .ConfirmScheduleDetail
-        }) {
-            Text("現在の追加状況を確認")
-                .frame(width: 200, height: 30)
+        GeometryReader { geometry in
+            HStack {
+                Spacer()
+                
+                Button(action: {
+                    route.path = .ConfirmScheduleDetail
+                }) {
+                    Text("現在の追加状況を確認")
+                        .font(.system(size: geometry.size.width / 25))
+                        .frame(width: geometry.size.width / 2, height: geometry.size.height)
+                }
+                .buttonStyle(NormalButtonStyle.normalButtonStyle())
+                .padding()
+                .offset(x:0, y:-60)
+                
+                Spacer()
+            }
         }
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding() // ボタンの余白を調整
     }
 }

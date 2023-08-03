@@ -12,13 +12,16 @@ struct NoticeSettingView: View {
     @State private var isSwitchOn = true
     
     var body: some View {
-        VStack {
-            Toggle("通知", isOn: $isSwitchOn)
-                .offset(x:0,y:60)
-                .padding(.horizontal, 100)
-                .onChange(of: isSwitchOn) { newValue in
-                    scheduleDetailViewModel.isNotice = newValue
-                }
+        GeometryReader { geometry in
+            VStack {
+                Toggle("通知", isOn: $isSwitchOn)
+                    .font(.system(size: geometry.size.width / 25))
+                    .padding(.horizontal, geometry.size.width / 5)
+                    .onChange(of: isSwitchOn) { newValue in
+                        scheduleDetailViewModel.isNotice = newValue
+                    }
+                    .offset(x:0, y:0)
+            }
         }
     }
 }

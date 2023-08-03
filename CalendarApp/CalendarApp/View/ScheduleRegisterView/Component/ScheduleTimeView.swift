@@ -30,38 +30,38 @@ struct ScheduleTimeView: View {
                 Spacer()
                 // ToDo 開始より終了の方が早い場合はエラーにする。
                 Text("開始")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:140)
+                    .frame(width: geometry.size.width / 8, height: geometry.size.height / 10)
+                    .font(.system(size: geometry.size.width / 25))
+                    .offset(x:0, y:20)
+                
                 Picker("Select an StartTIme", selection: $selectedStartTime) {
                     ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
                         Text(scheduleDetailViewModel.timeArray[index])
                     }
                 }
-                .frame(width: 90, height: geometry.size.height / 10)
+                .frame(width: geometry.size.width / 10, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:140)
                 .onChange(of: selectedStartTime) { newValue in
                     scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[newValue]
                 }
-                
-                Text("〜　")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:140)
+                .offset(x:0, y:20)
                 
                 Text("終了")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:140)
+                    .frame(width: geometry.size.width / 8, height: geometry.size.height / 10)
+                    .font(.system(size: geometry.size.width / 25))
+                    .offset(x:0, y:20)
+                
                 Picker("Select an EndTime", selection: $selectedEndTime) {
                     ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
                         Text(scheduleDetailViewModel.timeArray[index])
                     }
                 }
-                .frame(width: 90, height: geometry.size.height / 10)
+                .frame(width: geometry.size.width / 10, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:140)
                 .onChange(of: selectedEndTime) { newValue in
                     scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]
                 }
+                .offset(x:0, y:20)
                 
                 Spacer()
             }

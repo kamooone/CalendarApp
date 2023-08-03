@@ -14,22 +14,32 @@ struct RegisterScheduleDetailButtonView: View {
     @State private var alertMessage = ""
     
     var body: some View {
-        // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
-        // ToDo 登録完了したら入力内容を初期化する
-        Button(action: {
-            regist()
-        }) {
-            Text("追加")
-                .frame(width: 50, height: 30)
-        }
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding()
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(alertMessage),
-                message: Text(alertMessage),
-                dismissButton: .default(Text("OK"))
-            )
+        GeometryReader { geometry in
+            HStack {
+                Spacer()
+                
+                // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
+                // ToDo 登録完了したら入力内容を初期化する
+                Button(action: {
+                    regist()
+                }) {
+                    Text("追加")
+                        .font(.system(size: geometry.size.width / 25))
+                        .frame(width: geometry.size.width / 2, height: geometry.size.height)
+                }
+                .buttonStyle(NormalButtonStyle.normalButtonStyle())
+                .padding()
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(alertMessage),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+                .offset(x:0, y:-40)
+                
+                Spacer()
+            }
         }
     }
     

@@ -30,7 +30,6 @@ struct ScheduleRegisterView: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height / 20)
                 
-                // ToDo 2023/8/2　ここから表示の最適化修正
                 VStack {
                     LoadScheduleView()
                 }
@@ -38,7 +37,7 @@ struct ScheduleRegisterView: View {
                 .background(Color.lightWhite)
                 
                 VStack {
-                    ZStack {
+                    VStack {
                         ScheduleDetailView()
                         
                         ScheduleTimeView()
@@ -50,7 +49,7 @@ struct ScheduleRegisterView: View {
                             RegisterScheduleDetailButtonView()
                         }
                     }
-                    .frame(width:geometry.size.width, height:270)
+                    .frame(width:geometry.size.width, height:geometry.size.height / 2)
                     .background(Color.lightWhite)
 
                     Spacer()
