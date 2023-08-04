@@ -39,7 +39,7 @@ struct ScheduleTimeView: View {
                         Text(scheduleDetailViewModel.timeArray[index])
                     }
                 }
-                .frame(width: geometry.size.width / 10, height: geometry.size.height / 10)
+                .frame(width: geometry.size.width / 4, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: selectedStartTime) { newValue in
                     scheduleDetailViewModel.startTime = scheduleDetailViewModel.timeArray[newValue]
@@ -56,7 +56,7 @@ struct ScheduleTimeView: View {
                         Text(scheduleDetailViewModel.timeArray[index])
                     }
                 }
-                .frame(width: geometry.size.width / 10, height: geometry.size.height / 10)
+                .frame(width: geometry.size.width / 4, height: geometry.size.height / 10)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: selectedEndTime) { newValue in
                     scheduleDetailViewModel.endTime = scheduleDetailViewModel.timeArray[newValue]

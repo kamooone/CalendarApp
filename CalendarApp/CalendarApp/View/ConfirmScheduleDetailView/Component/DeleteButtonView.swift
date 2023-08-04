@@ -9,6 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct DeleteButtonView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     @EnvironmentObject var setting: Setting
     let _id: String
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
@@ -17,23 +18,32 @@ struct DeleteButtonView: View {
     @State private var alertMessage = ""
     
     var body: some View  {
-        Button(action: {
-            delete()
-        }) {
-            Text("削除")
-                .font(.system(size: 12))
-                .frame(width: 60, height: 30)
+        HStack {
+            Spacer()
+            Button(action: {
+                delete()
+            }) {
+                Text("削除")
+                    .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 40)
+                    .font(.system(size: screenSizeObject.screenSize.width / 30))
+            }
+            .offset(x: 0, y: 0)
+            .buttonStyle(NormalButtonStyle.normalButtonStyle())
+            .padding()
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertMessage),
+                    dismissButton: .default(Text("OK")) {
+                        setting.isReload = true
+                    }
+                )
+            }
+            Spacer()
         }
-        .offset(x: 0, y: 0)
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding()
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(alertMessage),
-                dismissButton: .default(Text("OK")) {
-                    setting.isReload = true
-                }
-            )
+        .onAppear {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
     

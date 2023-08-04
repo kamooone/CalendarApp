@@ -10,27 +10,37 @@ import SwiftUI
 struct UpdateButtonView: View {
     @Binding var isEditMode: Bool
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
-    
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     @State private var showAlert = false
     @State private var alertMessage = ""
     
     var body: some View  {
-        Button(action: {
-            update()
-        }) {
-            Text("更新")
-                .frame(width: 50, height: 30)
+        HStack {
+            Spacer()
+            
+            Button(action: {
+                update()
+            }) {
+                Text("更新")
+                    .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 25)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
+            }
+            .offset(x: 0, y: 0)
+            .buttonStyle(NormalButtonStyle.normalButtonStyle())
+            .padding()
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertMessage),
+                    dismissButton: .default(Text("OK")) {
+                        isEditMode = false
+                    }
+                )
+            }
         }
-        .offset(x: 10, y: -100)
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding()
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(alertMessage),
-                dismissButton: .default(Text("OK")) {
-                    isEditMode = false
-                }
-            )
+        .onAppear {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
     
