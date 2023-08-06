@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IdealScheduleTimeView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var selectedStartTime = 0
     @State private var selectedEndTime = 0
@@ -25,46 +26,47 @@ struct IdealScheduleTimeView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            HStack {
-                Spacer()
-                // ToDo 開始より終了の方が早い場合はエラーにする。
-                Text("開始")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:140)
-                Picker("Select an StartTIme", selection: $selectedStartTime) {
-                    ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
-                        Text(scheduleDetailViewModel.timeArray[index])
-                    }
+        HStack {
+            Spacer()
+            // ToDo 開始より終了の方が早い場合はエラーにする。
+            Text("開始")
+                .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                .font(.system(size: screenSizeObject.screenSize.width / 25))
+                .offset(x:0,y:0)
+            Picker("Select an StartTIme", selection: $selectedStartTime) {
+                ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
+                    Text(scheduleDetailViewModel.timeArray[index])
                 }
-                .frame(width: 90, height: geometry.size.height / 10)
-                .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:140)
-                .onChange(of: selectedStartTime) { newValue in
-                    scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[newValue]
-                }
-                
-                Text("〜　")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:140)
-                
-                Text("終了")
-                    .font(.system(size: 16))
-                    .offset(x:0,y:140)
-                Picker("Select an EndTime", selection: $selectedEndTime) {
-                    ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
-                        Text(scheduleDetailViewModel.timeArray[index])
-                    }
-                }
-                .frame(width: 90, height: geometry.size.height / 10)
-                .pickerStyle(MenuPickerStyle())
-                .offset(x:0,y:140)
-                .onChange(of: selectedEndTime) { newValue in
-                    scheduleDetailViewModel.idealEndTime = scheduleDetailViewModel.timeArray[newValue]
-                }
-                
-                Spacer()
             }
+            .frame(width: screenSizeObject.screenSize.width / 4, height: screenSizeObject.screenSize.height / 10)
+            .pickerStyle(MenuPickerStyle())
+            .offset(x:0,y:0)
+            .onChange(of: selectedStartTime) { newValue in
+                scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[newValue]
+            }
+                        
+            Text("終了")
+                .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                .font(.system(size: screenSizeObject.screenSize.width / 25))
+                .offset(x:0,y:0)
+            Picker("Select an EndTime", selection: $selectedEndTime) {
+                ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { index in
+                    Text(scheduleDetailViewModel.timeArray[index])
+                }
+            }
+            .frame(width: screenSizeObject.screenSize.width / 4, height: screenSizeObject.screenSize.height / 10)
+            .pickerStyle(MenuPickerStyle())
+            .offset(x:0,y:0)
+            .onChange(of: selectedEndTime) { newValue in
+                scheduleDetailViewModel.idealEndTime = scheduleDetailViewModel.timeArray[newValue]
+            }
+            
+            Spacer()
+        }
+        .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
 }

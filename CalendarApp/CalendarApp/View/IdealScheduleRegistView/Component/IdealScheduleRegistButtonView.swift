@@ -8,30 +8,38 @@
 import SwiftUI
 
 struct IdealScheduleRegistButtonView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var showAlert = false
     @State private var alertMessage = ""
     
     var body: some View  {
-        Button(action: {
-            if scheduleDetailViewModel.isIdealScheduleUpdate {
-                update()
-            } else {
-                regist()
+        HStack {
+            Button(action: {
+                if scheduleDetailViewModel.isIdealScheduleUpdate {
+                    update()
+                } else {
+                    regist()
+                }
+            }) {
+                Text("理想のスケジュールを登録")
+                    .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
             }
-        }) {
-            Text("理想のスケジュールを登録")
-                .frame(width: 200, height: 30)
+            .offset(x: 0, y: 0)
+            .buttonStyle(NormalButtonStyle.normalButtonStyle())
+            .padding()
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertMessage),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
-        .offset(x: 0, y: 0)
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding()
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(alertMessage),
-                message: Text(alertMessage),
-                dismissButton: .default(Text("OK"))
-            )
+        .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
     

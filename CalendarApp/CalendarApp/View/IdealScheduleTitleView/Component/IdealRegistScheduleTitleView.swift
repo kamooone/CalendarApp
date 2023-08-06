@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IdealRegistScheduleTitleView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     @EnvironmentObject var route: RouteObserver
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var text = ""
@@ -17,8 +18,8 @@ struct IdealRegistScheduleTitleView: View {
             Spacer()
             HStack {
                 Text("理想のスケジュールのタイトルを入力しよう")
-                    .font(.system(size: 16))
-                    .offset(x: 0, y: 20)
+                    .font(.system(size: screenSizeObject.screenSize.width / 20))
+                    .offset(x: 0, y: 0)
             }
             
             HStack {
@@ -26,7 +27,7 @@ struct IdealRegistScheduleTitleView: View {
                 TextField("例 : 休日Aの理想スケジュール", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                    .offset(x: 5, y: 20)
+                    .offset(x: 5, y: 0)
                     .onChange(of: text) { newValue in
                         scheduleDetailViewModel.idealScheduleTitle = newValue
                     }
@@ -37,13 +38,19 @@ struct IdealRegistScheduleTitleView: View {
                     route.path = .IdealSchedule
                 }) {
                     Text("次へ")
-                        .frame(width: 50, height: 30)
+                        .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 30)
+                        .font(.system(size: screenSizeObject.screenSize.width / 40))
                 }
                 .offset(x: 0, y: 0)
                 .buttonStyle(NormalButtonStyle.normalButtonStyle())
                 .padding()
             }
             Spacer()
+        }
+        .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
 }

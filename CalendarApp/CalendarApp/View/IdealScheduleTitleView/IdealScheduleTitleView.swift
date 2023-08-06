@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IdealScheduleTitleView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let headerTitle: String = "理想のスケジュール"
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
@@ -19,49 +20,44 @@ struct IdealScheduleTitleView: View {
         scheduleDetailViewModel.idealStartTime = "00:00"
         scheduleDetailViewModel.idealEndTime = "00:00"
         scheduleDetailViewModel.idealIsNotice = true
-
+        
         scheduleDetailViewModel.idealScheduleTitleArray = []
         scheduleDetailViewModel.idealScheduleDetailTitleArray = []
         scheduleDetailViewModel.idealStartTimeArray = []
         scheduleDetailViewModel.idealEndTimeArray = []
         scheduleDetailViewModel.idealIsNoticeArray = []
     }
-
+    
     var body: some View {
         Color.lightGray.edgesIgnoringSafeArea(.all)
-        GeometryReader { geometry in
-            VStack {
-                HStack {
-                    BackButtonView()
-                }
-                HStack {
-                    HeaderView(_headerTitle: headerTitle)
-                }
-                VStack {
-                    ZStack {
-                        IdealRegistScheduleTitleView()
-                    }
-                    .frame(width: geometry.size.width, height: 180)
-                    .background(Color.lightWhite)
-                    .offset(x: 0, y: -50)
-                }
-                VStack {
-                    ZStack {
-                        IdealRegisteredScheduleTitleView()
-                            .frame(width: geometry.size.width, height: 180)
-                            .background(Color.lightWhite)
-                            .offset(x: 0, y: -20)
-                    }
-                }
-                VStack {
-                    BannerAdsView()
-                        .frame(width: geometry.size.width, height: 80)
-                        .background(Color.yellow)
-                        .offset(x: 0, y: 150)
-                }
+        VStack {
+            HStack {
+                BackButtonView()
+                    .offset(x:0, y:20)
             }
+            HStack {
+                HeaderView(_headerTitle: headerTitle)
+                    .offset(x:0, y:screenSizeObject.screenSize.height / 30 - 10)
+            }
+            HStack {
+                IdealRegistScheduleTitleView()
+            }
+            HStack {
+                IdealRegisteredScheduleTitleView()
+                    .offset(x:0, y:0)
+            }
+            HStack {
+                BannerAdsView()
+                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.1)
+                    .background(Color.yellow)
+                    .offset(x: 0, y: 0)
+            }
+            Spacer()
         }
         .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
             bindViewModel()
         }
     }

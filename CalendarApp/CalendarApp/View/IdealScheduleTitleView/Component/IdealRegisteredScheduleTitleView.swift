@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IdealRegisteredScheduleTitleView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @EnvironmentObject var setting: Setting
     @State private var text = ""
@@ -57,37 +58,38 @@ struct IdealRegisteredScheduleTitleView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                if isRequestSuccessful {
-                    HStack {
-                        Text("登録済みの理想のスケジュール")
-                            .font(.system(size: 16))
-                            .offset(x: 0, y: 20)
-                    }
-                    
-                    ScrollView {
-                        VStack(spacing: 10) {
-                            Spacer().frame(height: 10)
-                            ForEach(0..<scheduleDetailViewModel.idealScheduleTitleArray.count, id: \.self) { index in
-                                VStack {
-                                    IdealScheduleTitle(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
-                                }
-                                .frame(width: geometry.size.width - 40, height: 60)
-                                .background(Color.lemonchiffon)
-                                .cornerRadius(10)
-                                .padding(.horizontal, 20)
-                            }
-                            Spacer().frame(height: 10)
-                        }
-                    }
-                    .frame(width: geometry.size.width, height: 270)
-                    .background(Color.lightWhite)
-                    .offset(x: 0, y: 20)
+        VStack {
+            if isRequestSuccessful {
+                HStack {
+                    Text("登録済みの理想のスケジュール")
+                        .font(.system(size: screenSizeObject.screenSize.width / 20))
+                        .offset(x: 0, y: 5)
                 }
+                
+                ScrollView {
+                    VStack(spacing: 10) {
+                        Spacer().frame(height: 10)
+                        ForEach(0..<scheduleDetailViewModel.idealScheduleTitleArray.count, id: \.self) { index in
+                            VStack {
+                                IdealScheduleTitle(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                            }
+                            .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
+                            .background(Color.lemonchiffon)
+                            .cornerRadius(10)
+                            .padding(.horizontal, 20)
+                        }
+                        Spacer().frame(height: 10)
+                    }
+                }
+                .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height / 5)
+                .background(Color.lightWhite)
+                .offset(x: 0, y: 0)
             }
         }
         .onAppear {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
             bindViewModel()
         }
         .onChange(of: setting.isReload) { isReload in

@@ -8,18 +8,25 @@
 import SwiftUI
 
 struct IdealConfirmScheduleDetailButtonView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     @EnvironmentObject var route: RouteObserver
     
     var body: some View {
-        
-        Button(action: {
-            route.path = .IdealConfirmScheduleDetail
-        }) {
-            Text("現在の追加状況を確認")
-                .frame(width: 200, height: 30)
+        HStack {
+            Button(action: {
+                route.path = .IdealConfirmScheduleDetail
+            }) {
+                Text("現在の追加状況を確認")
+                    .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
+            }
+            .offset(x:0,y:0)
+            .buttonStyle(NormalButtonStyle.normalButtonStyle())
+            .padding() // ボタンの余白を調整
         }
-        .offset(x:0,y:105)
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding() // ボタンの余白を調整
+        .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
+        }
     }
 }

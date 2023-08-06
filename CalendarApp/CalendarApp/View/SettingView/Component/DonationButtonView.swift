@@ -8,16 +8,25 @@
 import SwiftUI
 
 struct DonationButtonView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     
     var body: some View  {
-        Button(action: {
-            // ToDo 広告をいっぱい表示する画面に遷移させる
-        }) {
-            Text("開発者へお布施")
-                .frame(width: 300, height: 30)
+        HStack {
+            Button(action: {
+                // ToDo 広告をいっぱい表示する画面に遷移させる
+            }) {
+                Text("開発者へお布施")
+                    .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
+                    .font(.system(size: screenSizeObject.screenSize.width / 20))
+            }
+            .offset(x: 0, y: 0)
+            .buttonStyle(NormalButtonStyle.normalButtonStyle())
+            .padding()
         }
-        .offset(x: 0, y: -50)
-        .buttonStyle(NormalButtonStyle.normalButtonStyle())
-        .padding()
+        .onAppear {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
+        }
     }
 }
