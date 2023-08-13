@@ -1,28 +1,27 @@
 //
-//  EditButtonView.swift
+//  IdealCanselButtonView.swift
 //  CalendarApp
 //
-//  Created by Kazusa Kondo on 2023/06/29.
+//  Created by Kazusa Kondo on 2023/08/13.
 //
 
 import SwiftUI
 
-struct EditButtonView: View {
+struct CanselIdealButtonView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     @Binding var isEditMode: Bool
     
     var body: some View  {
         HStack {
             Spacer()
-            
             Button(action: {
-                isEditMode = true
+                isEditMode = false
             }) {
-                Text("修正")
-                    .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 20)
-                    .font(.system(size: screenSizeObject.screenSize.width / 25))
+                Text("キャンセル")
+                    .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 20)
+                    .font(.system(size: screenSizeObject.screenSize.width / 40))
             }
-            .offset(x: 0, y: 0)
+            .offset(x: 30, y: 0)
             .buttonStyle(NormalButtonStyle.normalButtonStyle())
             .padding()
         }

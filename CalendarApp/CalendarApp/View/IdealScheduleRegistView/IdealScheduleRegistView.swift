@@ -21,7 +21,7 @@ struct IdealScheduleRegistView: View {
             }
             HStack {
                 HeaderView(_headerTitle: scheduleDetailViewModel.idealScheduleTitle + headerTitle)
-                    .offset(x:0, y:30)
+                    .offset(x:0, y:40)
             }
             VStack {
                 HStack {

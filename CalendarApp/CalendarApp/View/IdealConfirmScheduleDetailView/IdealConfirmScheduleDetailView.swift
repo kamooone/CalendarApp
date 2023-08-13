@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IdealConfirmScheduleDetailView: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
     @EnvironmentObject var setting: Setting
@@ -20,32 +21,33 @@ struct IdealConfirmScheduleDetailView: View {
     let headerTitle: String = "理想のスケジュール確認"
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                
-                HStack {
-                    BackButtonView()
+        VStack {
+            
+            HStack {
+                BackButtonView()
+                    .offset(x:0, y:screenSizeObject.screenSize.height / 10 - 20)
+            }
+            
+            HStack {
+                HeaderView(_headerTitle: headerTitle)
+                    .offset(x:0, y:screenSizeObject.screenSize.height / 10 + 0)
+            }
+            
+            HStack {
+                SelectIdealScheduleTitle()
+            }
+            
+            HStack {
+                if isEditMode {
+                    CanselIdealButtonView(isEditMode: $isEditMode)
+                    UpdateIdealScheduleDetailButtonView(isEditMode: $isEditMode)
+                } else {
+                    EditButtonView(isEditMode: $isEditMode)
                 }
-                
-                HStack {
-                    HeaderView(_headerTitle: headerTitle)
-                }
-                
-                HStack {
-                    SelectIdealScheduleTitle()
-                }
-                
-                HStack {
-                    Spacer()
-                    if isEditMode {
-                        CancelButtonView(isEditMode: $isEditMode)
-                        UpdateIdealScheduleDetailButtonView(isEditMode: $isEditMode)
-                    } else {
-                        EditButtonView(isEditMode: $isEditMode)
-                    }
-                }
-                
-                // ToDo 見栄えが悪いので処理を関数にする
+            }
+            
+            // ToDo 見栄えが悪いので処理を関数にする
+            HStack {
                 if isEditMode {
                     ScrollView {
                         VStack(spacing: 20) {
@@ -54,7 +56,7 @@ struct IdealConfirmScheduleDetailView: View {
                                 VStack {
                                     IdealScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                 }
-                                .frame(width: geometry.size.width - 40, height: 220)
+                                .frame(width: screenSizeObject.screenSize.width - 40, height: screenSizeObject.screenSize.height / 4)
                                 .background(Color.lemonchiffon)
                                 .cornerRadius(10)
                                 .padding(.horizontal, 20)
@@ -62,9 +64,9 @@ struct IdealConfirmScheduleDetailView: View {
                             Spacer().frame(height: 20)
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.75)
                     .background(Color.lightGray)
-                    .offset(x: 0, y: -100)
+                    .offset(x: 0, y: 0)
                 } else {
                     // ToDo 見栄えが悪いので処理を関数にする
                     ScrollView {
@@ -74,7 +76,7 @@ struct IdealConfirmScheduleDetailView: View {
                                 VStack {
                                     IdealSchedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
                                 }
-                                .frame(width: geometry.size.width - 40, height: 100)
+                                .frame(width: screenSizeObject.screenSize.width - 40, height: screenSizeObject.screenSize.height / 6)
                                 .background(Color.lemonchiffon)
                                 .cornerRadius(10)
                                 .padding(.horizontal, 20)
@@ -82,57 +84,81 @@ struct IdealConfirmScheduleDetailView: View {
                             Spacer().frame(height: 20)
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
+                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.75)
                     .background(Color.lightGray)
-                    .offset(x: 0, y: -100)
+                    .offset(x: 0, y: 0)
                 }
-                
-                BannerAdsView()
-                    .frame(width: geometry.size.width, height: 80)
-                    .background(Color.yellow)
-                    .offset(x: 0, y: -70)
-                
-                Spacer()
             }
+            
+            HStack {
+                BannerAdsView()
+                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.1)
+                    .background(Color.yellow)
+                    .offset(x: 0, y: -50)
+            }
+            Spacer()
+        }
+        .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
 }
 
 struct IdealSchedule: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     var scheduleDetailViewModel: ScheduleDetailViewModel
     var index: Int
     
     var body: some View {
         VStack {
+            Spacer().frame(height: 5)
+            
             HStack {
-                Text("タイトル")
-                    .font(.system(size: 16))
                 Text(scheduleDetailViewModel.idealScheduleDetailTitleArray[index])
+                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height / 30)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
             }
+            .offset(x:0, y:0)
+            
+            Spacer().frame(height: 10)
             
             HStack {
                 Text("開始")
-                    .font(.system(size: 16))
+                    .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Text(scheduleDetailViewModel.idealStartTimeArray[index])
                 
-                Text("〜")
-                    .font(.system(size: 16))
-                
                 Text("終了")
-                    .font(.system(size: 16))
+                    .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Text(scheduleDetailViewModel.idealEndTimeArray[index])
             }
+            .offset(x:0, y:0)
+            
+            Spacer().frame(height: 10)
             
             HStack {
                 Text("通知")
-                    .font(.system(size: 16))
+                    .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Text(scheduleDetailViewModel.idealIsNoticeArray[index] ? "ON" : "OFF")
             }
+            .offset(x:0, y:0)
+            
+            Spacer().frame(height: 5)
+        }
+        .onAppear{
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
         }
     }
 }
 
 struct IdealScheduleEdit: View {
+    @EnvironmentObject var screenSizeObject: ScreenSizeObject
     var scheduleDetailViewModel: ScheduleDetailViewModel
     var index: Int
     @State private var textFieldValue: String = ""
@@ -141,92 +167,97 @@ struct IdealScheduleEdit: View {
     @State private var isSwitchOn = true
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                
-                HStack {
-                    // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
-                    Spacer()
-                    TextField("", text: $textFieldValue)
-                        .frame(width: 300)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                        .onChange(of: textFieldValue) { newTitleDetail in
-                            // 表示用
-                            scheduleDetailViewModel.idealScheduleDetailTitle = newTitleDetail
-                            // 更新用にバックアップ
-                            scheduleDetailViewModel.updScheduleDetailTitleArray[index] = newTitleDetail
-                        }
-                    Spacer()
-                }
-                
-                HStack {
-                    Text("開始")
-                        .font(.system(size: 16))
-                    Picker("Select an StartTIme", selection: $selectedStartTime) {
-                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
-                            Text(scheduleDetailViewModel.timeArray[_index])
-                        }
-                    }
-                    .frame(width: 90, height: geometry.size.height / 10)
-                    .pickerStyle(MenuPickerStyle())
-                    .offset(x:0,y:0)
-                    .onChange(of: selectedStartTime) { timeIndex in
+        
+        VStack {
+            
+            HStack {
+                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
+                Spacer()
+                TextField("", text: $textFieldValue)
+                    .frame(width: 300, height: 0)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .onChange(of: textFieldValue) { newTitleDetail in
                         // 表示用
-                        scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[timeIndex]
+                        scheduleDetailViewModel.idealScheduleDetailTitle = newTitleDetail
                         // 更新用にバックアップ
-                        scheduleDetailViewModel.updStartTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
+                        scheduleDetailViewModel.updScheduleDetailTitleArray[index] = newTitleDetail
                     }
-                    
-                    Text("〜")
-                        .font(.system(size: 16))
-                    
-                    Text("終了")
-                        .font(.system(size: 16))
-                    Picker("Select an EndTime", selection: $selectedEndTime) {
-                        ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
-                            Text(scheduleDetailViewModel.timeArray[_index])
-                        }
-                    }
-                    .frame(width: 90, height: geometry.size.height / 10)
-                    .pickerStyle(MenuPickerStyle())
-                    .offset(x:0,y:0)
-                    .onChange(of: selectedEndTime) { timeIndex in
-                        // 表示用
-                        scheduleDetailViewModel.idealEndTime = scheduleDetailViewModel.timeArray[timeIndex]
-                        // 更新用にバックアップ
-                        scheduleDetailViewModel.updEndTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
+                    .offset(x:0, y:20)
+                Spacer()
+            }
+            
+            HStack {
+                Text("開始")
+                    .frame(width: screenSizeObject.screenSize.width / 8, height: 0)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
+                Picker("Select an StartTIme", selection: $selectedStartTime) {
+                    ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
+                        Text(scheduleDetailViewModel.timeArray[_index])
                     }
                 }
-                
-                HStack {
-                    Toggle("通知", isOn: $isSwitchOn)
-                        .offset(x:0,y:0)
-                        .padding(.horizontal, 100)
-                        .onChange(of: isSwitchOn) { newIsNotice in
-                            // 表示用
-                            scheduleDetailViewModel.idealIsNotice = newIsNotice
-                            // 更新用にバックアップ
-                            scheduleDetailViewModel.updIsNoticeArray[index] = newIsNotice
-                        }
+                .frame(width: screenSizeObject.screenSize.width / 4, height: screenSizeObject.screenSize.height / 10)
+                .pickerStyle(MenuPickerStyle())
+                .pickerStyle(MenuPickerStyle())
+                .offset(x:0,y:0)
+                .onChange(of: selectedStartTime) { timeIndex in
+                    // 表示用
+                    scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[timeIndex]
+                    // 更新用にバックアップ
+                    scheduleDetailViewModel.updStartTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                 }
                 
-                HStack {
-                    DeleteIdealDetailScheduleButtonView(_id: index)
+                Text("終了")
+                    .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
+                    .font(.system(size: screenSizeObject.screenSize.width / 25))
+                Picker("Select an EndTime", selection: $selectedEndTime) {
+                    ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
+                        Text(scheduleDetailViewModel.timeArray[_index])
+                    }
+                }
+                .frame(width: screenSizeObject.screenSize.width / 4, height: 0)
+                .pickerStyle(MenuPickerStyle())
+                .offset(x:0,y:0)
+                .onChange(of: selectedEndTime) { timeIndex in
+                    // 表示用
+                    scheduleDetailViewModel.idealEndTime = scheduleDetailViewModel.timeArray[timeIndex]
+                    // 更新用にバックアップ
+                    scheduleDetailViewModel.updEndTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                 }
             }
-            .onAppear {
-                textFieldValue = scheduleDetailViewModel.idealScheduleDetailTitleArray[index]
-                
-                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.idealStartTimeArray[index]) {
-                    selectedStartTime = selectedIndex
-                }
-                if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.idealEndTimeArray[index]) {
-                    selectedEndTime = selectedIndex
-                }
-                
-                isSwitchOn = scheduleDetailViewModel.idealIsNoticeArray[index]
+            
+            HStack {
+                Toggle("通知", isOn: $isSwitchOn)
+                    .frame(width: screenSizeObject.screenSize.width / 4, height: 20)
+                    .offset(x:0,y:0)
+                    .padding(.horizontal, 100)
+                    .onChange(of: isSwitchOn) { newIsNotice in
+                        // 表示用
+                        scheduleDetailViewModel.idealIsNotice = newIsNotice
+                        // 更新用にバックアップ
+                        scheduleDetailViewModel.updIsNoticeArray[index] = newIsNotice
+                    }
             }
+            
+            HStack {
+                DeleteIdealDetailScheduleButtonView(_id: index)
+            }
+        }
+        .onAppear {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else { return }
+            screenSizeObject.screenSize = window.bounds.size
+            
+            textFieldValue = scheduleDetailViewModel.idealScheduleDetailTitleArray[index]
+            
+            if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.idealStartTimeArray[index]) {
+                selectedStartTime = selectedIndex
+            }
+            if let selectedIndex = scheduleDetailViewModel.timeArray.firstIndex(of: scheduleDetailViewModel.idealEndTimeArray[index]) {
+                selectedEndTime = selectedIndex
+            }
+            
+            isSwitchOn = scheduleDetailViewModel.idealIsNoticeArray[index]
         }
     }
 }
