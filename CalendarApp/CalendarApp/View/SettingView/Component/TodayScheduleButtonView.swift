@@ -1,5 +1,5 @@
 //
-//  MiniGameButtonView.swift
+//  TodayScheduleButtonView.swift
 //  CalendarApp
 //
 //  Created by Kazusa Kondo on 2023/07/16.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MiniGameButtonView: View {
+struct TodayScheduleButtonView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     
     var body: some View  {

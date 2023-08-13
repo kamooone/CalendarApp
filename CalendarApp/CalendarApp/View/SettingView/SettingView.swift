@@ -27,7 +27,8 @@ struct SettingView: View {
                 IdealScheduleButtonView()
             }
             HStack {
-                MiniGameButtonView()
+                // ToDo 本日のスケジュールにする。
+                TodayScheduleButtonView()
             }
             HStack {
                 LanguageSwitcButtonView()

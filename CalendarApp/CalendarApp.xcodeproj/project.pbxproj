@@ -48,7 +48,7 @@
 		E2AA37412A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */; };
 		E2B363212A639420008C3E20 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363202A639420008C3E20 /* SettingView.swift */; };
 		E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363222A63B1BA008C3E20 /* IdealScheduleButtonView.swift */; };
-		E2B363252A63B2A3008C3E20 /* MiniGameButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363242A63B2A3008C3E20 /* MiniGameButtonView.swift */; };
+		E2B363252A63B2A3008C3E20 /* TodayScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363242A63B2A3008C3E20 /* TodayScheduleButtonView.swift */; };
 		E2B363272A63B2F6008C3E20 /* LanguageSwitchButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363262A63B2F6008C3E20 /* LanguageSwitchButtonView.swift */; };
 		E2B363292A63B35C008C3E20 /* CharacterSwitchingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B363282A63B35C008C3E20 /* CharacterSwitchingButtonView.swift */; };
 		E2B3632B2A63B3E6008C3E20 /* DonationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B3632A2A63B3E6008C3E20 /* DonationButtonView.swift */; };
@@ -115,7 +115,7 @@
 		E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2B363202A639420008C3E20 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E2B363222A63B1BA008C3E20 /* IdealScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdealScheduleButtonView.swift; sourceTree = "<group>"; };
-		E2B363242A63B2A3008C3E20 /* MiniGameButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniGameButtonView.swift; sourceTree = "<group>"; };
+		E2B363242A63B2A3008C3E20 /* TodayScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleButtonView.swift; sourceTree = "<group>"; };
 		E2B363262A63B2F6008C3E20 /* LanguageSwitchButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSwitchButtonView.swift; sourceTree = "<group>"; };
 		E2B363282A63B35C008C3E20 /* CharacterSwitchingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSwitchingButtonView.swift; sourceTree = "<group>"; };
 		E2B3632A2A63B3E6008C3E20 /* DonationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationButtonView.swift; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B363222A63B1BA008C3E20 /* IdealScheduleButtonView.swift */,
-				E2B363242A63B2A3008C3E20 /* MiniGameButtonView.swift */,
+				E2B363242A63B2A3008C3E20 /* TodayScheduleButtonView.swift */,
 				E2B363262A63B2F6008C3E20 /* LanguageSwitchButtonView.swift */,
 				E2B363282A63B35C008C3E20 /* CharacterSwitchingButtonView.swift */,
 				E2B3632A2A63B3E6008C3E20 /* DonationButtonView.swift */,
@@ -642,7 +642,7 @@
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
 				E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */,
 				E295B8DD2A890D2400B8551A /* CanselIdealButtonView.swift in Sources */,
-				E2B363252A63B2A3008C3E20 /* MiniGameButtonView.swift in Sources */,
+				E2B363252A63B2A3008C3E20 /* TodayScheduleButtonView.swift in Sources */,
 				E2B363352A63E20D008C3E20 /* IdealScheduleRegistButtonView.swift in Sources */,
 				E2B3633E2A63E9FE008C3E20 /* IdealAppendScheduleDetailButtonView.swift in Sources */,
 				E2B363372A63E681008C3E20 /* IdealConfirmScheduleDetailButtonView.swift in Sources */,
