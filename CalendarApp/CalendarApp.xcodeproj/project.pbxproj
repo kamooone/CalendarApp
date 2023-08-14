@@ -25,6 +25,7 @@
 		E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = E22CD0E32A25CE2900C78018 /* hamburger.png */; };
 		E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CD0E72A25CF8700C78018 /* HamburgerView.swift */; };
 		E24F7B832A41EA58002F12C7 /* ScheduleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */; };
+		E26543672A8A565600742575 /* NoticeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26543662A8A565600742575 /* NoticeSettingViewModel.swift */; };
 		E2661EDD2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EDC2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift */; };
 		E2661EDF2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EDE2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift */; };
 		E2661EE12A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EE02A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift */; };
@@ -91,6 +92,7 @@
 		E22CD0E32A25CE2900C78018 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		E22CD0E72A25CF8700C78018 /* HamburgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
 		E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewModel.swift; sourceTree = "<group>"; };
+		E26543662A8A565600742575 /* NoticeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSettingViewModel.swift; sourceTree = "<group>"; };
 		E2661EDC2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIdealScheduleTitle.swift; sourceTree = "<group>"; };
 		E2661EDE2A6AB4B400BA5A8F /* DeleteIdealScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteIdealScheduleButtonView.swift; sourceTree = "<group>"; };
 		E2661EE02A6ACC7300BA5A8F /* EditIdealScheduleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIdealScheduleButtonView.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			children = (
 				E27C8E5C2A23991A00841268 /* CalendarViewModel.swift */,
 				E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */,
+				E26543662A8A565600742575 /* NoticeSettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */,
 				E2C1BB752A69278600AB4403 /* IdealRegisteredScheduleTitleView.swift in Sources */,
 				E27C8E5A2A2398E400841268 /* CalendarView.swift in Sources */,
+				E26543672A8A565600742575 /* NoticeSettingViewModel.swift in Sources */,
 				E2B363232A63B1BA008C3E20 /* IdealScheduleButtonView.swift in Sources */,
 				E295B8DD2A890D2400B8551A /* CanselIdealButtonView.swift in Sources */,
 				E2B363252A63B2A3008C3E20 /* TodayScheduleButtonView.swift in Sources */,
@@ -816,6 +820,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -849,6 +854,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
