@@ -77,9 +77,14 @@ final class NoticeSettingViewModel: ObservableObject {
         }
     }
     
+    //==================================================================================
     // 登録済みの通知削除
-//        let identifierToRemove = "通知No.1"
-//        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifierToRemove])
+    //==================================================================================
+    func deleteNotificationRequest() {
+        // ToDo 削除したい通知のidentifierを求める処理
+        let identifierToRemove = "510"
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifierToRemove])
+    }
     
 }
 
