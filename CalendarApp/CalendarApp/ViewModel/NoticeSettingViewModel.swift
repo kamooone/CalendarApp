@@ -43,11 +43,10 @@ final class NoticeSettingViewModel: ObservableObject {
     // 通知内容を登録するメソッド
     //==================================================================================
     func sendNotificationRequest(_scheduleDetailData: ScheduleDetailData) {
-        let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         let calendarViewModel = CalendarViewModel.shared
         
         let content = UNMutableNotificationContent()
-        content.title = scheduleDetailViewModel.scheduleDetailTitle
+        content.title = _scheduleDetailData.scheduleDetailTitle
         content.body = "スケジュール5分前です。準備は出来ていますか？" // ToDo 文言の変更または文言を自由に出来るようにする改善あり
         
         var dateComponents = DateComponents()
@@ -55,9 +54,9 @@ final class NoticeSettingViewModel: ObservableObject {
         dateComponents.month = calendarViewModel.selectMonth
         dateComponents.day = calendarViewModel.selectDay
         // ToDo 5分前にする
-        dateComponents.hour = Int(scheduleDetailViewModel.startTime.prefix(2))
-        dateComponents.minute = Int(scheduleDetailViewModel.startTime.suffix(2))
-        let identifier = scheduleDetailViewModel.id
+        dateComponents.hour = Int(_scheduleDetailData.startTime.prefix(2))
+        dateComponents.minute = Int(_scheduleDetailData.startTime.suffix(2))
+        let identifier = String(describing: _scheduleDetailData.id)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
@@ -84,7 +83,7 @@ final class NoticeSettingViewModel: ObservableObject {
     // 登録済みの通知削除
     //==================================================================================
     func deleteNotificationRequest() {
-        // ToDo 削除したい通知のidentifierを使用して登録している通知を削除
+        // ToDo2023/8/19 削除したい通知のidentifierを使用して登録している通知を削除
         let identifierToRemove = "510"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifierToRemove])
     }
