@@ -44,7 +44,6 @@ struct RegisterScheduleDetailButtonView: View {
     }
     
     func regist() {
-        let noticeSettingViewModel = NoticeSettingViewModel.shared
         let group = DispatchGroup()
         group.enter()
         
@@ -57,10 +56,6 @@ struct RegisterScheduleDetailButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "登録が成功しました"
-                        
-                        // ToDo 登録した内容の通知登録処理(フォアグラウンドでも通知が来るようにする設定も必要？)
-                        // ToDo 日付等、そして複数通知登録処理
-                        noticeSettingViewModel.sendNotificationRequest()
                     }
                 } else {
                     print("非同期処理失敗")

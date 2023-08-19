@@ -42,25 +42,28 @@ final class NoticeSettingViewModel: ObservableObject {
     //==================================================================================
     // 通知内容を登録するメソッド
     //==================================================================================
-    func sendNotificationRequest() {
+    func sendNotificationRequest(_scheduleDetailData: ScheduleDetailData) {
+        let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+        let calendarViewModel = CalendarViewModel.shared
+        
         let content = UNMutableNotificationContent()
-        content.title = "通知タイトルテスト"
-        content.body = "通知の内容テスト"
+        content.title = scheduleDetailViewModel.scheduleDetailTitle
+        content.body = "スケジュール5分前です。準備は出来ていますか？" // ToDo 文言の変更または文言を自由に出来るようにする改善あり
         
         var dateComponents = DateComponents()
-        dateComponents.year = 2023
-        dateComponents.month = Int.random(in: 9..<12)
-        dateComponents.day = Int.random(in: 1..<28)
-        dateComponents.hour = Int.random(in: 0..<23)
-        dateComponents.minute = Int.random(in: 0..<60)
+        dateComponents.year = calendarViewModel.selectYear
+        dateComponents.month = calendarViewModel.selectMonth
+        dateComponents.day = calendarViewModel.selectDay
+        // ToDo 5分前にする
+        dateComponents.hour = Int(scheduleDetailViewModel.startTime.prefix(2))
+        dateComponents.minute = Int(scheduleDetailViewModel.startTime.suffix(2))
+        let identifier = scheduleDetailViewModel.id
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        
-        let randomInt = Int.random(in: 1..<1000)
-        let request = UNNotificationRequest(identifier: String(randomInt), content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
         
-        // 登録済みの通知一覧確認
+        // 登録済みの通知一覧確認(デバッグ用、本日のスケジュール一覧表時でも使用すると思う)
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
             if requests.isEmpty {
@@ -81,7 +84,7 @@ final class NoticeSettingViewModel: ObservableObject {
     // 登録済みの通知削除
     //==================================================================================
     func deleteNotificationRequest() {
-        // ToDo 削除したい通知のidentifierを求める処理
+        // ToDo 削除したい通知のidentifierを使用して登録している通知を削除
         let identifierToRemove = "510"
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifierToRemove])
     }

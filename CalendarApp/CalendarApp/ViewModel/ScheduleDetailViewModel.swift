@@ -14,6 +14,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var isEditMode: Bool = false
     
+    var id = ""
     var scheduleDetailTitle = ""
     var startTime = "00:00"
     var endTime = "00:00"
@@ -64,6 +65,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         
         let scheduleDetailData = ScheduleDetailData()
         let calendarViewModel = CalendarViewModel.shared
+        self.id = String(describing: ObjectId.generate())
         scheduleDetailData.id = ObjectId.generate()
         scheduleDetailData.date = "\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日"
         scheduleDetailData.scheduleDetailTitle = self.scheduleDetailTitle
@@ -84,6 +86,12 @@ final class ScheduleDetailViewModel: ObservableObject {
                 print("scheduleDetailData.endTime",scheduleDetailData.endTime)
                 print("scheduleDetailData.isNotice",scheduleDetailData.isNotice)
                 print(scheduleDetailData)
+                
+                // 通知をONに設定していたら通知登録処理
+                if scheduleDetailData.isNotice {
+                    let noticeSettingViewModel = NoticeSettingViewModel.shared
+                    noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData)
+                }
                 
                 // 非同期処理が成功したことを示す
                 completion(true)
