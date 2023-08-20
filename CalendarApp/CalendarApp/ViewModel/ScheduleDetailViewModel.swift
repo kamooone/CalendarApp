@@ -608,7 +608,11 @@ final class ScheduleDetailViewModel: ObservableObject {
 
                     realm.add(scheduleDetailData)
                     
-                    // ToDo scheduleDetailData.isNoticeがtrueの値だけ通知設定登録処理を行う
+                    // ToDo scheduleDetailData.isNoticeがtrueの値だけ通知設定登録処理を行うテスト
+                    if scheduleDetailData.isNotice {
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData)
+                    }
                     
                     //================================================================
                     // 登録処理デバッグ
