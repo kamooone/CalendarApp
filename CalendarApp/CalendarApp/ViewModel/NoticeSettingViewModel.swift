@@ -82,9 +82,8 @@ final class NoticeSettingViewModel: ObservableObject {
     //==================================================================================
     // 登録済みの通知削除
     //==================================================================================
-    func deleteNotificationRequest() {
-        // ToDo2023/8/19 削除したい通知のidentifierを使用して登録している通知を削除
-        let identifierToRemove = "510"
+    func deleteNotificationRequest(_scheduleDetailData: ScheduleDetailData) {
+        let identifierToRemove = String(describing: _scheduleDetailData.id)
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifierToRemove])
     }
     

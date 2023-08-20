@@ -221,6 +221,15 @@ final class ScheduleDetailViewModel: ObservableObject {
                 let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
                 realm.delete(scheduleDetailData)
                 
+                // ToDo for文を使用して登録している通知設定を削除する処理テスト
+                for i in 0..<scheduleDetailData.count {
+                    if scheduleDetailData[i].isNotice {
+                        // 通知設定フラグが変わったので通知設定の更新
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.deleteNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
+                    }
+                }
+                
                 completion(true)
             }
         } catch {
@@ -558,6 +567,15 @@ final class ScheduleDetailViewModel: ObservableObject {
                 let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
                 realm.delete(scheduleDetailData)
                 
+                // ToDo for文を使用して登録している通知設定を削除する処理テスト
+                for i in 0..<scheduleDetailData.count {
+                    if scheduleDetailData[i].isNotice {
+                        // 通知設定フラグが変わったので通知設定の更新
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.deleteNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
+                    }
+                }
+                
                 completion(true)
             }
         } catch {
@@ -589,6 +607,8 @@ final class ScheduleDetailViewModel: ObservableObject {
                     scheduleDetailData.isNotice = scheduleDetailViewModel.isNoticeArray[i]
 
                     realm.add(scheduleDetailData)
+                    
+                    // ToDo scheduleDetailData.isNoticeがtrueの値だけ通知設定登録処理を行う
                     
                     //================================================================
                     // 登録処理デバッグ
