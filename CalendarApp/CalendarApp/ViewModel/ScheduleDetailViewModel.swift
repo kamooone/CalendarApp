@@ -93,6 +93,13 @@ final class ScheduleDetailViewModel: ObservableObject {
                     noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData)
                 }
                 
+                // 初期化処理
+                self.id = ""
+                self.scheduleDetailTitle = ""
+                self.startTime = "00:00"
+                self.endTime = "00:00"
+                self.isNotice = true
+                
                 // 非同期処理が成功したことを示す
                 completion(true)
             }
@@ -584,7 +591,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
-    // DB登録処理(複数件の新規登録処理)
+    // DB登録処理(複数件の新規登録処理、理想のスケジュールを反映した時だけに呼ばれる)
     func setIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
         let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         print(Realm.Configuration.defaultConfiguration.fileURL!)

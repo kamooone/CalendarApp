@@ -104,18 +104,20 @@ struct SetButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
+                        // 先にレコード削除してから登録処理を行う
+                        delete()
+                        
                         scheduleDetailViewModel.scheduleDetailTitleArray = scheduleDetailViewModel.idealScheduleDetailTitleArray
                         scheduleDetailViewModel.startTimeArray = scheduleDetailViewModel.idealStartTimeArray
                         scheduleDetailViewModel.endTimeArray = scheduleDetailViewModel.idealEndTimeArray
                         scheduleDetailViewModel.isNoticeArray = scheduleDetailViewModel.idealIsNoticeArray
                         
+                        print("理想スケジュール反映デバッグ")
                         print(scheduleDetailViewModel.scheduleDetailTitleArray)
                         print(scheduleDetailViewModel.startTimeArray)
                         print(scheduleDetailViewModel.endTimeArray)
                         print(scheduleDetailViewModel.isNoticeArray)
                         
-                        // 先にレコード削除してから登録処理を行う
-                        delete()
                         update()
                     }
                 } else {
