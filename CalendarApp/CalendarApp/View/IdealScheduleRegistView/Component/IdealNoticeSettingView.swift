@@ -18,7 +18,7 @@ struct IdealNoticeSettingView: View {
                 .font(.system(size: screenSizeObject.screenSize.width / 25))
                 .padding(.horizontal, screenSizeObject.screenSize.width / 5)
                 .onChange(of: isSwitchOn) { newValue in
-                    scheduleDetailViewModel.isNotice = newValue
+                    scheduleDetailViewModel.idealIsNotice = newValue
                 }
                 .offset(x:0, y:0)
         }
