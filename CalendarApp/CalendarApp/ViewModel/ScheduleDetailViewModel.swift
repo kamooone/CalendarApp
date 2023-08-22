@@ -178,6 +178,7 @@ final class ScheduleDetailViewModel: ObservableObject {
             let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
             print(scheduleDetailData)
             try realm.write {
+                // ToDo うまく更新できていない。タイトルのところ？
                 // 更新のあったフィールドのみ更新する
                 for i in 0..<updScheduleDetailTitleArray.count {
                     if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
@@ -261,13 +262,9 @@ final class ScheduleDetailViewModel: ObservableObject {
             
             // 該当する月のレコードをクエリで取得(表示するカレンダーの年月と同じレコードかつ、日付が早い順に取得)
             let scheduleDetailData = realm.objects(ScheduleDetailData.self)
-                // ToDo どのようなロジックになっているのかを理解する
                 .filter("date CONTAINS '\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月'")
                 .sorted { (data1, data2) -> Bool in
-                    guard let day1 = getDayFromString(data1.date), let day2 = getDayFromString(data2.date) else {
-                        return false
-                    }
-                    return day1 < day2
+                    return data1.startTime < data2.startTime
                 }
             
             // 取得したデータをパース処理
