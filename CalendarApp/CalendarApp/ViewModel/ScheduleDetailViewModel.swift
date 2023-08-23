@@ -441,7 +441,8 @@ final class ScheduleDetailViewModel: ObservableObject {
                     idealScheduleDetailData.endTime = scheduleDetailViewModel.updEndTimeArray[i]
                     idealScheduleDetailData.isNotice = scheduleDetailViewModel.updIsNoticeArray[i]
 
-                    scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
+                    // 更新内容を上書き
+                    scheduleDetailData.scheduleDetails[i] = idealScheduleDetailData
                 }
             }
             
