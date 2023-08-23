@@ -428,8 +428,6 @@ final class ScheduleDetailViewModel: ObservableObject {
 
             // レコードのプロパティを更新
             try realm.write {
-                // 既存のスケジュール詳細を削除
-                scheduleDetailData.scheduleDetails.removeAll()
                 
                 // 新しいスケジュール詳細を追加
                 for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
