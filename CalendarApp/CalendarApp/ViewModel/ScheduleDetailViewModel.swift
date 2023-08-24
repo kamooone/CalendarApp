@@ -369,6 +369,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
+        // ToDo 理想のスケジュールの新規登録処理、更新、修正処理、要確認。
         do {
             let idealScheduleDetailData = IdealScheduleDetailData()
             idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitle
@@ -376,32 +377,36 @@ final class ScheduleDetailViewModel: ObservableObject {
             idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTime
             idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNotice
             
-            let idealScheduleData = IdealScheduleData()
-            self.idealId = String(describing: ObjectId.generate())
-            idealScheduleData.id = ObjectId.generate()
-            idealScheduleData.scheduleTitle = self.idealScheduleTitle
-            idealScheduleData.scheduleDetails.append(idealScheduleDetailData)
-            
             let realm = try Realm(configuration: config)
-            try realm.write {
-                realm.add(idealScheduleData)
+            
+            if let objectId = try? ObjectId(string: self.idealId),
+               let existingScheduleData = realm.objects(IdealScheduleData.self).filter("id == %@", objectId).first {
+                // 既存のデータがある場合は更新
+                try realm.write {
+                    existingScheduleData.scheduleDetails.append(idealScheduleDetailData)
+                }
+            } else {
+                // 新規作成
+                let idealScheduleData = IdealScheduleData()
+                idealScheduleData.id = ObjectId.generate()
+                self.idealId = String(describing: idealScheduleData.id)
+                print("self.idealId",self.idealId)
+                print("idealScheduleData.id",idealScheduleData.id)
+                idealScheduleData.scheduleTitle = self.idealScheduleTitle
+                idealScheduleData.scheduleDetails.append(idealScheduleDetailData)
                 
-                //================================================================
-                // 登録処理デバッグ
-                //================================================================
-                print(Realm.Configuration.defaultConfiguration.fileURL!)
-                print("idealScheduleData",idealScheduleData)
-                
-                
-                // 非同期処理が成功したことを示す
-                completion(true)
+                try realm.write {
+                    realm.add(idealScheduleData)
+                }
             }
-        } catch {
-            print("Realmの書き込みエラー：\(error)")
-            // 非同期処理失敗
+            
+            completion(true)
+        } catch let error as NSError {
+            print("Realmの書き込みエラー：\(error.localizedDescription)")
             completion(false)
         }
     }
+
     
     // 登録済みの理想のスケジュールDB更新処理
     func updateIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
