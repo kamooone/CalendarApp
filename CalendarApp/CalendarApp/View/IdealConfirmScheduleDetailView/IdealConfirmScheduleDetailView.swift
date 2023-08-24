@@ -20,6 +20,40 @@ struct IdealConfirmScheduleDetailView: View {
     @State private var alertMessage = ""
     let headerTitle: String = "理想のスケジュール確認"
     
+    func bindViewModel() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue(label: "realm").async {
+            scheduleDetailViewModel.getIdealScheduleDetail { success in
+                group.leave()
+                
+                if success {
+                    print("非同期処理成功")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        setting.isReload = false
+                    }
+                } else {
+                    print("非同期処理失敗")
+                    // ToDo 取得失敗エラーアラート表示
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        
+                    }
+                }
+            }
+        }
+        
+        // 成功失敗に関わらず呼ばれる
+        group.notify(queue: .main) {
+            // ToDo 失敗エラーアラート表示
+            print("非同期処理終了")
+        }
+    }
+    
+    // ToDo idealScheduleDetailTitleArray等はどこで取得している？また、確認画面で昇順に表示されてないので修正する、
+    // またその他にも理想のスケジュール更新関連で不具合あり。
     var body: some View {
         VStack {
             
@@ -48,45 +82,47 @@ struct IdealConfirmScheduleDetailView: View {
             
             // ToDo 見栄えが悪いので処理を関数にする
             HStack {
-                if isEditMode {
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            Spacer().frame(height: 20)
-                            ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
-                                VStack {
-                                    IdealScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                if !setting.isReload {
+                    if isEditMode {
+                        ScrollView {
+                            VStack(spacing: 20) {
+                                Spacer().frame(height: 20)
+                                ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
+                                    VStack {
+                                        IdealScheduleEdit(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                    }
+                                    .frame(width: screenSizeObject.screenSize.width - 40, height: screenSizeObject.screenSize.height / 4)
+                                    .background(Color.lemonchiffon)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 20)
                                 }
-                                .frame(width: screenSizeObject.screenSize.width - 40, height: screenSizeObject.screenSize.height / 4)
-                                .background(Color.lemonchiffon)
-                                .cornerRadius(10)
-                                .padding(.horizontal, 20)
+                                Spacer().frame(height: 20)
                             }
-                            Spacer().frame(height: 20)
                         }
-                    }
-                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.75)
-                    .background(Color.lightGray)
-                    .offset(x: 0, y: 0)
-                } else {
-                    // ToDo 見栄えが悪いので処理を関数にする
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            Spacer().frame(height: 20)
-                            ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
-                                VStack {
-                                    IdealSchedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                        .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.75)
+                        .background(Color.lightGray)
+                        .offset(x: 0, y: 0)
+                    } else {
+                        // ToDo 見栄えが悪いので処理を関数にする
+                        ScrollView {
+                            VStack(spacing: 20) {
+                                Spacer().frame(height: 20)
+                                ForEach(0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count, id: \.self) { index in
+                                    VStack {
+                                        IdealSchedule(scheduleDetailViewModel: scheduleDetailViewModel, index: index)
+                                    }
+                                    .frame(width: screenSizeObject.screenSize.width - 40, height: screenSizeObject.screenSize.height / 6)
+                                    .background(Color.lemonchiffon)
+                                    .cornerRadius(10)
+                                    .padding(.horizontal, 20)
                                 }
-                                .frame(width: screenSizeObject.screenSize.width - 40, height: screenSizeObject.screenSize.height / 6)
-                                .background(Color.lemonchiffon)
-                                .cornerRadius(10)
-                                .padding(.horizontal, 20)
+                                Spacer().frame(height: 20)
                             }
-                            Spacer().frame(height: 20)
                         }
+                        .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.75)
+                        .background(Color.lightGray)
+                        .offset(x: 0, y: 0)
                     }
-                    .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height * 0.75)
-                    .background(Color.lightGray)
-                    .offset(x: 0, y: 0)
                 }
             }
             
@@ -98,10 +134,16 @@ struct IdealConfirmScheduleDetailView: View {
             }
             Spacer()
         }
+        .onChange(of: setting.isReload) { isReload in
+            if isReload {
+                bindViewModel()
+            }
+        }
         .onAppear{
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }
             screenSizeObject.screenSize = window.bounds.size
+            bindViewModel()
         }
     }
 }

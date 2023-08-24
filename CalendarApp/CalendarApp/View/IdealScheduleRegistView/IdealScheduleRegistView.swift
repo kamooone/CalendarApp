@@ -47,13 +47,6 @@ struct IdealScheduleRegistView: View {
                         .offset(x:0, y:0)
                     Spacer()
                 }
-                
-                HStack {
-                    Spacer()
-                    IdealScheduleRegistButtonView()
-                        .offset(x:0, y:0)
-                    Spacer()
-                }
                 .frame(width: screenSizeObject.screenSize.width, height: screenSizeObject.screenSize.height / 3)
                 .background(Color.lightWhite)
                 .offset(x: 0, y: 0)

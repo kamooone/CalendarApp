@@ -40,6 +40,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var isIdealScheduleUpdate: Bool = false
     
+    var idealId = ""
     var idealScheduleTitle = ""
     var idealScheduleDetailTitle = ""
     var idealStartTime = "00:00"
@@ -368,30 +369,28 @@ final class ScheduleDetailViewModel: ObservableObject {
         let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
-        
-        let scheduleDetailData = IdealScheduleData()
-        scheduleDetailData.scheduleTitle = self.idealScheduleTitle
-        
-        for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
-            let idealScheduleDetailData = IdealScheduleDetailData()
-            idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitleArray[i]
-            idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTimeArray[i]
-            idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTimeArray[i]
-            idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNoticeArray[i]
-
-            scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
-        }
-        
         do {
+            let idealScheduleDetailData = IdealScheduleDetailData()
+            idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitle
+            idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTime
+            idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTime
+            idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNotice
+            
+            let idealScheduleData = IdealScheduleData()
+            self.idealId = String(describing: ObjectId.generate())
+            idealScheduleData.id = ObjectId.generate()
+            idealScheduleData.scheduleTitle = self.idealScheduleTitle
+            idealScheduleData.scheduleDetails.append(idealScheduleDetailData)
+            
             let realm = try Realm(configuration: config)
             try realm.write {
-                realm.add(scheduleDetailData)
+                realm.add(idealScheduleData)
                 
                 //================================================================
                 // 登録処理デバッグ
                 //================================================================
                 print(Realm.Configuration.defaultConfiguration.fileURL!)
-                print("scheduleDetailData",scheduleDetailData)
+                print("idealScheduleData",idealScheduleData)
                 
                 
                 // 非同期処理が成功したことを示す

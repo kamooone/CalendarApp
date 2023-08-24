@@ -58,6 +58,7 @@ final class NoticeSettingViewModel: ObservableObject {
         dateComponents.minute = Int(_scheduleDetailData.startTime.suffix(2))
         let identifier = String(describing: _scheduleDetailData.id)
         
+        // ToDo 登録済みの通知の時間の修正更新した時にうまく通知設定ができてない？
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)

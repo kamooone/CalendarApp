@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UpdateIdealScheduleDetailButtonView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
+    @EnvironmentObject var setting: Setting
     @Binding var isEditMode: Bool
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
@@ -32,6 +33,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     title: Text(alertMessage),
                     dismissButton: .default(Text("OK")) {
                         isEditMode = false
+                        setting.isReload = true
                     }
                 )
             }
@@ -59,7 +61,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "更新が完了しました"
+                        alertMessage = "システムエラーが発生しました。"
                         showAlert = true
                     }
                 }
@@ -85,7 +87,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録が成功しました"
+                        alertMessage = "更新が完了しました"
                     }
                 } else {
                     print("非同期処理失敗")

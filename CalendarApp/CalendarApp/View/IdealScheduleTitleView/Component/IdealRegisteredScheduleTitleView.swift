@@ -108,6 +108,7 @@ struct IdealScheduleTitle: View {
     
     var body: some View {
         VStack {
+            // ToDo 登録済み理想のスケジュールのタイトルを変更できるようにする。
             HStack {
                 Spacer()
                 Text(scheduleDetailViewModel.idealScheduleTitleArray[index])
