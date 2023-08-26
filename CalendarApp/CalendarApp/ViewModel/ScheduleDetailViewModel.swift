@@ -398,6 +398,13 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
+            self.idealId = ""
+            self.idealScheduleDetailTitle = ""
+            self.idealStartTime = "00:00"
+            self.idealEndTime = "00:00"
+            self.idealIsNotice = true
+            self.idealScheduleTitle = ""
+            
             completion(true)
         } catch let error as NSError {
             print("Realmの書き込みエラー：\(error.localizedDescription)")

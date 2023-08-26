@@ -142,7 +142,6 @@ struct SetButtonView: View {
             Button(action: {
                 bindViewModel()
             }) {
-                // 2023/8/26 ToDo 何も選択されてない時はこのボタンを押せないようにする
                 Text("設定する")
                     .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
             }

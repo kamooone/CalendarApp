@@ -21,7 +21,6 @@ struct ScheduleDetailView: View {
                 }
                 
                 HStack {
-                    // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる。もしくはキャラの画像で
                     Text("タイトル")
                         .font(.system(size: geometry.size.width / 25))
                         .offset(x: 20, y: 0)

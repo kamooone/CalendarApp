@@ -11,6 +11,7 @@ struct IdealScheduleRegistView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     let headerTitle: String = "のスケジュール"
+    @State private var isShouldReloadView: Int = 0
     
     var body: some View {
         Color.lightGray.edgesIgnoringSafeArea(.all)
@@ -36,7 +37,7 @@ struct IdealScheduleRegistView: View {
                 
                 HStack {
                     Spacer()
-                    IdealAppendScheduleDetailButtonView()
+                    IdealAppendScheduleDetailButtonView(isShouldReloadView: $isShouldReloadView)
                         .offset(x:0, y:0)
                     Spacer()
                 }
@@ -63,6 +64,7 @@ struct IdealScheduleRegistView: View {
             }
             Spacer()
         }
+        .id(isShouldReloadView)
         .onAppear{
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }

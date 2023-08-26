@@ -23,7 +23,6 @@ struct RegisterScheduleDetailButtonView: View {
                 Button(action: {
                     if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
                         regist()
-                        isReload = true
                     } else {
                         showAlert = true
                         if scheduleDetailViewModel.scheduleDetailTitle.count == 0 {

@@ -9,17 +9,26 @@ import SwiftUI
 import RealmSwift
 
 struct IdealAppendScheduleDetailButtonView: View {
+    @Binding var isShouldReloadView: Int
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var isReload: Bool = false
     
     var body: some View {
         HStack {
-            // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
-            // ToDo 登録完了したら入力内容を初期化する
             Button(action: {
-                regist()
+                if scheduleDetailViewModel.idealScheduleDetailTitle.count != 0 && scheduleDetailViewModel.idealScheduleDetailTitle.count < 11 {
+                    regist()
+                } else {
+                    showAlert = true
+                    if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {
+                        alertMessage = "タイトルの入力は必須です。"
+                    } else {
+                        alertMessage = "タイトルは10文字以内で入力してください。"
+                    }
+                }
             }) {
                 Text("追加")
                     .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 20)
@@ -31,7 +40,11 @@ struct IdealAppendScheduleDetailButtonView: View {
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text(alertMessage),
-                    dismissButton: .default(Text("OK"))
+                    dismissButton: .default(Text("OK")){
+                        if isReload {
+                            isShouldReloadView += 1
+                        }
+                    }
                 )
             }
         }
@@ -55,6 +68,7 @@ struct IdealAppendScheduleDetailButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "登録が成功しました"
+                        isReload = true
                     }
                 } else {
                     print("非同期処理失敗")
