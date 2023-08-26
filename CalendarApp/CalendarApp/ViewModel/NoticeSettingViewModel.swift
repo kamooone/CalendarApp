@@ -43,7 +43,6 @@ final class NoticeSettingViewModel: ObservableObject {
     // 通知内容を登録するメソッド
     //==================================================================================
     func sendNotificationRequest(_scheduleDetailData: ScheduleDetailData) {
-        // ToDo 通知テスト
         let calendarViewModel = CalendarViewModel.shared
         
         let content = UNMutableNotificationContent()
