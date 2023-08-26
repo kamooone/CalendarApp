@@ -197,11 +197,11 @@ final class ScheduleDetailViewModel: ObservableObject {
                     if isNoticeArray[i] != updIsNoticeArray[i] {
                         isNoticeArray[i] = updIsNoticeArray[i]
                         scheduleDetailData[i].isNotice = isNoticeArray[i]
-                        
-                        // 通知設定フラグが変わったので通知設定の更新
-                        let noticeSettingViewModel = NoticeSettingViewModel.shared
-                        noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
                     }
+                    
+                    // 通知設定の更新
+                    let noticeSettingViewModel = NoticeSettingViewModel.shared
+                    noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
                 }
                 completion(true)
             }
