@@ -11,7 +11,6 @@ struct SettingView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let headerTitle: String = "設定"
     
-    // ToDo 2023/8/5 表示正規化
     var body: some View {
         // ToDo 間間に書くボタンの説明をしてるキャラクターを表示させる
         VStack {

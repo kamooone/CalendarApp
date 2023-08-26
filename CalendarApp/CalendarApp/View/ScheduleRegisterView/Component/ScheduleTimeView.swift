@@ -28,7 +28,7 @@ struct ScheduleTimeView: View {
         GeometryReader { geometry in
             HStack {
                 Spacer()
-                // ToDo 開始より終了の方が早い場合はエラーにする。
+                // 2023/8/27 ToDo 開始より終了の方が早い場合はエラーにする。
                 // ToDo 選択式ではなくて入力式に変更した方が良いかも
                 Text("開始")
                     .frame(width: geometry.size.width / 8, height: geometry.size.height / 10)
