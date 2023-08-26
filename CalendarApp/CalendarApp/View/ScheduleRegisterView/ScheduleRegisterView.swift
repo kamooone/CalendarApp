@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScheduleRegisterView: View {
     let headerTitle: String = "スケジュール登録"
+    @State private var isShouldReloadView: Int = 0
     
     var body: some View {
         Color.lightGray.edgesIgnoringSafeArea(.all)
@@ -46,7 +47,7 @@ struct ScheduleRegisterView: View {
                         
                         VStack {
                             ConfirmScheduleDetailButtonView()
-                            RegisterScheduleDetailButtonView()
+                            RegisterScheduleDetailButtonView(isShouldReloadView: $isShouldReloadView)
                         }
                     }
                     .frame(width:geometry.size.width, height:geometry.size.height / 2)
@@ -64,6 +65,7 @@ struct ScheduleRegisterView: View {
                 Spacer()
             }
         }
+        .id(isShouldReloadView)
     }
 }
 

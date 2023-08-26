@@ -9,9 +9,11 @@ import SwiftUI
 import RealmSwift
 
 struct RegisterScheduleDetailButtonView: View {
+    @Binding var isShouldReloadView: Int
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var isReload: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -19,9 +21,16 @@ struct RegisterScheduleDetailButtonView: View {
                 Spacer()
                 
                 Button(action: {
-                    // ToDo タイトル未入力の場合はグレーアウトさせる
-                    if scheduleDetailViewModel.scheduleDetailTitle != "" {
+                    if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
                         regist()
+                        isReload = true
+                    } else {
+                        showAlert = true
+                        if scheduleDetailViewModel.scheduleDetailTitle.count == 0 {
+                            alertMessage = "タイトルの入力は必須です。"
+                        } else {
+                            alertMessage = "タイトルは10文字以内で入力してください。"
+                        }
                     }
                 }) {
                     Text("追加")
@@ -33,8 +42,11 @@ struct RegisterScheduleDetailButtonView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(
                         title: Text(alertMessage),
-                        message: Text(alertMessage),
-                        dismissButton: .default(Text("OK"))
+                        dismissButton: .default(Text("OK")) {
+                            if isReload {
+                                isShouldReloadView += 1
+                            }
+                        }
                     )
                 }
                 .offset(x:0, y:-40)
@@ -57,6 +69,7 @@ struct RegisterScheduleDetailButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "登録が成功しました"
+                        isReload = true
                     }
                 } else {
                     print("非同期処理失敗")
