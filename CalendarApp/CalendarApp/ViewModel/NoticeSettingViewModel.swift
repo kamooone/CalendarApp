@@ -47,21 +47,64 @@ final class NoticeSettingViewModel: ObservableObject {
         
         let content = UNMutableNotificationContent()
         content.title = _scheduleDetailData.scheduleDetailTitle
-        content.body = "スケジュール5分前です。準備は出来ていますか？" // ToDo 文言の変更または文言を自由に出来るようにする改善あり
+        content.body = "スケジュール5分前です。準備は出来ていますか？"
         
         var dateComponents = DateComponents()
         dateComponents.year = calendarViewModel.selectYear
         dateComponents.month = calendarViewModel.selectMonth
         dateComponents.day = calendarViewModel.selectDay
-        // ToDo 5分前にする
-        dateComponents.hour = Int(_scheduleDetailData.startTime.prefix(2))
-        dateComponents.minute = Int(_scheduleDetailData.startTime.suffix(2))
-        let identifier = String(describing: _scheduleDetailData.id)
-        
-        // ToDo 登録済みの通知の時間の修正更新した時にうまく通知設定ができてない？
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request)
+
+        if let startTimeHour = Int(_scheduleDetailData.startTime.prefix(2)),
+           let startTimeMinute = Int(_scheduleDetailData.startTime.suffix(2)) {
+            let calendar = Calendar.current
+            let targetDate = calendar.date(from: dateComponents) ?? Date()
+            
+            // 開始時間5分前の時間を求める
+            var fiveMinutesBeforeComponents = DateComponents()
+            fiveMinutesBeforeComponents.minute = startTimeMinute - 5
+            fiveMinutesBeforeComponents.hour = startTimeHour
+            
+            if fiveMinutesBeforeComponents.minute! < 0 {
+                fiveMinutesBeforeComponents.minute! += 60
+                fiveMinutesBeforeComponents.hour! -= 1
+            }
+            
+            // 負の時間を処理するために日付を調整
+            if fiveMinutesBeforeComponents.hour! < 0 {
+                let oneDayAgo = Calendar.current.date(byAdding: .day, value: -1, to: targetDate)!
+                let newDateComponents = Calendar.current.dateComponents([.year, .month, .day], from: oneDayAgo)
+                dateComponents.year = newDateComponents.year
+                dateComponents.month = newDateComponents.month
+                dateComponents.day = newDateComponents.day
+                
+                // 月が1月だった場合は前の年の12月になる
+                if dateComponents.month == 1 {
+                    dateComponents.year! -= 1
+                    dateComponents.month = 12
+                } else {
+                    dateComponents.month! -= 1
+                }
+                
+                fiveMinutesBeforeComponents.hour! += 24
+            }
+            
+            if let fiveMinutesBeforeDate = calendar.date(bySettingHour: fiveMinutesBeforeComponents.hour!, minute: fiveMinutesBeforeComponents.minute!, second: 0, of: targetDate) {
+                dateComponents = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: fiveMinutesBeforeDate)
+                
+                let identifier = String(describing: _scheduleDetailData.id)
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request) { (error) in
+                    if let error = error {
+                        print("Error adding notification request: \(error)")
+                    } else {
+                        print("Notification request added successfully")
+                    }
+                }
+            }
+        }
         
         // 登録済みの通知一覧確認(デバッグ用、本日のスケジュール一覧表時でも使用すると思う)
         let center = UNUserNotificationCenter.current()
