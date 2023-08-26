@@ -12,6 +12,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     //Action trigger for request API
     static let shared = ScheduleDetailViewModel()
     
+    // TODO ViewModelには非同期の呼び出しの部分を書いて、repositoryに以下の呼び出し先の処理を書く。
     var isEditMode: Bool = false
     
     var id = ""
@@ -111,7 +112,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
-    // レコード取得処理(日にち単位で取得 ToDo 月単位と同一メソッドにする)
+    // レコード取得処理(日にち単位で取得)
     func getScheduleDetail(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
@@ -179,7 +180,6 @@ final class ScheduleDetailViewModel: ObservableObject {
             let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
             print(scheduleDetailData)
             try realm.write {
-                // ToDo うまく更新できていない。タイトルのところ？
                 // 更新のあったフィールドのみ更新する
                 for i in 0..<updScheduleDetailTitleArray.count {
                     if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
@@ -230,7 +230,6 @@ final class ScheduleDetailViewModel: ObservableObject {
                 let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
                 realm.delete(scheduleDetailData)
                 
-                // ToDo for文を使用して登録している通知設定を削除する処理テスト
                 for i in 0..<scheduleDetailData.count {
                     if scheduleDetailData[i].isNotice {
                         // 通知設定フラグが変わったので通知設定の更新
@@ -248,7 +247,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     }
     
     
-    // レコード取得処理(月単位で取得 ToDo 日にち単位で取得のメソッドと同一メソッドにする)
+    // レコード取得処理(月単位で取得)
     func getScheduleDetailMonth(completion: @escaping (Bool) -> Void) {
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
@@ -572,7 +571,6 @@ final class ScheduleDetailViewModel: ObservableObject {
                 let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
                 realm.delete(scheduleDetailData)
                 
-                // ToDo for文を使用して登録している通知設定を削除する処理テスト
                 for i in 0..<scheduleDetailData.count {
                     if scheduleDetailData[i].isNotice {
                         // 通知設定フラグが変わったので通知設定の更新
@@ -613,7 +611,6 @@ final class ScheduleDetailViewModel: ObservableObject {
 
                     realm.add(scheduleDetailData)
                     
-                    // ToDo scheduleDetailData.isNoticeがtrueの値だけ通知設定登録処理を行うテスト
                     if scheduleDetailData.isNotice {
                         let noticeSettingViewModel = NoticeSettingViewModel.shared
                         noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData)

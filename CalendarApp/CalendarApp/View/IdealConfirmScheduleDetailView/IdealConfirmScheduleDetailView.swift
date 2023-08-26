@@ -52,8 +52,6 @@ struct IdealConfirmScheduleDetailView: View {
         }
     }
     
-    // ToDo idealScheduleDetailTitleArray等はどこで取得している？また、確認画面で昇順に表示されてないので修正する、
-    // またその他にも理想のスケジュール更新関連で不具合あり。
     var body: some View {
         VStack {
             

@@ -63,7 +63,6 @@ struct LoadScheduleView: View {
                     }
                     
                     HStack {
-                        // ToDo 設定後は次回以降もその設定している項目が選択されているようにしておく？
                         Picker("Select an option", selection: $selectedOption) {
                             ForEach(0..<options.count, id: \.self) { index in
                                 Text(options[index])
@@ -143,6 +142,7 @@ struct SetButtonView: View {
             Button(action: {
                 bindViewModel()
             }) {
+                // 2023/8/26 ToDo 何も選択されてない時はこのボタンを押せないようにする
                 Text("設定する")
                     .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
             }
