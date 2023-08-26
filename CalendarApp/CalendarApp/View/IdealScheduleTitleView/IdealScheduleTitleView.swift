@@ -11,6 +11,7 @@ struct IdealScheduleTitleView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let headerTitle: String = "理想のスケジュール"
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
+    @State private var isShouldReloadView: Int = 0
     
     func bindViewModel() {
         scheduleDetailViewModel.isIdealScheduleUpdate = false
@@ -40,7 +41,7 @@ struct IdealScheduleTitleView: View {
                     .offset(x:0, y:screenSizeObject.screenSize.height / 30 - 10)
             }
             HStack {
-                IdealRegistScheduleTitleView()
+                IdealRegistScheduleTitleView(isShouldReloadView: $isShouldReloadView)
             }
             HStack {
                 IdealRegisteredScheduleTitleView()
@@ -54,6 +55,7 @@ struct IdealScheduleTitleView: View {
             }
             Spacer()
         }
+        .id(isShouldReloadView)
         .onAppear{
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }
