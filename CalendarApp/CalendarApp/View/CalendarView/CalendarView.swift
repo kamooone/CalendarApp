@@ -10,9 +10,13 @@ import SwiftUI
 struct CalendarView: View {
     @State private var isShouldReloadView: Int = 0
     let calendarViewModel = CalendarViewModel.shared
+    let noticeSettingViewModel = NoticeSettingViewModel.shared
     let headerTitle: String = "スケジュール管理アプリ"
     
     init() {
+        // ToDo 初回起動時のみ通知リクエスト許可ポップアップを表示する
+        noticeSettingViewModel.noticeInit()
+        
         calendarViewModel.bindViewModel()
     }
     

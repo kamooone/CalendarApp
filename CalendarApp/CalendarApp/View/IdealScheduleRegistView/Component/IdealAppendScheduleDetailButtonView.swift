@@ -19,7 +19,6 @@ struct IdealAppendScheduleDetailButtonView: View {
             // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
             // ToDo 登録完了したら入力内容を初期化する
             Button(action: {
-                // この時に行うのはappendのみで、Realmにはまだ保存しない
                 regist()
             }) {
                 Text("追加")
@@ -44,19 +43,34 @@ struct IdealAppendScheduleDetailButtonView: View {
     }
     
     func regist() {
-        let scheduleDetailViewModel = ScheduleDetailViewModel.shared
-        scheduleDetailViewModel.idealScheduleDetailTitleArray.append(scheduleDetailViewModel.idealScheduleDetailTitle)
-        scheduleDetailViewModel.idealStartTimeArray.append(scheduleDetailViewModel.idealStartTime)
-        scheduleDetailViewModel.idealEndTimeArray.append(scheduleDetailViewModel.idealEndTime)
-        scheduleDetailViewModel.idealIsNoticeArray.append(scheduleDetailViewModel.idealIsNotice)
+        let group = DispatchGroup()
+        group.enter()
         
-        // 編集画面で更新用にバックアップを取っておく
-        scheduleDetailViewModel.updScheduleDetailTitleArray.append(scheduleDetailViewModel.idealScheduleDetailTitle)
-        scheduleDetailViewModel.updStartTimeArray.append(scheduleDetailViewModel.idealStartTime)
-        scheduleDetailViewModel.updEndTimeArray.append(scheduleDetailViewModel.idealEndTime)
-        scheduleDetailViewModel.updIsNoticeArray.append(scheduleDetailViewModel.idealIsNotice)
+        DispatchQueue(label: "realm").async {
+            scheduleDetailViewModel.registerIdealScheduleDetail { success in
+                group.leave()
+                
+                if success {
+                    print("非同期処理成功")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        alertMessage = "登録が成功しました"
+                    }
+                } else {
+                    print("非同期処理失敗")
+                    // メインスレッド（UI スレッド）で非同期に実行するメソッド
+                    DispatchQueue.main.async {
+                        alertMessage = "登録に失敗しました"
+                    }
+                }
+            }
+        }
         
-        alertMessage = "追加しました"
-        showAlert = true
+        // 成功失敗に関わらず呼ばれる
+        group.notify(queue: .main) {
+            // ToDo 失敗エラーアラート表示
+            print("非同期処理終了")
+            showAlert = true
+        }
     }
 }

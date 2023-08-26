@@ -14,6 +14,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var isEditMode: Bool = false
     
+    var id = ""
     var scheduleDetailTitle = ""
     var startTime = "00:00"
     var endTime = "00:00"
@@ -39,6 +40,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     
     var isIdealScheduleUpdate: Bool = false
     
+    var idealId = ""
     var idealScheduleTitle = ""
     var idealScheduleDetailTitle = ""
     var idealStartTime = "00:00"
@@ -64,6 +66,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         
         let scheduleDetailData = ScheduleDetailData()
         let calendarViewModel = CalendarViewModel.shared
+        self.id = String(describing: ObjectId.generate())
         scheduleDetailData.id = ObjectId.generate()
         scheduleDetailData.date = "\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日"
         scheduleDetailData.scheduleDetailTitle = self.scheduleDetailTitle
@@ -84,6 +87,19 @@ final class ScheduleDetailViewModel: ObservableObject {
                 print("scheduleDetailData.endTime",scheduleDetailData.endTime)
                 print("scheduleDetailData.isNotice",scheduleDetailData.isNotice)
                 print(scheduleDetailData)
+                
+                // 通知をONに設定していたら通知登録処理
+                if scheduleDetailData.isNotice {
+                    let noticeSettingViewModel = NoticeSettingViewModel.shared
+                    noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData)
+                }
+                
+                // 初期化処理
+                self.id = ""
+                self.scheduleDetailTitle = ""
+                self.startTime = "00:00"
+                self.endTime = "00:00"
+                self.isNotice = true
                 
                 // 非同期処理が成功したことを示す
                 completion(true)
@@ -163,6 +179,7 @@ final class ScheduleDetailViewModel: ObservableObject {
             let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
             print(scheduleDetailData)
             try realm.write {
+                // ToDo うまく更新できていない。タイトルのところ？
                 // 更新のあったフィールドのみ更新する
                 for i in 0..<updScheduleDetailTitleArray.count {
                     if scheduleDetailTitleArray[i] != updScheduleDetailTitleArray[i] {
@@ -180,6 +197,10 @@ final class ScheduleDetailViewModel: ObservableObject {
                     if isNoticeArray[i] != updIsNoticeArray[i] {
                         isNoticeArray[i] = updIsNoticeArray[i]
                         scheduleDetailData[i].isNotice = isNoticeArray[i]
+                        
+                        // 通知設定フラグが変わったので通知設定の更新
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
                     }
                 }
                 completion(true)
@@ -209,6 +230,15 @@ final class ScheduleDetailViewModel: ObservableObject {
                 let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
                 realm.delete(scheduleDetailData)
                 
+                // ToDo for文を使用して登録している通知設定を削除する処理テスト
+                for i in 0..<scheduleDetailData.count {
+                    if scheduleDetailData[i].isNotice {
+                        // 通知設定フラグが変わったので通知設定の更新
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.deleteNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
+                    }
+                }
+                
                 completion(true)
             }
         } catch {
@@ -233,13 +263,9 @@ final class ScheduleDetailViewModel: ObservableObject {
             
             // 該当する月のレコードをクエリで取得(表示するカレンダーの年月と同じレコードかつ、日付が早い順に取得)
             let scheduleDetailData = realm.objects(ScheduleDetailData.self)
-                // ToDo どのようなロジックになっているのかを理解する
                 .filter("date CONTAINS '\(calendarViewModel.selectYear)年\(calendarViewModel.selectMonth)月'")
                 .sorted { (data1, data2) -> Bool in
-                    guard let day1 = getDayFromString(data1.date), let day2 = getDayFromString(data2.date) else {
-                        return false
-                    }
-                    return day1 < day2
+                    return data1.startTime < data2.startTime
                 }
             
             // 取得したデータをパース処理
@@ -343,38 +369,39 @@ final class ScheduleDetailViewModel: ObservableObject {
         let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         let config = Realm.Configuration(schemaVersion: schemaVersion)
         
-        
-        let scheduleDetailData = IdealScheduleData()
-        scheduleDetailData.scheduleTitle = self.idealScheduleTitle
-        
-        for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
-            let idealScheduleDetailData = IdealScheduleDetailData()
-            idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitleArray[i]
-            idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTimeArray[i]
-            idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTimeArray[i]
-            idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNoticeArray[i]
-
-            scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
-        }
-        
         do {
+            let idealScheduleDetailData = IdealScheduleDetailData()
+            idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitle
+            idealScheduleDetailData.startTime = scheduleDetailViewModel.idealStartTime
+            idealScheduleDetailData.endTime = scheduleDetailViewModel.idealEndTime
+            idealScheduleDetailData.isNotice = scheduleDetailViewModel.idealIsNotice
+            
             let realm = try Realm(configuration: config)
-            try realm.write {
-                realm.add(scheduleDetailData)
+            
+            if let objectId = try? ObjectId(string: self.idealId),
+               let existingScheduleData = realm.objects(IdealScheduleData.self).filter("id == %@", objectId).first {
+                // 既存のデータがある場合は更新
+                try realm.write {
+                    existingScheduleData.scheduleDetails.append(idealScheduleDetailData)
+                }
+            } else {
+                // 新規作成
+                let idealScheduleData = IdealScheduleData()
+                idealScheduleData.id = ObjectId.generate()
+                self.idealId = String(describing: idealScheduleData.id)
+                print("self.idealId",self.idealId)
+                print("idealScheduleData.id",idealScheduleData.id)
+                idealScheduleData.scheduleTitle = self.idealScheduleTitle
+                idealScheduleData.scheduleDetails.append(idealScheduleDetailData)
                 
-                //================================================================
-                // 登録処理デバッグ
-                //================================================================
-                print(Realm.Configuration.defaultConfiguration.fileURL!)
-                print("scheduleDetailData",scheduleDetailData)
-                
-                
-                // 非同期処理が成功したことを示す
-                completion(true)
+                try realm.write {
+                    realm.add(idealScheduleData)
+                }
             }
-        } catch {
-            print("Realmの書き込みエラー：\(error)")
-            // 非同期処理失敗
+            
+            completion(true)
+        } catch let error as NSError {
+            print("Realmの書き込みエラー：\(error.localizedDescription)")
             completion(false)
         }
     }
@@ -403,8 +430,6 @@ final class ScheduleDetailViewModel: ObservableObject {
 
             // レコードのプロパティを更新
             try realm.write {
-                // 既存のスケジュール詳細を削除
-                scheduleDetailData.scheduleDetails.removeAll()
                 
                 // 新しいスケジュール詳細を追加
                 for i in 0..<scheduleDetailViewModel.idealScheduleDetailTitleArray.count {
@@ -416,7 +441,8 @@ final class ScheduleDetailViewModel: ObservableObject {
                     idealScheduleDetailData.endTime = scheduleDetailViewModel.updEndTimeArray[i]
                     idealScheduleDetailData.isNotice = scheduleDetailViewModel.updIsNoticeArray[i]
 
-                    scheduleDetailData.scheduleDetails.append(idealScheduleDetailData)
+                    // 更新内容を上書き
+                    scheduleDetailData.scheduleDetails[i] = idealScheduleDetailData
                 }
             }
             
@@ -546,6 +572,15 @@ final class ScheduleDetailViewModel: ObservableObject {
                 let scheduleDetailData = realm.objects(ScheduleDetailData.self).filter(predicate)
                 realm.delete(scheduleDetailData)
                 
+                // ToDo for文を使用して登録している通知設定を削除する処理テスト
+                for i in 0..<scheduleDetailData.count {
+                    if scheduleDetailData[i].isNotice {
+                        // 通知設定フラグが変わったので通知設定の更新
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.deleteNotificationRequest(_scheduleDetailData: scheduleDetailData[i])
+                    }
+                }
+                
                 completion(true)
             }
         } catch {
@@ -554,7 +589,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         }
     }
     
-    // DB登録処理(複数件の新規登録処理)
+    // DB登録処理(複数件の新規登録処理、理想のスケジュールを反映した時だけに呼ばれる)
     func setIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
         let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         print(Realm.Configuration.defaultConfiguration.fileURL!)
@@ -577,6 +612,12 @@ final class ScheduleDetailViewModel: ObservableObject {
                     scheduleDetailData.isNotice = scheduleDetailViewModel.isNoticeArray[i]
 
                     realm.add(scheduleDetailData)
+                    
+                    // ToDo scheduleDetailData.isNoticeがtrueの値だけ通知設定登録処理を行うテスト
+                    if scheduleDetailData.isNotice {
+                        let noticeSettingViewModel = NoticeSettingViewModel.shared
+                        noticeSettingViewModel.sendNotificationRequest(_scheduleDetailData: scheduleDetailData)
+                    }
                     
                     //================================================================
                     // 登録処理デバッグ

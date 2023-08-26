@@ -11,6 +11,7 @@ struct UpdateButtonView: View {
     @Binding var isEditMode: Bool
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
+    @EnvironmentObject var setting: Setting
     @State private var showAlert = false
     @State private var alertMessage = ""
     
@@ -33,6 +34,7 @@ struct UpdateButtonView: View {
                     title: Text(alertMessage),
                     dismissButton: .default(Text("OK")) {
                         isEditMode = false
+                        setting.isReload = true
                     }
                 )
             }

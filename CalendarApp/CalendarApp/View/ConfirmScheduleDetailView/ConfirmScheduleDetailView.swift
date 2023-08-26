@@ -37,6 +37,7 @@ struct ConfirmScheduleDetailView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = true
+                        setting.isReload = false
                     }
                 } else {
                     print("非同期処理失敗")
@@ -44,6 +45,7 @@ struct ConfirmScheduleDetailView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
+                        setting.isReload = false
                     }
                 }
             }
@@ -88,7 +90,7 @@ struct ConfirmScheduleDetailView: View {
             
             VStack {
                 // 非同期処理が完了後にスケジュール詳細登録状況を表示させる
-                if isRequestSuccessful {
+                if isRequestSuccessful && !setting.isReload {
                     // ToDo 見栄えが悪いので処理を関数にする
                     if isEditMode {
                         ScrollView {
@@ -149,7 +151,6 @@ struct ConfirmScheduleDetailView: View {
         .onChange(of: setting.isReload) { isReload in
             if isReload {
                 bindViewModel()
-                setting.isReload = false
             }
         }
     }

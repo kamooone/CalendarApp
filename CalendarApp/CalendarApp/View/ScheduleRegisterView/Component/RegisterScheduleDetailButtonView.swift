@@ -18,10 +18,11 @@ struct RegisterScheduleDetailButtonView: View {
             HStack {
                 Spacer()
                 
-                // ToDo タイトル未入力だとエラー表示させる。時間の設定がおかしい時もエラー表示させる。
-                // ToDo 登録完了したら入力内容を初期化する
                 Button(action: {
-                    regist()
+                    // ToDo タイトル未入力の場合はグレーアウトさせる
+                    if scheduleDetailViewModel.scheduleDetailTitle != "" {
+                        regist()
+                    }
                 }) {
                     Text("追加")
                         .font(.system(size: geometry.size.width / 25))
