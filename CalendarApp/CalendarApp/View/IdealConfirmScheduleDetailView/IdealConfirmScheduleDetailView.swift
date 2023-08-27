@@ -211,7 +211,6 @@ struct IdealScheduleEdit: View {
         VStack {
             
             HStack {
-                // 2023/8/27 ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
                 Spacer()
                 TextField("", text: $textFieldValue)
                     .frame(width: 300, height: 0)

@@ -19,7 +19,16 @@ struct UpdateIdealScheduleDetailButtonView: View {
     var body: some View  {
         HStack {
             Button(action: {
-                update()
+                if scheduleDetailViewModel.idealScheduleDetailTitle.count != 0 && scheduleDetailViewModel.idealScheduleDetailTitle.count < 11 {
+                    update()
+                } else {
+                    showAlert = true
+                    if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {
+                        alertMessage = "タイトルの入力は必須です。"
+                    } else {
+                        alertMessage = "タイトルは10文字以内で入力してください。"
+                    }
+                }
             }) {
                 Text("更新")
                     .frame(width: screenSizeObject.screenSize.width / 12, height: screenSizeObject.screenSize.height / 20)
@@ -32,8 +41,12 @@ struct UpdateIdealScheduleDetailButtonView: View {
                 Alert(
                     title: Text(alertMessage),
                     dismissButton: .default(Text("OK")) {
-                        isEditMode = false
-                        setting.isReload = true
+                        if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
+                            isEditMode = false
+                            setting.isReload = true
+                        } else {
+                            // タイトル入力に問題がある場合は何もしない
+                        }
                     }
                 )
             }
