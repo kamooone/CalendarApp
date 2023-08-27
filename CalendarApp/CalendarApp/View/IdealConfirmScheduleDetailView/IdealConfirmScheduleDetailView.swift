@@ -21,6 +21,10 @@ struct IdealConfirmScheduleDetailView: View {
     let headerTitle: String = "理想のスケジュール確認"
     
     func bindViewModel() {
+        isRequestSuccessful = false
+        isEditMode = false
+        showAlert = false
+        alertMessage = ""
         let group = DispatchGroup()
         group.enter()
         
@@ -32,6 +36,7 @@ struct IdealConfirmScheduleDetailView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
+                        isRequestSuccessful = true
                         setting.isReload = false
                     }
                 } else {
@@ -39,7 +44,8 @@ struct IdealConfirmScheduleDetailView: View {
                     // ToDo 取得失敗エラーアラート表示
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        
+                        isRequestSuccessful = false
+                        setting.isReload = false
                     }
                 }
             }
@@ -80,7 +86,7 @@ struct IdealConfirmScheduleDetailView: View {
             
             // ToDo 見栄えが悪いので処理を関数にする
             HStack {
-                if !setting.isReload {
+                if isRequestSuccessful && !setting.isReload {
                     if isEditMode {
                         ScrollView {
                             VStack(spacing: 20) {

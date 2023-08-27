@@ -41,7 +41,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                 Alert(
                     title: Text(alertMessage),
                     dismissButton: .default(Text("OK")) {
-                        if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
+                        if scheduleDetailViewModel.idealScheduleDetailTitle.count != 0 && scheduleDetailViewModel.idealScheduleDetailTitle.count < 11 {
                             isEditMode = false
                             setting.isReload = true
                         } else {

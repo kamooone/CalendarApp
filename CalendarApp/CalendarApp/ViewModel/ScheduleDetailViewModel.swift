@@ -367,7 +367,7 @@ final class ScheduleDetailViewModel: ObservableObject {
     func registerIdealScheduleDetail(completion: @escaping (Bool) -> Void) {
         let scheduleDetailViewModel = ScheduleDetailViewModel.shared
         let config = Realm.Configuration(schemaVersion: schemaVersion)
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         do {
             let idealScheduleDetailData = IdealScheduleDetailData()
             idealScheduleDetailData.scheduleDetailTitle = scheduleDetailViewModel.idealScheduleDetailTitle
@@ -398,12 +398,14 @@ final class ScheduleDetailViewModel: ObservableObject {
                 }
             }
             
-            self.idealId = ""
+            // 理想のスケジュール登録の時は以下の二つは初期化しない
+            //self.idealId = ""
+            //self.idealScheduleTitle = ""
+            
             self.idealScheduleDetailTitle = ""
             self.idealStartTime = "00:00"
             self.idealEndTime = "00:00"
             self.idealIsNotice = true
-            self.idealScheduleTitle = ""
             
             completion(true)
         } catch let error as NSError {
@@ -504,6 +506,7 @@ final class ScheduleDetailViewModel: ObservableObject {
         idealEndTimeArray = []
         idealIsNoticeArray = []
         
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         do {
             let realm = try Realm(configuration: config)
             
