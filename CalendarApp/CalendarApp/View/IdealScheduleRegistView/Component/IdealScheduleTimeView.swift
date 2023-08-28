@@ -28,7 +28,6 @@ struct IdealScheduleTimeView: View {
     var body: some View {
         HStack {
             Spacer()
-            // 2023/8/27 ToDo 開始より終了の方が早い場合はエラーにする。
             Text("開始")
                 .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
                 .font(.system(size: screenSizeObject.screenSize.width / 25))
