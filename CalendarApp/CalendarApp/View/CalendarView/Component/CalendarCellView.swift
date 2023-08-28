@@ -17,13 +17,11 @@ struct CalendarCellView: View {
     @State private var isRequestSuccessful = false
     @State private var isEditMode = false
     @State private var showAlert = false
-    @State private var alertMessage = ""
     
     func bindViewModel() {
         isRequestSuccessful = false
         isEditMode = false
         showAlert = false
-        alertMessage = ""
         calendarViewModel.isSelectMonthSwitchButton = true
         
         let group = DispatchGroup()
@@ -41,10 +39,10 @@ struct CalendarCellView: View {
                     }
                 } else {
                     print("非同期処理失敗")
-                    // ToDo 取得失敗エラーアラート表示
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
+                        showAlert = false
                     }
                 }
             }
@@ -52,8 +50,8 @@ struct CalendarCellView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            // ToDo 取得失敗エラーアラート表示
             print("非同期処理終了")
+            showAlert = false
             calendarViewModel.isSelectMonthSwitchButton = false
         }
     }
@@ -97,6 +95,10 @@ struct CalendarCellView: View {
                     }
                 }
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("スケジュールの取得に失敗しました。"),
+                  dismissButton: .default(Text("OK")))
         }
         .onAppear {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

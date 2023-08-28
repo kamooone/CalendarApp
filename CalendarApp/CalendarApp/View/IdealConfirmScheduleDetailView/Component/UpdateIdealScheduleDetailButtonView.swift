@@ -104,8 +104,9 @@ struct UpdateIdealScheduleDetailButtonView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            // ToDo 失敗エラーアラート表示
             print("非同期処理終了")
+            showAlert = true
+            alertMessage = "更新に失敗しました。。"
         }
     }
     
@@ -125,10 +126,10 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     }
                 } else {
                     print("非同期処理失敗")
-                    // ToDo 取得失敗エラーアラート表示
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        
+                        showAlert = true
+                        alertMessage = "更新後のスケジュールの取得に失敗しました。"
                     }
                 }
             }
@@ -136,9 +137,9 @@ struct UpdateIdealScheduleDetailButtonView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            // ToDo 失敗エラーアラート表示
             print("非同期処理終了")
             showAlert = true
+            alertMessage = "更新後のスケジュールの取得に失敗しました。"
         }
     }
 }

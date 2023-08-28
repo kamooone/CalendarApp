@@ -94,9 +94,9 @@ struct RegisterScheduleDetailButtonView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            // ToDo 失敗エラーアラート表示
             print("非同期処理終了")
             showAlert = true
+            alertMessage = "登録に失敗しました。"
         }
     }
 }

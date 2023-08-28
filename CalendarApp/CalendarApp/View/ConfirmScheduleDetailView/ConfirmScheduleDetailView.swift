@@ -41,11 +41,12 @@ struct ConfirmScheduleDetailView: View {
                     }
                 } else {
                     print("非同期処理失敗")
-                    // ToDo 取得失敗エラーアラート表示
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
                         setting.isReload = false
+                        showAlert = true
+                        alertMessage = "スケジュールの取得に失敗しました。"
                     }
                 }
             }
@@ -53,8 +54,9 @@ struct ConfirmScheduleDetailView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            // ToDo 失敗エラーアラート表示
             print("非同期処理終了")
+            showAlert = true
+            alertMessage = "スケジュールの取得に失敗しました。"
         }
     }
     
@@ -141,6 +143,10 @@ struct ConfirmScheduleDetailView: View {
                     .background(Color.yellow)
                     .offset(x: 0, y: 0)
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("スケジュールの取得に失敗しました。"),
+                  dismissButton: .default(Text("OK")))
         }
         .onAppear {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
