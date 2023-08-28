@@ -20,7 +20,20 @@ struct IdealAppendScheduleDetailButtonView: View {
         HStack {
             Button(action: {
                 if scheduleDetailViewModel.idealScheduleDetailTitle.count != 0 && scheduleDetailViewModel.idealScheduleDetailTitle.count < 11 {
-                    regist()
+                    
+                    // 開始より終了の方が早い場合のエラーアラートも追加。
+                    let startHour = scheduleDetailViewModel.idealStartTime.prefix(2)
+                    let startMinute = scheduleDetailViewModel.idealStartTime.suffix(2)
+                    let startTime = Int(startHour + startMinute)
+                    let endHour = scheduleDetailViewModel.idealEndTime.prefix(2)
+                    let endMinute = scheduleDetailViewModel.idealEndTime.suffix(2)
+                    let endTime = Int(endHour + endMinute)
+                    if Int(startTime!) < Int(endTime!) {
+                        regist()
+                    } else {
+                        showAlert = true
+                        alertMessage = "開始時間より終了時間が後になるように設定してください。"
+                    }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {

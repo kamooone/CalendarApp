@@ -22,7 +22,19 @@ struct RegisterScheduleDetailButtonView: View {
                 
                 Button(action: {
                     if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
-                        regist()
+                        // 開始より終了の方が早い場合のエラーアラートも追加。
+                        let startHour = scheduleDetailViewModel.startTime.prefix(2)
+                        let startMinute = scheduleDetailViewModel.startTime.suffix(2)
+                        let startTime = Int(startHour + startMinute)
+                        let endHour = scheduleDetailViewModel.endTime.prefix(2)
+                        let endMinute = scheduleDetailViewModel.endTime.suffix(2)
+                        let endTime = Int(endHour + endMinute)
+                        if Int(startTime!) < Int(endTime!) {
+                            regist()
+                        } else {
+                            showAlert = true
+                            alertMessage = "開始時間より終了時間が後になるように設定してください。"
+                        }
                     } else {
                         showAlert = true
                         if scheduleDetailViewModel.scheduleDetailTitle.count == 0 {
