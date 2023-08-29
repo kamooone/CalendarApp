@@ -21,7 +21,6 @@ struct IdealScheduleDetailTitleView: View {
             }
             
             HStack {
-                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
                 Text("タイトル")
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
                     .offset(x: 20, y: 0)

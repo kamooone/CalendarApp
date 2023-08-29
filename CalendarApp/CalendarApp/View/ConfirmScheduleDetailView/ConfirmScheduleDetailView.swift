@@ -93,7 +93,6 @@ struct ConfirmScheduleDetailView: View {
             VStack {
                 // 非同期処理が完了後にスケジュール詳細登録状況を表示させる
                 if isRequestSuccessful && !setting.isReload {
-                    // ToDo 見栄えが悪いので処理を関数にする
                     if isEditMode {
                         ScrollView {
                             VStack(spacing: 20) {
@@ -114,7 +113,6 @@ struct ConfirmScheduleDetailView: View {
                         .background(Color.lightGray)
                         .offset(x: 0, y: 10)
                     } else {
-                        // ToDo 見栄えが悪いので処理を関数にする
                         ScrollView {
                             VStack(spacing: 20) {
                                 Spacer().frame(height: 20)

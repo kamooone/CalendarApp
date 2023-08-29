@@ -152,7 +152,6 @@ struct DayStringtView: View {
                     // ルートをスケジュール登録に変更して、選択したセルの月日を取得
                     calendarViewModel.selectDay = i+week*7 - calendarViewModel.firstDayWeek.rawValue
                     
-                    // ToDo 今は登録画面その次に確認画面という流れにしているが、先に確認画面を表示した方がいいかも。そして確認画面の中に登録ボタンを作る。
                     route.path = .ScheduleConfirm
                 }) {
                     VStack {

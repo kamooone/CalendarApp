@@ -86,7 +86,6 @@ struct IdealConfirmScheduleDetailView: View {
                 }
             }
             
-            // ToDo 見栄えが悪いので処理を関数にする
             HStack {
                 if isRequestSuccessful && !setting.isReload {
                     if isEditMode {
@@ -109,7 +108,6 @@ struct IdealConfirmScheduleDetailView: View {
                         .background(Color.lightGray)
                         .offset(x: 0, y: 0)
                     } else {
-                        // ToDo 見栄えが悪いので処理を関数にする
                         ScrollView {
                             VStack(spacing: 20) {
                                 Spacer().frame(height: 20)

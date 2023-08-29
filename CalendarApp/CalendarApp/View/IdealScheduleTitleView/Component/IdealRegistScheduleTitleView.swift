@@ -27,7 +27,6 @@ struct IdealRegistScheduleTitleView: View {
             }
             
             HStack {
-                // ToDo 未入力状態でボタンを押した場合は、赤文字で入力してくださいメッセージを表示させる
                 TextField("例 : 休日Aの理想スケジュール", text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()

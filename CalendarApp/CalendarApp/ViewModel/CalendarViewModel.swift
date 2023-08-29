@@ -77,7 +77,6 @@ final class CalendarViewModel: ObservableObject {
         }
     }
     
-    // ToDo bindViewModelというメソッド名はおかしい
     func bindViewModel() {
         firstDayWeek = dayOfWeekCalc(year: selectYear, month: selectMonth,  day: 1)
         numDaysMonth = dayNumber(year: selectYear, month: selectMonth)
