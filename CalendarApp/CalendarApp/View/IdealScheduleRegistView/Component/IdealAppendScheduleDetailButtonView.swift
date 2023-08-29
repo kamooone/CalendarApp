@@ -95,8 +95,6 @@ struct IdealAppendScheduleDetailButtonView: View {
         
         group.notify(queue: .main) {
             print("非同期処理終了")
-            showAlert = true
-            alertMessage = "登録に失敗しました"
         }
     }
 }

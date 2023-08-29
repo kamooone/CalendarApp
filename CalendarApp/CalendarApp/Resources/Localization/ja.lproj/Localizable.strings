@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  CalendarApp
+
+  Created by Kazusa Kondo on 2023/08/29.
+  
+*/
+"ScheduleManagementApp" = "スケジュール管理アプリ";
+"Year" = "年";
+"Month" = "月";
+"Sunday" = "日";
+"Monday" = "月";
+
+"Monday" = "月";

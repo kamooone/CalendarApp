@@ -11,7 +11,7 @@ struct CalendarView: View {
     @State private var isShouldReloadView: Int = 0
     let calendarViewModel = CalendarViewModel.shared
     let noticeSettingViewModel = NoticeSettingViewModel.shared
-    let headerTitle: String = "スケジュール管理アプリ"
+    let headerTitle: String = "ScheduleManagementApp"
     
     init() {
         noticeSettingViewModel.noticeInit()

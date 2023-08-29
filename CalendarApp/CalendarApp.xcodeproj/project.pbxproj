@@ -24,6 +24,7 @@
 		E225D2D32A2F7E020052362D /* NoticeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225D2D22A2F7E020052362D /* NoticeSettingView.swift */; };
 		E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */ = {isa = PBXBuildFile; fileRef = E22CD0E32A25CE2900C78018 /* hamburger.png */; };
 		E22CD0E82A25CF8700C78018 /* HamburgerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22CD0E72A25CF8700C78018 /* HamburgerView.swift */; };
+		E2400B302A9E30880089AB49 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E2400B322A9E30880089AB49 /* Localizable.strings */; };
 		E24F7B832A41EA58002F12C7 /* ScheduleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */; };
 		E26543672A8A565600742575 /* NoticeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26543662A8A565600742575 /* NoticeSettingViewModel.swift */; };
 		E2661EDD2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2661EDC2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift */; };
@@ -90,6 +91,9 @@
 		E225D2D22A2F7E020052362D /* NoticeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSettingView.swift; sourceTree = "<group>"; };
 		E22CD0E32A25CE2900C78018 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		E22CD0E72A25CF8700C78018 /* HamburgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
+		E2400B312A9E30880089AB49 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E2400B332A9E30BB0089AB49 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E2400B342A9E30BC0089AB49 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewModel.swift; sourceTree = "<group>"; };
 		E26543662A8A565600742575 /* NoticeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSettingViewModel.swift; sourceTree = "<group>"; };
 		E2661EDC2A6A67A100BA5A8F /* SelectIdealScheduleTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIdealScheduleTitle.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 		E22CD0E12A25CD7900C78018 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				E2400B322A9E30880089AB49 /* Localizable.strings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -551,6 +556,9 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				vi,
+				"vi-VN",
 			);
 			mainGroup = E27C8E372A23949200841268;
 			productRefGroup = E27C8E412A23949200841268 /* Products */;
@@ -567,6 +575,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2400B302A9E30880089AB49 /* Localizable.strings in Resources */,
 				E2120D862A2652F500F08940 /* back.png in Resources */,
 				E27C8E4B2A23949300841268 /* Preview Assets.xcassets in Resources */,
 				E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */,
@@ -683,6 +692,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E2400B322A9E30880089AB49 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E2400B312A9E30880089AB49 /* en */,
+				E2400B332A9E30BB0089AB49 /* ja */,
+				E2400B342A9E30BC0089AB49 /* vi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E27C8E4C2A23949300841268 /* Debug */ = {

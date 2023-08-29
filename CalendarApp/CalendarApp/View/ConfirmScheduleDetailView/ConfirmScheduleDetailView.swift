@@ -55,8 +55,6 @@ struct ConfirmScheduleDetailView: View {
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
             print("非同期処理終了")
-            showAlert = true
-            alertMessage = "スケジュールの取得に失敗しました。"
         }
     }
     

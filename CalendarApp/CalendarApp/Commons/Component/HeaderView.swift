@@ -14,7 +14,7 @@ struct HeaderView: View {
         GeometryReader { geometry in
             HStack {
                 Spacer()
-                Text(_headerTitle)
+                Text(LocalizedStringKey(_headerTitle))
                     .font(.system(size: geometry.size.width / 20))
                     .fontWeight(.bold)
                 Spacer()

@@ -14,10 +14,11 @@ struct LoadScheduleView: View {
     @State private var options: [String] = ["---------------"]
     @State private var isRequestSuccessful = false
     @State private var showAlert = false
+    @State private var alertMessage = ""
     
     func bindViewModel() {
         isRequestSuccessful = false
-        showAlert = false
+        //showAlert = false
         
         let group = DispatchGroup()
         group.enter()
@@ -39,7 +40,8 @@ struct LoadScheduleView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
-                        showAlert = false
+                        showAlert = true
+                        alertMessage = "スケジュールの取得に失敗しました。"
                     }
                 }
             }
@@ -47,7 +49,6 @@ struct LoadScheduleView: View {
         
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
-            showAlert = false
             print("非同期処理終了")
         }
     }
@@ -76,14 +77,14 @@ struct LoadScheduleView: View {
                             scheduleDetailViewModel.idealScheduleTitle = options[index]
                         }
                         
-                        SetButtonView(scheduleDetailViewModel: scheduleDetailViewModel)
+                        SetButtonView(selectedOption: $selectedOption, showAlert: $showAlert, alertMessage: $alertMessage, scheduleDetailViewModel: scheduleDetailViewModel)
                             .frame(width: geometry.size.width * 0.5, height: geometry.size.height / 5)
                     }
                 }
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("スケジュールの取得に失敗しました。"),
+            Alert(title: Text(alertMessage),
                   dismissButton: .default(Text("OK")))
         }
         .onAppear{
@@ -93,13 +94,13 @@ struct LoadScheduleView: View {
 }
 
 struct SetButtonView: View {
+    @Binding var selectedOption: Int
+    @Binding var showAlert: Bool
+    @Binding var alertMessage: String
     let scheduleDetailViewModel: ScheduleDetailViewModel
-    @State private var showAlert = false
-    @State private var alertMessage = ""
+    
     
     func bindViewModel() {
-        showAlert = false
-        alertMessage = ""
         
         let group = DispatchGroup()
         group.enter()
@@ -142,27 +143,24 @@ struct SetButtonView: View {
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
             print("非同期処理終了")
-            showAlert = true
-            alertMessage = "スケジュールの取得に失敗しました。"
         }
     }
     
     var body: some View {
         GeometryReader { geometry in
             Button(action: {
-                bindViewModel()
+                if selectedOption != 0 {
+                    bindViewModel()
+                } else {
+                    showAlert = true
+                    alertMessage = "設定する理想のスケジュールを選択してください。"
+                }
             }) {
                 Text("設定する")
                     .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
             }
             .buttonStyle(NormalButtonStyle.normalButtonStyle())
             .padding()
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text(alertMessage),
-                    dismissButton: .default(Text("OK")) {}
-                )
-            }
         }
     }
     
@@ -182,6 +180,8 @@ struct SetButtonView: View {
                             print("削除完了")
                         } else {
                             print("削除失敗")
+                            alertMessage = "問題が発生しました。"
+                            showAlert = true
                         }
                     }
                 }
@@ -205,11 +205,13 @@ struct SetButtonView: View {
                 if success {
                     print("非同期処理成功")
                     alertMessage = "設定が完了しました"
+                    showAlert = true
                 } else {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "設定に失敗しました"
+                        showAlert = true
                     }
                 }
             }
@@ -218,7 +220,6 @@ struct SetButtonView: View {
         // 成功失敗に関わらず呼ばれる
         group.notify(queue: .main) {
             print("非同期処理終了")
-            showAlert = true
         }
     }
 }
