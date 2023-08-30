@@ -42,7 +42,7 @@ struct CalendarCellView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
-                        showAlert = false
+                        showAlert = true
                     }
                 }
             }

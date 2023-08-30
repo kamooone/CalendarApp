@@ -121,6 +121,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "更新が完了しました"
+                        showAlert = true
                     }
                 } else {
                     print("非同期処理失敗")

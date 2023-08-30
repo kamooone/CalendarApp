@@ -81,12 +81,14 @@ struct RegisterScheduleDetailButtonView: View {
                     DispatchQueue.main.async {
                         alertMessage = "登録が成功しました"
                         isReload = true
+                        showAlert = true
                     }
                 } else {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         alertMessage = "登録に失敗しました"
+                        showAlert = true
                     }
                 }
             }

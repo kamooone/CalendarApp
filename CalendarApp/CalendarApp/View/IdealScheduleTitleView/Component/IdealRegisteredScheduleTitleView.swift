@@ -44,7 +44,7 @@ struct IdealRegisteredScheduleTitleView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
-                        showAlert = false
+                        showAlert = true
                         alertMessage = "スケジュールの取得に失敗しました。"
                     }
                 }
