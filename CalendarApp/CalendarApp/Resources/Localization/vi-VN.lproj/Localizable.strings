@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  CalendarApp
+
+  Created by Kazusa Kondo on 2023/08/29.
+  
+*/
+"ScheduleManagementApp" = "Ứng dụng quản lý lịch trình";
+"Year" = "Năm";
+"Month" = "Tháng";
+"Day" = "Ngày";
+"Sunday" = "Chủ nhật";
+"Monday" = "Thứ hai";
+"Tuesday" = "Thứ ba";
+"Wednesday" = "Thứ Tư";
+"Thursday" = "Thứ năm";
+"Friday" = "Thứ sáu";
+"Saturday" = "Thứ bảy";
+"ScheduleRegistration" = "Lịch đăng ký";
+"Set" = "Bộ";
+"AddSchedule!" = "Thêm lịch trình!";
+"TITLE" = "TIÊU ĐỀ";
+"ExampleAfternoonShopping" = "Ví dụBuổi chiềuMua sắm";
+"Start" = "Bắt đầu";
+"End" = "Kết thúc";
+"Notice" = "Để ý";
+"CheckCurrentAdditionStatus" = "Kiểm tra trạng thái bổ sung hiện tại";
+"Add" = "Thêm vào";
+"CheckScheduleDetails" = "Kiểm tra lịch trìnhChi tiết";
+"Edit" = "Biên tập";
+"Cancel" = "Hủy bỏ";
+"Update" = "Cập nhật";
+"Delete" = "Xóa bỏ";
+"Setting" = "Cài đặt";
+"IdealSchedule" = "Lịch trình lý tưởng";
+"MiniGame" = "Trò chơi nhỏ";
+"LanguageChange" = "Thay đổi ngôn ngữ";
+"CharacterChange" = "Thay đổi ký tự";
+"DonationToDevelopers" = "Đóng góp cho nhà phát triểns";
+"ContactDeveloper" = "Liên hệNhà phát triển";
+"EnterTheTitleOfYourIdealSchedule" = "Nhập tiêu đề lịch trình lý tưởng của bạn";
+"ExampleIdealScheduleForHolidayA" = "Ví dụ về lịch trình lý tưởng cho kỳ nghỉ A";
+"Next" = "Kế tiếp";
+"RegisteredIdealSchedule" = "Đã đăng ký lý tưởng Lịch trình";
+"Schedule" = "Lịch trình";
+"ConfirmYourIdealSchedule" = "Xác nhận lịch trình lý tưởng của bạn";

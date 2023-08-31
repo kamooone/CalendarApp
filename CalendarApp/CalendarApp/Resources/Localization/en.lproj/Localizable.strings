@@ -8,8 +8,14 @@
 "ScheduleManagementApp" = "Schedule management app";
 "Year" = "Year";
 "Month" = "Month";
+"Day" = "Day";
 "Sunday" = "Sunday";
 "Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
 "ScheduleRegistration" = "Schedule registration";
 "Set" = "Set";
 "AddSchedule!" = "Add schedule!";
@@ -36,13 +42,5 @@
 "ExampleIdealScheduleForHolidayA" = "Example: Ideal schedule for holiday A";
 "Next" = "Next";
 "RegisteredIdealSchedule" = "Registered ideal schedule";
+"Schedule" = "Schedule";
 "ConfirmYourIdealSchedule" = "Confirm your ideal schedule";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-
-
