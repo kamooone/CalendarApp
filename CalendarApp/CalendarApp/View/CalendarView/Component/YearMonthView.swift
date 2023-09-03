@@ -30,7 +30,7 @@ struct YearMonthView: View {
                 }
                 .disabled(calendarViewModel.isSelectMonthSwitchButton)
                 
-                Text("\(String(calendarViewModel.selectYear))年\(calendarViewModel.selectMonth)月")
+                Text(String(calendarViewModel.selectYear)) + Text(LocalizedStringKey(" ")) + Text(LocalizedStringKey("Year")) + Text(LocalizedStringKey(" "))  + Text("\(calendarViewModel.selectMonth)") + Text(LocalizedStringKey(" ")) + Text(LocalizedStringKey("Month"))
                     .font(.system(size: geometry.size.width / 20))
                 
                 Button(action: {

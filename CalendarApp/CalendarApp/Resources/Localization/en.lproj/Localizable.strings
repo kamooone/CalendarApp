@@ -6,16 +6,16 @@
   
 */
 "ScheduleManagementApp" = "Schedule management app";
-"Year" = "Year";
-"Month" = "Month";
+"Year" = "year";
+"Month" = "month";
 "Day" = "Day";
-"Sunday" = "Sunday";
-"Monday" = "Monday";
-"Tuesday" = "Tuesday";
-"Wednesday" = "Wednesday";
-"Thursday" = "Thursday";
-"Friday" = "Friday";
-"Saturday" = "Saturday";
+"Sunday" = "Sun";
+"Monday" = "Mon";
+"Tuesday" = "Tues";
+"Wednesday" = "Wednes";
+"Thursday" = "Thurs";
+"Friday" = "Fri";
+"Saturday" = "Satur";
 "ScheduleRegistration" = "Schedule registration";
 "Set" = "Set";
 "AddSchedule!" = "Add schedule!";

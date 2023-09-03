@@ -110,25 +110,31 @@ struct CalendarCellView: View {
 
 struct DaysWeekView: View {
     let calendarViewModel = CalendarViewModel.shared
-    let dayofweek = ["日", "月", "火", "水", "木", "金", "土"]
+    let dayofweek: [LocalizedStringKey] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: geometry.size.width / 15) {
                 Spacer()
-                ForEach(self.dayofweek, id: \.self) { day in
-                    HStack {
-                        Text(day)
-                            .font(.system(size: geometry.size.width / 20))
-                            .foregroundColor(day == "土" ? Color.blue : (day == "日" ? Color.red : Color.black))
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                ForEach(0..<dayofweek.count, id: \.self) { index in
+                    let day = dayofweek[index]
+                    let preferredLanguages = Locale.preferredLanguages
+                    let languageCode = preferredLanguages.first?.prefix(2) ?? "en"
+                    
+                    let fontSize: CGFloat = (languageCode == "ja") ? geometry.size.width / 20 : geometry.size.width / 70
+
+                    Text(day)
+                        .font(.system(size: fontSize))
+                        .foregroundColor(day == "Saturday" ? Color.blue : (day == "Sunday" ? Color.red : Color.black))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 Spacer()
             }
         }
     }
 }
+
+
 
 struct DayStringtView: View {
     @EnvironmentObject var route: RouteObserver
