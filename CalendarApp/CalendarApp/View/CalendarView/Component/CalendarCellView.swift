@@ -13,7 +13,7 @@ struct CalendarCellView: View {
     let calendarViewModel = CalendarViewModel.shared
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     
-    // ToDo このStateの値はConfirmScheduleDetailViewModelを作成してそこで管理する
+    // ToDo このStateの値はConfirmScheduleDetailViewModelを作成してそこで管理する gitコマンドコミットテスト
     @State private var isRequestSuccessful = false
     @State private var isEditMode = false
     @State private var showAlert = false
