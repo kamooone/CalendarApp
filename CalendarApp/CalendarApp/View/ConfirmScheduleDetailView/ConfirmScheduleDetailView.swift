@@ -46,7 +46,7 @@ struct ConfirmScheduleDetailView: View {
                         isRequestSuccessful = false
                         setting.isReload = false
                         showAlert = true
-                        alertMessage = "スケジュールの取得に失敗しました。"
+                        alertMessage = "FailedToGetSchedule"
                     }
                 }
             }
@@ -141,7 +141,7 @@ struct ConfirmScheduleDetailView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("スケジュールの取得に失敗しました。"),
+            Alert(title: Text("FailedToGetSchedule"),
                   dismissButton: .default(Text("OK")))
         }
         .onAppear {

@@ -32,14 +32,14 @@ struct IdealAppendScheduleDetailButtonView: View {
                         regist()
                     } else {
                         showAlert = true
-                        alertMessage = "開始時間より終了時間が後になるように設定してください。"
+                        alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
                     }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {
-                        alertMessage = "タイトルの入力は必須です。"
+                        alertMessage = "EnteringTitleIsRequired"
                     } else {
-                        alertMessage = "タイトルは10文字以内で入力してください。"
+                        alertMessage = "PleaseEnterTheTitleWithin10Characters"
                     }
                 }
             }) {
@@ -80,7 +80,7 @@ struct IdealAppendScheduleDetailButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録が成功しました"
+                        alertMessage = "RegistrationSuccessful"
                         isReload = true
                         showAlert = true
                     }
@@ -88,7 +88,7 @@ struct IdealAppendScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録に失敗しました"
+                        alertMessage = "SignupFailed"
                         showAlert = true
                     }
                 }

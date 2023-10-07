@@ -22,7 +22,6 @@ struct RegisterScheduleDetailButtonView: View {
                 
                 Button(action: {
                     if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
-                        // 開始より終了の方が早い場合のエラーアラートも追加。
                         let startHour = scheduleDetailViewModel.startTime.prefix(2)
                         let startMinute = scheduleDetailViewModel.startTime.suffix(2)
                         let startTime = Int(startHour + startMinute)
@@ -33,15 +32,14 @@ struct RegisterScheduleDetailButtonView: View {
                             regist()
                         } else {
                             showAlert = true
-                            // ToDo アラートメッセージも翻訳
-                            alertMessage = "開始時間より終了時間が後になるように設定してください。"
+                            alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
                         }
                     } else {
                         showAlert = true
                         if scheduleDetailViewModel.scheduleDetailTitle.count == 0 {
-                            alertMessage = "タイトルの入力は必須です。"
+                            alertMessage = "EnteringTitleIsRequired"
                         } else {
-                            alertMessage = "タイトルは10文字以内で入力してください。"
+                            alertMessage = "PleaseEnterTheTitleWithin10Characters"
                         }
                     }
                 }) {
@@ -80,7 +78,7 @@ struct RegisterScheduleDetailButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録が成功しました"
+                        alertMessage = "RegistrationSuccessful"
                         isReload = true
                         showAlert = true
                     }
@@ -88,7 +86,7 @@ struct RegisterScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "登録に失敗しました"
+                        alertMessage = "SignupFailed"
                         showAlert = true
                     }
                 }

@@ -32,14 +32,14 @@ struct UpdateIdealScheduleDetailButtonView: View {
                         update()
                     } else {
                         showAlert = true
-                        alertMessage = "開始時間より終了時間が後になるように設定してください。"
+                        alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
                     }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {
-                        alertMessage = "タイトルの入力は必須です。"
+                        alertMessage = "EnteringTitleIsRequired"
                     } else {
-                        alertMessage = "タイトルは10文字以内で入力してください。"
+                        alertMessage = "PleaseEnterTheTitleWithin10Characters"
                     }
                 }
             }) {
@@ -95,7 +95,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "システムエラーが発生しました。"
+                        alertMessage = "SystemErrorHasOccurred."
                         showAlert = true
                     }
                 }
@@ -120,7 +120,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "更新が完了しました"
+                        alertMessage = "UpdateCompleted"
                         showAlert = true
                     }
                 } else {
@@ -128,7 +128,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         showAlert = true
-                        alertMessage = "更新後のスケジュールの取得に失敗しました。"
+                        alertMessage = "FailedToObtainTheUpdatedSchedule"
                     }
                 }
             }

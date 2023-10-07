@@ -96,7 +96,7 @@ struct CalendarCellView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("スケジュールの取得に失敗しました。"),
+            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule")),
                   dismissButton: .default(Text("OK")))
         }
         .onAppear {

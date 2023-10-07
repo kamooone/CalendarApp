@@ -25,6 +25,7 @@ struct YearMonthView: View {
                     }
                     calendarViewModel.bindViewModel()
                 }) {
+                    // ToDo 自作のデザインに差し替える
                     Text("◀︎")
                         .font(.system(size: geometry.size.width / 20))
                 }
@@ -42,6 +43,7 @@ struct YearMonthView: View {
                     }
                     calendarViewModel.bindViewModel()
                 }) {
+                    // ToDo 自作のデザインに差し替える
                     Text("▶︎")
                         .font(.system(size: geometry.size.width / 20))
                 }

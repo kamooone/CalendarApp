@@ -32,14 +32,14 @@ struct UpdateButtonView: View {
                         update()
                     } else {
                         showAlert = true
-                        alertMessage = "開始時間より終了時間が後になるように設定してください。"
+                        alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
                     }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.scheduleDetailTitle.count == 0 {
-                        alertMessage = "タイトルの入力は必須です。"
+                        alertMessage = "EnteringTitleIsRequired"
                     } else {
-                        alertMessage = "タイトルは10文字以内で入力してください。"
+                        alertMessage = "PleaseEnterTheTitleWithin10Characters"
                     }
                 }
             }) {
@@ -91,9 +91,9 @@ struct UpdateButtonView: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         if success {
-                            alertMessage = "更新が完了しました"
+                            alertMessage = "UpdateCompleted"
                         } else {
-                            alertMessage = "更新に失敗しました"
+                            alertMessage = "UpdateFailed"
                         }
                         showAlert = true
                     }

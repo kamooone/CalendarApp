@@ -45,7 +45,7 @@ struct IdealRegisteredScheduleTitleView: View {
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
                         showAlert = true
-                        alertMessage = "スケジュールの取得に失敗しました。"
+                        alertMessage = "FailedToGetSchedule"
                     }
                 }
             }
@@ -87,7 +87,7 @@ struct IdealRegisteredScheduleTitleView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("スケジュールの取得に失敗しました。"),
+            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule.")),
                   dismissButton: .default(Text("OK")))
         }
         .onAppear {

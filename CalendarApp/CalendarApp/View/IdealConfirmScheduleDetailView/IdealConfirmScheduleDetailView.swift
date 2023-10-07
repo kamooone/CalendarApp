@@ -137,7 +137,7 @@ struct IdealConfirmScheduleDetailView: View {
             Spacer()
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("スケジュールの取得に失敗しました。"),
+            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule.")),
                   dismissButton: .default(Text("OK")))
         }
         .onChange(of: setting.isReload) { isReload in

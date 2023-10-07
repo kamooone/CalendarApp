@@ -43,9 +43,9 @@ struct IdealRegistScheduleTitleView: View {
                     } else {
                         showAlert = true
                         if scheduleDetailViewModel.idealScheduleTitle.count == 0 {
-                            alertMessage = "タイトルの入力は必須です。"
+                            alertMessage = "EnteringTitleIsRequired"
                         } else {
-                            alertMessage = "タイトルは10文字以内で入力してください。"
+                            alertMessage = "PleaseEnterTheTitleWithin10Characters"
                         }
                     }
                 }) {

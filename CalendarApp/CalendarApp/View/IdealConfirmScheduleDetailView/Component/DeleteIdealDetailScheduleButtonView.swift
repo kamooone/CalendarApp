@@ -52,7 +52,7 @@ struct DeleteIdealDetailScheduleButtonView: View {
         scheduleDetailViewModel.idealStartTimeArray.remove(at: _id)
         scheduleDetailViewModel.idealEndTimeArray.remove(at: _id)
         scheduleDetailViewModel.idealIsNoticeArray.remove(at: _id)
-        alertMessage = "削除が完了しました"
+        alertMessage = "DeletionCompleted"
         showAlert = true
     }
 }

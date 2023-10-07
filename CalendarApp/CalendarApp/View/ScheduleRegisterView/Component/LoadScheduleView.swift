@@ -41,7 +41,7 @@ struct LoadScheduleView: View {
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
                         showAlert = true
-                        alertMessage = "スケジュールの取得に失敗しました。"
+                        alertMessage = "FailedToGetSchedule"
                     }
                 }
             }
@@ -134,7 +134,7 @@ struct SetButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         showAlert = true
-                        alertMessage = "システムエラーが発生しました。"
+                        alertMessage = "SystemErrorHasOccurred"
                     }
                 }
             }
@@ -153,7 +153,7 @@ struct SetButtonView: View {
                     bindViewModel()
                 } else {
                     showAlert = true
-                    alertMessage = "設定する理想のスケジュールを選択してください。"
+                    alertMessage = "ChooseYourIdealScheduleToSet"
                 }
             }) {
                 Text(LocalizedStringKey("Set"))
@@ -180,7 +180,7 @@ struct SetButtonView: View {
                             print("削除完了")
                         } else {
                             print("削除失敗")
-                            alertMessage = "問題が発生しました。"
+                            alertMessage = "ThereWasProblem"
                             showAlert = true
                         }
                     }
@@ -204,13 +204,13 @@ struct SetButtonView: View {
                 
                 if success {
                     print("非同期処理成功")
-                    alertMessage = "設定が完了しました"
+                    alertMessage = "ConfigurationCompleted"
                     showAlert = true
                 } else {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "設定に失敗しました"
+                        alertMessage = "ConfigurationFailed"
                         showAlert = true
                     }
                 }

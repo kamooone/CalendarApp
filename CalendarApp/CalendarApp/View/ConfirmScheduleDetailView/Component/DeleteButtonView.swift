@@ -60,9 +60,9 @@ struct DeleteButtonView: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         if success {
-                            alertMessage = "削除が完了しました"
+                            alertMessage = "DeletionCompleted"
                         } else {
-                            alertMessage = "削除に失敗しました"
+                            alertMessage = "DeletionFailed"
                         }
                         showAlert = true
                     }

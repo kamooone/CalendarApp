@@ -19,6 +19,7 @@ struct HamburgerView: View {
                 route.path = .Setting
             }) {
                 if let image = UIImage(named: "hamburger") {
+                    // ToDo 自作のデザインに差し替える
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
