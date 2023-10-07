@@ -46,7 +46,7 @@ struct IdealConfirmScheduleDetailView: View {
                         isRequestSuccessful = false
                         setting.isReload = false
                         showAlert = true
-                        alertMessage = "スケジュールの取得に失敗しました。"
+                        alertMessage = NSLocalizedString("FailedToGetSchedule", comment: "")
                     }
                 }
             }
@@ -137,7 +137,7 @@ struct IdealConfirmScheduleDetailView: View {
             Spacer()
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule.")),
+            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule")),
                   dismissButton: .default(Text("OK")))
         }
         .onChange(of: setting.isReload) { isReload in

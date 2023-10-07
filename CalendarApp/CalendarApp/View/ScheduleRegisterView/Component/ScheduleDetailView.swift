@@ -21,7 +21,7 @@ struct ScheduleDetailView: View {
                 }
                 
                 HStack {
-                    Text(LocalizedStringKey("TITLE!"))
+                    Text(LocalizedStringKey("TITLE"))
                         .font(.system(size: geometry.size.width / 25))
                         .offset(x: 20, y: 0)
                     TextField(LocalizedStringKey("ExampleAfternoonShopping"), text: $text)

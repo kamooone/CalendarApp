@@ -32,14 +32,14 @@ struct UpdateIdealScheduleDetailButtonView: View {
                         update()
                     } else {
                         showAlert = true
-                        alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
+                        alertMessage = NSLocalizedString("PleaseSetTheEndTimeToBeLaterThanTheStartTime", comment: "")
                     }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {
-                        alertMessage = "EnteringTitleIsRequired"
+                        alertMessage = NSLocalizedString("EnteringTitleIsRequired", comment: "")
                     } else {
-                        alertMessage = "PleaseEnterTheTitleWithin10Characters"
+                        alertMessage = NSLocalizedString("PleaseEnterTheTitleWithin10Characters", comment: "")
                     }
                 }
             }) {
@@ -95,7 +95,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "SystemErrorHasOccurred."
+                        alertMessage = NSLocalizedString("SystemErrorHasOccurred", comment: "")
                         showAlert = true
                     }
                 }
@@ -120,7 +120,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "UpdateCompleted"
+                        alertMessage = NSLocalizedString("UpdateCompleted", comment: "")
                         showAlert = true
                     }
                 } else {
@@ -128,7 +128,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         showAlert = true
-                        alertMessage = "FailedToObtainTheUpdatedSchedule"
+                        alertMessage = NSLocalizedString("FailedToObtainTheUpdatedSchedule", comment: "")
                     }
                 }
             }

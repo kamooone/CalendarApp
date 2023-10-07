@@ -52,7 +52,7 @@ struct DeleteIdealDetailScheduleButtonView: View {
         scheduleDetailViewModel.idealStartTimeArray.remove(at: _id)
         scheduleDetailViewModel.idealEndTimeArray.remove(at: _id)
         scheduleDetailViewModel.idealIsNoticeArray.remove(at: _id)
-        alertMessage = "DeletionCompleted"
+        alertMessage = NSLocalizedString("DeletionCompleted", comment: "")
         showAlert = true
     }
 }

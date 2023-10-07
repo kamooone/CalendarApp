@@ -46,7 +46,7 @@ struct ConfirmScheduleDetailView: View {
                         isRequestSuccessful = false
                         setting.isReload = false
                         showAlert = true
-                        alertMessage = "FailedToGetSchedule"
+                        alertMessage = NSLocalizedString("FailedToGetSchedule", comment: "")
                     }
                 }
             }

@@ -45,7 +45,7 @@ struct IdealRegisteredScheduleTitleView: View {
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
                         showAlert = true
-                        alertMessage = "FailedToGetSchedule"
+                        alertMessage = NSLocalizedString("FailedToGetSchedule", comment: "")
                     }
                 }
             }
@@ -87,7 +87,7 @@ struct IdealRegisteredScheduleTitleView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule.")),
+            Alert(title: Text(LocalizedStringKey("FailedToGetSchedule")),
                   dismissButton: .default(Text("OK")))
         }
         .onAppear {

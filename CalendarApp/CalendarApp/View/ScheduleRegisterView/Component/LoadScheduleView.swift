@@ -41,7 +41,7 @@ struct LoadScheduleView: View {
                     DispatchQueue.main.async {
                         isRequestSuccessful = false
                         showAlert = true
-                        alertMessage = "FailedToGetSchedule"
+                        alertMessage = NSLocalizedString("FailedToGetSchedule", comment: "")
                     }
                 }
             }
@@ -134,7 +134,7 @@ struct SetButtonView: View {
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
                         showAlert = true
-                        alertMessage = "SystemErrorHasOccurred"
+                        alertMessage = NSLocalizedString("SystemErrorHasOccurred", comment: "")
                     }
                 }
             }
@@ -153,7 +153,7 @@ struct SetButtonView: View {
                     bindViewModel()
                 } else {
                     showAlert = true
-                    alertMessage = "ChooseYourIdealScheduleToSet"
+                    alertMessage = NSLocalizedString("ChooseYourIdealScheduleToSet", comment: "")
                 }
             }) {
                 Text(LocalizedStringKey("Set"))
@@ -180,7 +180,7 @@ struct SetButtonView: View {
                             print("削除完了")
                         } else {
                             print("削除失敗")
-                            alertMessage = "ThereWasProblem"
+                            alertMessage = NSLocalizedString("ThereWasProblem", comment: "")
                             showAlert = true
                         }
                     }
@@ -204,13 +204,13 @@ struct SetButtonView: View {
                 
                 if success {
                     print("非同期処理成功")
-                    alertMessage = "ConfigurationCompleted"
+                    alertMessage = NSLocalizedString("ConfigurationCompleted", comment: "")
                     showAlert = true
                 } else {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "ConfigurationFailed"
+                        alertMessage = NSLocalizedString("ConfigurationFailed", comment: "")
                         showAlert = true
                     }
                 }

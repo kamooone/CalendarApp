@@ -32,14 +32,14 @@ struct IdealAppendScheduleDetailButtonView: View {
                         regist()
                     } else {
                         showAlert = true
-                        alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
+                        alertMessage = NSLocalizedString("PleaseSetTheEndTimeToBeLaterThanTheStartTime", comment: "")
                     }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.idealScheduleDetailTitle.count == 0 {
-                        alertMessage = "EnteringTitleIsRequired"
+                        alertMessage = NSLocalizedString("EnteringTitleIsRequired", comment: "")
                     } else {
-                        alertMessage = "PleaseEnterTheTitleWithin10Characters"
+                        alertMessage = NSLocalizedString("PleaseEnterTheTitleWithin10Characters", comment: "")
                     }
                 }
             }) {
@@ -80,7 +80,7 @@ struct IdealAppendScheduleDetailButtonView: View {
                     print("非同期処理成功")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "RegistrationSuccessful"
+                        alertMessage = NSLocalizedString("RegistrationSuccessful", comment: "")
                         isReload = true
                         showAlert = true
                     }
@@ -88,7 +88,7 @@ struct IdealAppendScheduleDetailButtonView: View {
                     print("非同期処理失敗")
                     // メインスレッド（UI スレッド）で非同期に実行するメソッド
                     DispatchQueue.main.async {
-                        alertMessage = "SignupFailed"
+                        alertMessage = NSLocalizedString("SignupFailed", comment: "")
                         showAlert = true
                     }
                 }

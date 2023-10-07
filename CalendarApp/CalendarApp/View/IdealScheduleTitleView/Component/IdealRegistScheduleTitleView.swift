@@ -43,9 +43,9 @@ struct IdealRegistScheduleTitleView: View {
                     } else {
                         showAlert = true
                         if scheduleDetailViewModel.idealScheduleTitle.count == 0 {
-                            alertMessage = "EnteringTitleIsRequired"
+                            alertMessage = NSLocalizedString("EnteringTitleIsRequired", comment: "")
                         } else {
-                            alertMessage = "PleaseEnterTheTitleWithin10Characters"
+                            alertMessage = NSLocalizedString("PleaseEnterTheTitleWithin10Characters", comment: "")
                         }
                     }
                 }) {

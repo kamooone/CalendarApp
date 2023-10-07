@@ -32,14 +32,14 @@ struct UpdateButtonView: View {
                         update()
                     } else {
                         showAlert = true
-                        alertMessage = "PleaseSetTheEndTimeToBeLaterThanTheStartTime"
+                        alertMessage = NSLocalizedString("PleaseSetTheEndTimeToBeLaterThanTheStartTime", comment: "")
                     }
                 } else {
                     showAlert = true
                     if scheduleDetailViewModel.scheduleDetailTitle.count == 0 {
-                        alertMessage = "EnteringTitleIsRequired"
+                        alertMessage = NSLocalizedString("EnteringTitleIsRequired", comment: "")
                     } else {
-                        alertMessage = "PleaseEnterTheTitleWithin10Characters"
+                        alertMessage = NSLocalizedString("PleaseEnterTheTitleWithin10Characters", comment: "")
                     }
                 }
             }) {
@@ -91,9 +91,9 @@ struct UpdateButtonView: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         if success {
-                            alertMessage = "UpdateCompleted"
+                            alertMessage = NSLocalizedString("UpdateCompleted", comment: "")
                         } else {
-                            alertMessage = "UpdateFailed"
+                            alertMessage = NSLocalizedString("UpdateFailed", comment: "")
                         }
                         showAlert = true
                     }

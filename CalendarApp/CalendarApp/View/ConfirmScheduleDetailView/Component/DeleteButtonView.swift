@@ -60,9 +60,9 @@ struct DeleteButtonView: View {
                 DispatchQueue.main.async {
                     withAnimation {
                         if success {
-                            alertMessage = "DeletionCompleted"
+                            alertMessage = NSLocalizedString("DeletionCompleted", comment: "")
                         } else {
-                            alertMessage = "DeletionFailed"
+                            alertMessage = NSLocalizedString("DeletionFailed", comment: "")
                         }
                         showAlert = true
                     }

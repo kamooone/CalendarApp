@@ -110,7 +110,7 @@ final class NoticeSettingViewModel: ObservableObject {
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests { (requests: [UNNotificationRequest]) in
             if requests.isEmpty {
-                print("No pending notification requests.")
+                print("No pending notification requests")
             } else {
                 for request in requests {
                     // 各通知リクエストの情報を確認するための処理
