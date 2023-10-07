@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// ToDo カレンダーの月切り替え処理のチラつきをなくす、スワイプで切り替えれるようにする
 struct CalendarView: View {
     @State private var isShouldReloadView: Int = 0
     let calendarViewModel = CalendarViewModel.shared
