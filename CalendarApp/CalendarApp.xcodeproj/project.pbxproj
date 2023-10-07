@@ -91,7 +91,6 @@
 		E225D2D22A2F7E020052362D /* NoticeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSettingView.swift; sourceTree = "<group>"; };
 		E22CD0E32A25CE2900C78018 /* hamburger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hamburger.png; sourceTree = "<group>"; };
 		E22CD0E72A25CF8700C78018 /* HamburgerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HamburgerView.swift; sourceTree = "<group>"; };
-		E231DB9F2AA0DF9F00193777 /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E2400B312A9E30880089AB49 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E2400B332A9E30BB0089AB49 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E24F7B822A41EA58002F12C7 /* ScheduleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewModel.swift; sourceTree = "<group>"; };
@@ -115,6 +114,7 @@
 		E28890252A4F282F00AE504E /* UpdateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateButtonView.swift; sourceTree = "<group>"; };
 		E28890272A4F284200AE504E /* CancelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButtonView.swift; sourceTree = "<group>"; };
 		E295B8DC2A890D2400B8551A /* CanselIdealButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanselIdealButtonView.swift; sourceTree = "<group>"; };
+		E2997ADE2AD10B9C008060AD /* vi-VN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "vi-VN"; path = "vi-VN.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E29D3C662A4C830200A68BF4 /* EditButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonView.swift; sourceTree = "<group>"; };
 		E2AA373E2A35CD32008FC93E /* ConfirmScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmScheduleDetailButtonView.swift; sourceTree = "<group>"; };
 		E2AA37402A35D8D9008FC93E /* RegisterScheduleDetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScheduleDetailButtonView.swift; sourceTree = "<group>"; };
@@ -698,7 +698,7 @@
 			children = (
 				E2400B312A9E30880089AB49 /* en */,
 				E2400B332A9E30BB0089AB49 /* ja */,
-				E231DB9F2AA0DF9F00193777 /* vi-VN */,
+				E2997ADE2AD10B9C008060AD /* vi-VN */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
