@@ -21,13 +21,13 @@ struct IdealRegistScheduleTitleView: View {
         VStack {
             Spacer()
             HStack {
-                Text("理想のスケジュールのタイトルを入力しよう")
+                Text(LocalizedStringKey("EnterTheTitleOfYourIdealSchedule"))
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
                     .offset(x: 0, y: 0)
             }
             
             HStack {
-                TextField("例 : 休日Aの理想スケジュール", text: $text)
+                TextField(LocalizedStringKey("ExampleIdealScheduleForHolidayA"), text: $text)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                     .offset(x: 5, y: 0)
@@ -49,7 +49,7 @@ struct IdealRegistScheduleTitleView: View {
                         }
                     }
                 }) {
-                    Text("次へ")
+                    Text(LocalizedStringKey("Next"))
                         .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 30)
                         .font(.system(size: screenSizeObject.screenSize.width / 40))
                 }

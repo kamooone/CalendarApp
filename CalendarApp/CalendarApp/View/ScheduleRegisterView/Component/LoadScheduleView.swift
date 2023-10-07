@@ -59,7 +59,7 @@ struct LoadScheduleView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Text("作成した理想のスケジュールを使用する")
+                        Text(LocalizedStringKey("UseTheIdealScheduleYouCreated"))
                             .font(.system(size: geometry.size.width / 25))
                             .offset(x:0, y:10)
                         Spacer()
@@ -156,7 +156,7 @@ struct SetButtonView: View {
                     alertMessage = "設定する理想のスケジュールを選択してください。"
                 }
             }) {
-                Text("設定する")
+                Text(LocalizedStringKey("Set"))
                     .frame(width: geometry.size.width * 0.5, height: geometry.size.height)
             }
             .buttonStyle(NormalButtonStyle.normalButtonStyle())

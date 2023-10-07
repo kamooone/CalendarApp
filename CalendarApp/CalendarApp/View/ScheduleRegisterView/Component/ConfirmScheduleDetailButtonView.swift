@@ -18,7 +18,7 @@ struct ConfirmScheduleDetailButtonView: View {
                 Button(action: {
                     route.path = .ConfirmScheduleDetail
                 }) {
-                    Text("現在の追加状況を確認")
+                    Text(LocalizedStringKey("CheckCurrentAdditionStatus"))
                         .font(.system(size: geometry.size.width / 25))
                         .frame(width: geometry.size.width / 2, height: geometry.size.height)
                 }

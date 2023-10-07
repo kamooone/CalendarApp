@@ -15,7 +15,7 @@ struct InquiryButtonView: View {
             Button(action: {
                 // ToDo メール送信画面を立ち上げる
             }) {
-                Text("開発者へ問い合わせ")
+                Text(LocalizedStringKey("ContactDeveloper"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
             }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IdealScheduleTitleView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
-    let headerTitle: String = "理想のスケジュール"
+    let headerTitle: String = "ConfirmYourIdealSchedule"
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
     @State private var isShouldReloadView: Int = 0
     

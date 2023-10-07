@@ -17,7 +17,7 @@ struct CancelButtonView: View {
             Button(action: {
                 isEditMode = false
             }) {
-                Text("キャンセル")
+                Text(LocalizedStringKey("Cancel"))
                     .frame(width: screenSizeObject.screenSize.width / 6, height: screenSizeObject.screenSize.height / 25)
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
             }

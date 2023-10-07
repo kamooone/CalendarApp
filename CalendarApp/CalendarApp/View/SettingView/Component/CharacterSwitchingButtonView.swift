@@ -16,7 +16,7 @@ struct CharacterSwitchingButtonView: View {
             Button(action: {
                 
             }) {
-                Text("キャラクター変更")
+                Text(LocalizedStringKey("CharacterChange"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
             }

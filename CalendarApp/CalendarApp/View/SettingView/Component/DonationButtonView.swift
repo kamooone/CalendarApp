@@ -15,7 +15,7 @@ struct DonationButtonView: View {
             Button(action: {
                 // ToDo 広告をいっぱい表示する画面に遷移させる
             }) {
-                Text("開発者へお布施")
+                Text(LocalizedStringKey("DonationToDevelopers"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
             }

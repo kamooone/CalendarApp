@@ -16,7 +16,7 @@ struct TodayScheduleButtonView: View {
                 // ToDo 資金不足のため、Coming soon　というポップアップを表示させる
                 
             }) {
-                Text("ミニゲーム")
+                Text(LocalizedStringKey("MiniGame"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
             }

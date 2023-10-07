@@ -15,16 +15,16 @@ struct ScheduleDetailView: View {
         GeometryReader { geometry in
             VStack {
                 HStack {
-                    Text("スケジュールを追加しよう！")
+                    Text(LocalizedStringKey("AddSchedule!"))
                         .font(.system(size: geometry.size.width / 25))
                         .offset(x: 0, y: 10)
                 }
                 
                 HStack {
-                    Text("タイトル")
+                    Text(LocalizedStringKey("TITLE!"))
                         .font(.system(size: geometry.size.width / 25))
                         .offset(x: 20, y: 0)
-                    TextField("例 : 午後の買い物", text: $text)
+                    TextField(LocalizedStringKey("ExampleAfternoonShopping"), text: $text)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                         .offset(x: 5, y: 0)

@@ -20,7 +20,7 @@ struct DeleteIdealScheduleButtonView: View {
         Button(action: {
             idealDelete()
         }) {
-            Text("削除")
+            Text(LocalizedStringKey("Delete"))
                 .font(.system(size: 12))
                 .frame(width: 60, height: 30)
         }

@@ -11,7 +11,6 @@ struct YearMonthView: View {
     @Binding var isShouldReloadView: Int
     let calendarViewModel = CalendarViewModel.shared
     
-    // Gitコマンドコミットテスト２
     var body: some View {
         GeometryReader { geometry in
             HStack {

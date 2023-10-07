@@ -18,7 +18,7 @@ struct EditIdealScheduleButtonView: View {
             scheduleDetailViewModel.isIdealScheduleUpdate = true
             route.path = .IdealSchedule
         }) {
-            Text("修正")
+            Text(LocalizedStringKey("Edit"))
                 .font(.system(size: 12))
                 .frame(width: 60, height: 30)
         }

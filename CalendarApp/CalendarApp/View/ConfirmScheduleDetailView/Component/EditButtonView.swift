@@ -18,7 +18,7 @@ struct EditButtonView: View {
             Button(action: {
                 isEditMode = true
             }) {
-                Text("修正")
+                Text(LocalizedStringKey("Edit"))
                     .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
             }

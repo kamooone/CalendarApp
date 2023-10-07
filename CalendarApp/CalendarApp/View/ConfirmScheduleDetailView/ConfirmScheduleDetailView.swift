@@ -17,7 +17,7 @@ struct ConfirmScheduleDetailView: View {
     @State private var isEditMode = false
     @State private var showAlert = false
     @State private var alertMessage = ""
-    let headerTitle: String = "スケジュール詳細確認"
+    let headerTitle: String = "CheckScheduleDetails"
     
     func bindViewModel() {
         isRequestSuccessful = false
@@ -166,26 +166,26 @@ struct Schedule: View {
     var body: some View {
         VStack {
             HStack {
-                Text("タイトル")
+                Text(LocalizedStringKey("TITLE"))
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 Text(scheduleDetailViewModel.scheduleDetailTitleArray[index])
             }
             
             HStack {
-                Text("開始")
+                Text(LocalizedStringKey("Start"))
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 Text(scheduleDetailViewModel.startTimeArray[index])
                 
                 Text("〜")
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 
-                Text("終了")
+                Text(LocalizedStringKey("End"))
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 Text(scheduleDetailViewModel.endTimeArray[index])
             }
             
             HStack {
-                Text("通知")
+                Text(LocalizedStringKey("Notice"))
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 Text(scheduleDetailViewModel.isNoticeArray[index] ? "ON" : "OFF")
             }
@@ -227,7 +227,7 @@ struct ScheduleEdit: View {
             }
             
             HStack {
-                Text("開始")
+                Text(LocalizedStringKey("Start"))
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 Picker("Select an StartTIme", selection: $selectedStartTime) {
                     ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
@@ -247,7 +247,7 @@ struct ScheduleEdit: View {
                 Text("〜")
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 
-                Text("終了")
+                Text(LocalizedStringKey("End"))
                     .font(.system(size: screenSizeObject.screenSize.width / 30))
                 Picker("Select an EndTime", selection: $selectedEndTime) {
                     ForEach(0..<scheduleDetailViewModel.timeArray.count, id: \.self) { _index in
@@ -266,7 +266,7 @@ struct ScheduleEdit: View {
             }
             
             HStack {
-                Toggle("通知", isOn: $isSwitchOn)
+                Toggle(LocalizedStringKey("Notice"), isOn: $isSwitchOn)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
                     .padding(.horizontal, screenSizeObject.screenSize.width / 5)
                     .onChange(of: isSwitchOn) { newIsNotice in

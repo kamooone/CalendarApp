@@ -18,7 +18,7 @@ struct IdealConfirmScheduleDetailView: View {
     @State private var isEditMode = false
     @State private var showAlert = false
     @State private var alertMessage = ""
-    let headerTitle: String = "理想のスケジュール確認"
+    let headerTitle: String = "ConfirmYourIdealSchedule"
     
     func bindViewModel() {
         isRequestSuccessful = false
@@ -173,12 +173,12 @@ struct IdealSchedule: View {
             Spacer().frame(height: 10)
             
             HStack {
-                Text("開始")
+                Text(LocalizedStringKey("Start"))
                     .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Text(scheduleDetailViewModel.idealStartTimeArray[index])
                 
-                Text("終了")
+                Text(LocalizedStringKey("End"))
                     .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Text(scheduleDetailViewModel.idealEndTimeArray[index])
@@ -188,7 +188,7 @@ struct IdealSchedule: View {
             Spacer().frame(height: 10)
             
             HStack {
-                Text("通知")
+                Text(LocalizedStringKey("Notice"))
                     .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Text(scheduleDetailViewModel.idealIsNoticeArray[index] ? "ON" : "OFF")
@@ -235,7 +235,7 @@ struct IdealScheduleEdit: View {
             }
             
             HStack {
-                Text("開始")
+                Text(LocalizedStringKey("Start"))
                     .frame(width: screenSizeObject.screenSize.width / 8, height: 0)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Picker("Select an StartTIme", selection: $selectedStartTime) {
@@ -254,7 +254,7 @@ struct IdealScheduleEdit: View {
                     scheduleDetailViewModel.updStartTimeArray[index] = scheduleDetailViewModel.timeArray[timeIndex]
                 }
                 
-                Text("終了")
+                Text(LocalizedStringKey("End"))
                     .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
                 Picker("Select an EndTime", selection: $selectedEndTime) {
@@ -274,7 +274,7 @@ struct IdealScheduleEdit: View {
             }
             
             HStack {
-                Toggle("通知", isOn: $isSwitchOn)
+                Toggle(LocalizedStringKey("Notice"), isOn: $isSwitchOn)
                     .frame(width: screenSizeObject.screenSize.width / 4, height: 20)
                     .offset(x:0,y:0)
                     .padding(.horizontal, 100)

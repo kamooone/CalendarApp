@@ -14,7 +14,12 @@ struct SelectedMonthDayView: View {
         GeometryReader { geometry in
             HStack {
                 Spacer()
-                Text("\(calendarViewModel.selectMonth)月\(calendarViewModel.selectDay)日")
+                let localizedMonth = NSLocalizedString("Month", comment: "")
+                let localizedDay = NSLocalizedString("Day", comment: "")
+
+                let formattedText = String.localizedStringWithFormat("%d \(localizedMonth) %d \(localizedDay)", calendarViewModel.selectMonth, calendarViewModel.selectDay)
+
+                Text(formattedText)
                     .font(.system(size: geometry.size.width / 20))
                 Spacer()
             }

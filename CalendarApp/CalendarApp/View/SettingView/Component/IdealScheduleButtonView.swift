@@ -16,7 +16,7 @@ struct IdealScheduleButtonView: View {
             Button(action: {
                 route.path = .IdealScheduleEnterTitle
             }) {
-                Text("理想のスケジュール")
+                Text(LocalizedStringKey("ConfirmYourIdealSchedule"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
             }

@@ -16,7 +16,7 @@ struct LanguageSwitcButtonView: View {
             Button(action: {
                 
             }) {
-                Text("言語切り替え")
+                Text(LocalizedStringKey("LanguageChange"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 20))
             }

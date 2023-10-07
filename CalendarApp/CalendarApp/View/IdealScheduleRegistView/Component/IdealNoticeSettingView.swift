@@ -14,7 +14,7 @@ struct IdealNoticeSettingView: View {
     
     var body: some View {
         VStack {
-            Toggle("通知", isOn: $isSwitchOn)
+            Toggle(LocalizedStringKey("Notice"), isOn: $isSwitchOn)
                 .font(.system(size: screenSizeObject.screenSize.width / 25))
                 .padding(.horizontal, screenSizeObject.screenSize.width / 5)
                 .onChange(of: isSwitchOn) { newValue in

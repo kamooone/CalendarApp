@@ -61,7 +61,7 @@ struct IdealRegisteredScheduleTitleView: View {
         VStack {
             if isRequestSuccessful {
                 HStack {
-                    Text("登録済みの理想のスケジュール")
+                    Text(LocalizedStringKey("RegisteredIdealSchedule"))
                         .font(.system(size: screenSizeObject.screenSize.width / 20))
                         .offset(x: 0, y: 5)
                 }

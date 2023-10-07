@@ -14,7 +14,7 @@ struct NoticeSettingView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Toggle("通知", isOn: $isSwitchOn)
+                Toggle(LocalizedStringKey("Notice"), isOn: $isSwitchOn)
                     .font(.system(size: geometry.size.width / 25))
                     .padding(.horizontal, geometry.size.width / 5)
                     .onChange(of: isSwitchOn) { newValue in

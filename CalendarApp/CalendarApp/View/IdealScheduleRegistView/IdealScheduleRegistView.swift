@@ -10,7 +10,7 @@ import SwiftUI
 struct IdealScheduleRegistView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
-    let headerTitle: String = "のスケジュール"
+    let headerTitle: String = "Schedule"
     @State private var isShouldReloadView: Int = 0
     
     var body: some View {

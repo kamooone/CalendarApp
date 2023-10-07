@@ -28,7 +28,7 @@ struct IdealScheduleTimeView: View {
     var body: some View {
         HStack {
             Spacer()
-            Text("開始")
+            Text(LocalizedStringKey("Start"))
                 .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
                 .font(.system(size: screenSizeObject.screenSize.width / 25))
                 .offset(x:0,y:0)
@@ -44,7 +44,7 @@ struct IdealScheduleTimeView: View {
                 scheduleDetailViewModel.idealStartTime = scheduleDetailViewModel.timeArray[newValue]
             }
                         
-            Text("終了")
+            Text(LocalizedStringKey("End"))
                 .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 10)
                 .font(.system(size: screenSizeObject.screenSize.width / 25))
                 .offset(x:0,y:0)

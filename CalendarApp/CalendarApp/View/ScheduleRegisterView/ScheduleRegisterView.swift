@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScheduleRegisterView: View {
-    let headerTitle: String = "スケジュール登録"
+    let headerTitle: String = "ScheduleRegistration"
     @State private var isShouldReloadView: Int = 0
     
     var body: some View {

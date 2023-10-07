@@ -47,7 +47,7 @@ final class NoticeSettingViewModel: ObservableObject {
         
         let content = UNMutableNotificationContent()
         content.title = _scheduleDetailData.scheduleDetailTitle
-        content.body = "スケジュール5分前です。準備は出来ていますか？"
+        content.body = NSLocalizedString("ToDo 翻訳", comment: "")
         
         var dateComponents = DateComponents()
         dateComponents.year = calendarViewModel.selectYear

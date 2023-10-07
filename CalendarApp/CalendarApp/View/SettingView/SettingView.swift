@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
-    let headerTitle: String = "設定"
+    let headerTitle: String = "Setting"
     
     var body: some View {
         // ToDo 間間に書くボタンの説明をしてるキャラクターを表示させる

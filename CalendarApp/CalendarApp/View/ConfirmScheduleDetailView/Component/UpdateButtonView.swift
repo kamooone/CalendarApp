@@ -43,7 +43,7 @@ struct UpdateButtonView: View {
                     }
                 }
             }) {
-                Text("更新")
+                Text(LocalizedStringKey("Update"))
                     .frame(width: screenSizeObject.screenSize.width / 10, height: screenSizeObject.screenSize.height / 25)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
             }

@@ -29,7 +29,7 @@ struct ScheduleTimeView: View {
             HStack {
                 Spacer()
                 // ToDo 選択式ではなくて入力式に変更した方が良いかも
-                Text("開始")
+                Text(LocalizedStringKey("Start"))
                     .frame(width: geometry.size.width / 8, height: geometry.size.height / 10)
                     .font(.system(size: geometry.size.width / 25))
                     .offset(x:0, y:20)
@@ -46,7 +46,7 @@ struct ScheduleTimeView: View {
                 }
                 .offset(x:0, y:20)
                 
-                Text("終了")
+                Text(LocalizedStringKey("End"))
                     .frame(width: geometry.size.width / 8, height: geometry.size.height / 10)
                     .font(.system(size: geometry.size.width / 25))
                     .offset(x:0, y:20)

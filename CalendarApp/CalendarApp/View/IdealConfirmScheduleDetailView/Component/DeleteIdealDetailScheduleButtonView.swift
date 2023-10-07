@@ -22,7 +22,7 @@ struct DeleteIdealDetailScheduleButtonView: View {
             Button(action: {
                 delete()
             }) {
-                Text("削除")
+                Text(LocalizedStringKey("Delete"))
                     .frame(width: screenSizeObject.screenSize.width / 8, height: screenSizeObject.screenSize.height / 30)
                     .font(.system(size: screenSizeObject.screenSize.width / 25))
             }

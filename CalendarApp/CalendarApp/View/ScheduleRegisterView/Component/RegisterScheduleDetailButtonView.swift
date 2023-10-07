@@ -33,6 +33,7 @@ struct RegisterScheduleDetailButtonView: View {
                             regist()
                         } else {
                             showAlert = true
+                            // ToDo アラートメッセージも翻訳
                             alertMessage = "開始時間より終了時間が後になるように設定してください。"
                         }
                     } else {
@@ -44,7 +45,7 @@ struct RegisterScheduleDetailButtonView: View {
                         }
                     }
                 }) {
-                    Text("追加")
+                    Text(LocalizedStringKey("Add"))
                         .font(.system(size: geometry.size.width / 25))
                         .frame(width: geometry.size.width / 2, height: geometry.size.height)
                 }

@@ -43,7 +43,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
                     }
                 }
             }) {
-                Text("更新")
+                Text(LocalizedStringKey("Update"))
                     .frame(width: screenSizeObject.screenSize.width / 12, height: screenSizeObject.screenSize.height / 20)
                     .font(.system(size: screenSizeObject.screenSize.width / 40))
             }

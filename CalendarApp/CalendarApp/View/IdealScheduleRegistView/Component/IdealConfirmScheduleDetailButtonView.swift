@@ -16,7 +16,7 @@ struct IdealConfirmScheduleDetailButtonView: View {
             Button(action: {
                 route.path = .IdealConfirmScheduleDetail
             }) {
-                Text("現在の追加状況を確認")
+                Text(LocalizedStringKey("CheckCurrentAdditionStatus"))
                     .frame(width: screenSizeObject.screenSize.width * 0.8, height: screenSizeObject.screenSize.height / 20)
             }
             .offset(x:0,y:0)
