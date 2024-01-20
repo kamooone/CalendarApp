@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ConfirmScheduleDetailView: View {
     let scheduleDetailViewModel = ScheduleDetailViewModel.shared
@@ -24,6 +25,13 @@ struct ConfirmScheduleDetailView: View {
         isEditMode = false
         showAlert = false
         alertMessage = ""
+        
+        Analytics.logEvent(
+            "現在の追加状況確認画面",
+            parameters: [
+                "地域と名前":"東京、東京太郎"
+            ]
+        )
         
         let group = DispatchGroup()
         group.enter()

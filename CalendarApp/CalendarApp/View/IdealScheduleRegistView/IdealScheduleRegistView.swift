@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct IdealScheduleRegistView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
@@ -66,6 +67,13 @@ struct IdealScheduleRegistView: View {
         }
         .id(isShouldReloadView)
         .onAppear{
+            Analytics.logEvent(
+                "理想のスケジュール登録画面",
+                parameters: [
+                    "地域と名前":"東京、東京太郎"
+                ]
+            )
+            
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }
             screenSizeObject.screenSize = window.bounds.size

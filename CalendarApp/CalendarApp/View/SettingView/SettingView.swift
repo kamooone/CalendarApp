@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SettingView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
@@ -54,6 +55,14 @@ struct SettingView: View {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }
             screenSizeObject.screenSize = window.bounds.size
+            
+            
+            Analytics.logEvent(
+                "設定画面",
+                parameters: [
+                    "地域と名前":"東京、東京太郎"
+                ]
+            )
         }
     }
 }

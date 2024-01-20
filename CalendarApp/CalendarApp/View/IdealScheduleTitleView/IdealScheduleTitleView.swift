@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct IdealScheduleTitleView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
@@ -14,6 +15,14 @@ struct IdealScheduleTitleView: View {
     @State private var isShouldReloadView: Int = 0
     
     func bindViewModel() {
+        
+        Analytics.logEvent(
+            "理想のスケジュールタイトル入力画面",
+            parameters: [
+                "地域と名前":"東京、東京太郎"
+            ]
+        )
+        
         scheduleDetailViewModel.isIdealScheduleUpdate = false
         
         scheduleDetailViewModel.idealScheduleTitle = ""

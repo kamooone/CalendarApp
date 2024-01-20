@@ -42,6 +42,7 @@
 		E27C8E662A239A4F00841268 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E652A239A4F00841268 /* Route.swift */; };
 		E27C8E682A239A5800841268 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E672A239A5800841268 /* View+.swift */; };
 		E27C8E6A2A239A6300841268 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C8E692A239A6300841268 /* Color+.swift */; };
+		E27CDCE52B02338E009FABFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E27CDCE42B02338E009FABFF /* GoogleService-Info.plist */; };
 		E28890262A4F282F00AE504E /* UpdateButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28890252A4F282F00AE504E /* UpdateButtonView.swift */; };
 		E28890282A4F284200AE504E /* CancelButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28890272A4F284200AE504E /* CancelButtonView.swift */; };
 		E295B8DD2A890D2400B8551A /* CanselIdealButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E295B8DC2A890D2400B8551A /* CanselIdealButtonView.swift */; };
@@ -111,6 +112,7 @@
 		E27C8E652A239A4F00841268 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		E27C8E672A239A5800841268 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		E27C8E692A239A6300841268 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		E27CDCE42B02338E009FABFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E28890252A4F282F00AE504E /* UpdateButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateButtonView.swift; sourceTree = "<group>"; };
 		E28890272A4F284200AE504E /* CancelButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButtonView.swift; sourceTree = "<group>"; };
 		E295B8DC2A890D2400B8551A /* CanselIdealButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanselIdealButtonView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		E27C8E372A23949200841268 = {
 			isa = PBXGroup;
 			children = (
+				E27CDCE42B02338E009FABFF /* GoogleService-Info.plist */,
 				E27C8E422A23949200841268 /* CalendarApp */,
 				E27C8E412A23949200841268 /* Products */,
 				5825C9C72C537983D8924DF3 /* Pods */,
@@ -579,6 +582,7 @@
 				E27C8E4B2A23949300841268 /* Preview Assets.xcassets in Resources */,
 				E22CD0E42A25CE2900C78018 /* hamburger.png in Resources */,
 				E27C8E482A23949300841268 /* Assets.xcassets in Resources */,
+				E27CDCE52B02338E009FABFF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

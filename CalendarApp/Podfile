@@ -7,5 +7,6 @@ target 'CalendarApp' do
   pod 'RealmSwift'
 
   # Pods for CalendarApp
+  pod 'Firebase/Analytics'
 
 end

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct IdealConfirmScheduleDetailView: View {
     @EnvironmentObject var screenSizeObject: ScreenSizeObject
@@ -21,6 +22,14 @@ struct IdealConfirmScheduleDetailView: View {
     let headerTitle: String = "ConfirmYourIdealSchedule"
     
     func bindViewModel() {
+        
+        Analytics.logEvent(
+            "理想のスケジュール追加状況確認画面",
+            parameters: [
+                "地域と名前":"東京、東京太郎"
+            ]
+        )
+        
         isRequestSuccessful = false
         isEditMode = false
         showAlert = false

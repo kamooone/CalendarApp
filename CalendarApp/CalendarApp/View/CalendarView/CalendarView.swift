@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 // ToDo カレンダーの月切り替え処理のチラつきをなくす、スワイプで切り替えれるようにする
 struct CalendarView: View {
@@ -18,6 +19,13 @@ struct CalendarView: View {
         noticeSettingViewModel.noticeInit()
         
         calendarViewModel.bindViewModel()
+        
+        Analytics.logEvent(
+            "トップ画面",
+            parameters: [
+                "地域と名前":"東京、東京太郎"
+            ]
+        )
     }
     
     var body: some View {
