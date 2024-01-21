@@ -19,6 +19,7 @@ struct UpdateButtonView: View {
         HStack {
             Spacer()
             
+            // ToDo: 時間選択をドラムロール、ピッカーに変更する
             Button(action: {
                 if scheduleDetailViewModel.scheduleDetailTitle.count != 0 && scheduleDetailViewModel.scheduleDetailTitle.count < 11 {
                     // 開始より終了の方が早い場合のエラーアラートも追加。

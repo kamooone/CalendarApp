@@ -21,6 +21,7 @@ struct UpdateIdealScheduleDetailButtonView: View {
             Button(action: {
                 if scheduleDetailViewModel.idealScheduleDetailTitle.count != 0 && scheduleDetailViewModel.idealScheduleDetailTitle.count < 11 {
                     
+                    // ToDo: 時間選択をドラムロール、ピッカーに変更する
                     // 開始より終了の方が早い場合のエラーアラートも追加。
                     let startHour = scheduleDetailViewModel.idealStartTime.prefix(2)
                     let startMinute = scheduleDetailViewModel.idealStartTime.suffix(2)
